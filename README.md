@@ -1,8 +1,4 @@
 # WoeUSB-ng
-[![Latest Release](https://img.shields.io/github/release/slacka/WoeUSB.svg)](https://github.com/WaxyMocha/WoeUSB-ng/releases)
-[![WoeUSB License](https://img.shields.io/badge/license-gpl-blue.svg)](https://github.com/WaxyMocha/WoeUSB-ng/blob/master/COPYING)
-[![Build Status](https://travis-ci.org/slacka/WoeUSB.svg?branch=master)](https://travis-ci.org/slacka/WoeUSB)
-
 ![brand](src/data/woeusb-logo.png)[![thumbnail of GUI wrapper screenshot](dev/woeusbgui-screenshot.thumbnail.png)](dev/woeusbgui-screenshot.png)[![thumbnail of CLI application screenshot](dev/woeusb-screenshot.thumbnail.png)](dev/woeusb-screenshot.png)
 
 _A Linux program to create a Windows USB stick installer from a real Windows DVD or image._

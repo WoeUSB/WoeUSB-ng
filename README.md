@@ -1,4 +1,4 @@
-# WoeUSB
+# WoeUSB-ng
 [![Latest Release](https://img.shields.io/github/release/slacka/WoeUSB.svg)](https://github.com/WaxyMocha/WoeUSB-ng/releases)
 [![WoeUSB License](https://img.shields.io/badge/license-gpl-blue.svg)](https://github.com/WaxyMocha/WoeUSB-ng/blob/master/COPYING)
 [![Build Status](https://travis-ci.org/slacka/WoeUSB.svg?branch=master)](https://travis-ci.org/slacka/WoeUSB)
@@ -23,33 +23,33 @@ Supported bootmodes:
 
 This project is a fork of [Congelli501's WinUSB software](http://en.congelli.eu/prog_info_winusb.html), which has not been maintained since 2012, according to the official website.
 
-## Installation
-### Prebuilt Packages
-Note that prebuilt packages are not necessarily the latest release and we are NOT responsible for the trustworthiness of these packages.  Regarding any related issues contact its maintainer first.
+## ~~Installation~~
+### ~~Prebuilt Packages~~
+~~Note that prebuilt packages are not necessarily the latest release and we are NOT responsible for the trustworthiness of these packages.  Regarding any related issues contact its maintainer first.~~
 
-#### Official Distribution Packages
-* [Fedora](https://src.fedoraproject.org/rpms/WoeUSB) packages maintained by mprahl
+#### ~~Official Distribution Packages~~
+* ~~[Fedora](https://src.fedoraproject.org/rpms/WoeUSB) packages maintained by mprahl~~
 
-#### Third-party Distribution Packages
-* [Arch Linux](https://aur.archlinux.org/packages/woeusb-git/) packages maintained by darkfm
-* [Ubuntu](https://launchpad.net/%7Enilarimogard/+archive/ubuntu/webupd8) packages maintained by [WebUpd8](http://www.webupd8.org/)
+#### ~~Third-party Distribution Packages~~
+* ~~[Arch Linux](https://aur.archlinux.org/packages/woeusb-git/) packages maintained by darkfm~~
+* ~~[Ubuntu](https://launchpad.net/%7Enilarimogard/+archive/ubuntu/webupd8) packages maintained by [WebUpd8](http://www.webupd8.org/)~~
 
-### Build from Source
-The following are the instructions to install WoeUSB if prebuilt version is not available or too old.
+### ~~Build from Source~~
+~~The following are the instructions to install WoeUSB if prebuilt version is not available or too old.~~
 
-#### Acquire WoeUSB's Source Code
-Clone WoeUSB's Git repository to your local machine using `git clone https://github.com/slacka/WoeUSB.git`
+#### ~~Acquire WoeUSB's Source Code~~
+~~Clone WoeUSB's Git repository to your local machine using~~ `git clone https://github.com/slacka/WoeUSB.git`
 
-NOTE: We no longer support building from source archives provided in the GitHub Releases page as the software version is not set.
+~~NOTE: We no longer support building from source archives provided in the GitHub Releases page as the software version is not set.~~
 
-#### Setting the Application Version String
-This step is required for generating the proper version name based on the Git tags. This step should be repeated if the version is changed.
+#### ~~Setting the Application Version String~~
+~~This step is required for generating the proper version name based on the Git tags. This step should be repeated if the version is changed.~~
 
 ```shell
 $ ./setup-development-environment.bash
 ```
 
-#### Install WoeUSB's Build Dependencies
+#### ~~Install WoeUSB's Build Dependencies~~
 ```shell
 # For Debian-based distributions (NOTE: For your convenience, this package is already provided in the release page)
 $ sudo apt-get install devscripts equivs gdebi-core
@@ -63,7 +63,7 @@ $ sudo dnf install wxGTK3-devel
 # For Fedora 22
 $ sudo dnf install wxGTK-devel dh-autoreconf.noarch
 ```
-#### Build & Install WoeUSB
+#### ~~Build & Install WoeUSB~~
 ```shell
 # For Debian-based distributions
 $ dpkg-buildpackage -uc -b # NOTE: Currently, due to a bug in the build system, this command will fail if the source's path contains space or single quotes, refer to issue #84 for details
@@ -77,4 +77,4 @@ $ sudo make install
 ```
 
 ## License
-WoeUSB is distributed under the [GPL license](https://github.com/slacka/WoeUSB/blob/master/COPYING).
+WoeUSB-ng is distributed under the [GPL license](https://github.com/slacka/WoeUSB/blob/master/COPYING).

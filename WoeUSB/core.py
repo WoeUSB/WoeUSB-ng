@@ -34,8 +34,8 @@ import subprocess
 import urllib.request
 from datetime import datetime
 
-import utils
-import workaround
+import WoeUSB.utils as utils
+import WoeUSB.workaround as workaround
 
 application_name = 'WoeUSB'
 application_version = '@@WOEUSB_VERSION@@'
@@ -126,12 +126,15 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
     utils.verbose = verbose
     utils.gui = gui
 
-    return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, install_mode, source_media, target_media,
-            workaround_bios_boot_flag, target_filesystem_type, filesystem_label, verbose, debug, parser]
+    if from_cli:
+        return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, install_mode, source_media, target_media,
+                workaround_bios_boot_flag, target_filesystem_type, filesystem_label, verbose, debug, parser]
+    else:
+        return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, parser]
 
 
 def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media, install_mode, temp_directory,
-         target_filesystem_type, workaround_bios_boot_flag, parser):
+         target_filesystem_type, workaround_bios_boot_flag, parser=None):
     """
     :param parser:
     :param source_fs_mountpoint:

@@ -21,7 +21,7 @@ import os
 import subprocess
 import time
 
-import utils
+import WoeUSB.utils as utils
 
 
 def make_system_realize_partition_table_changed(target_device):

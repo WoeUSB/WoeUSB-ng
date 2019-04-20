@@ -9,6 +9,10 @@ setup(name='WoeUSB-ng',
       license='GPL-3',
       zip_safe=False,
       packages=['WoeUSB'],
+      scripts=[
+            'WoeUSB/woeusb',
+            'WoeUSB/woeusbgui'
+      ],
       install_requires=[
           'termcolor',
           'wxPython'

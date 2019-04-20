@@ -421,7 +421,7 @@ class WoeUSB(threading.Thread):
         source_fs_mountpoint, target_fs_mountpoint, temp_directory = core.init(from_cli=False,
                                                                                        install_mode="device",
                                                                                        source_media=self.source,
-                                                                                       target_media=self.target)[:3]
+                                                                                       target_media=self.target)
         try:
             core.main(source_fs_mountpoint, target_fs_mountpoint, self.source, self.target, "device", temp_directory,
                       self.filesystem, self.boot_flag)

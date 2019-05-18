@@ -1,3 +1,4 @@
 graft WoeUSB/data
 graft WoeUSB/locale
 include README.md
+include polkit/com.github.woeusb.woeusb-ng.policy

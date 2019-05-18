@@ -15,7 +15,7 @@ class PostDevelopCommand(develop):
     """Post-installation for development mode."""
 
     def run(self):
-        # PUT YOUR POST-INSTALL SCRIPT HERE or CALL A FUNCTION
+        # TODO
         develop.run(self)
 
 
@@ -41,11 +41,8 @@ class PostInstallCommand(install):
 
 setup(
     name='WoeUSB-ng',
-    version_config={
-        "version_format": "{tag}.dev{sha}",
-        "starting_version": "0.1.3"
-    },
-    description='Create bootable windows installer',
+    version='0.1.5',
+    description='A Linux program to create a Windows USB stick installer from a real Windows DVD or image.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='http://github.com/WoeUSB/WoeUSB-ng',
@@ -62,9 +59,6 @@ setup(
     install_requires=[
         'termcolor',
         'wxPython'
-    ],
-    setup_requires=[
-        'better-setuptools-git-version'
     ],
     cmdclass={
         'develop': PostDevelopCommand,

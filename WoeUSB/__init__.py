@@ -3,3 +3,5 @@ from WoeUSB import \
     list_devices, \
     utils, \
     workaround
+
+__version__ = "0.1"

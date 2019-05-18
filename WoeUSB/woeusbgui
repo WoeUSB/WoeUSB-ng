@@ -26,6 +26,7 @@ import subprocess
 import wx
 import wx.adv
 
+import WoeUSB
 import WoeUSB.core as core
 import WoeUSB.list_devices as list_devices
 
@@ -42,12 +43,6 @@ translation.install()
 __ = wx.GetTranslation
 
 PROG_FULL_NAME = "WoeUSB"
-
-# Missing config.hpp included by AppConfig.hpp?
-# PROG_PKG_NAME = PACKAGE
-# PROG_PKG_NAME_GETTEXT = PROG_PKG_NAME
-
-VERSION = "1.0.0"
 
 
 class MainFrame(wx.Frame):
@@ -328,7 +323,7 @@ class DialogAbout(wx.Dialog):
         self.__staticTextTitre.SetForegroundColour(wx.Colour(0, 60, 118))
         sizer_text.Add(self.__staticTextTitre, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, 5)
 
-        self.__staticTextVersion = wx.StaticText(self, wx.ID_ANY, VERSION)
+        self.__staticTextVersion = wx.StaticText(self, wx.ID_ANY, WoeUSB.__version__)
         self.__staticTextVersion.SetFont(wx.Font(10, 74, 90, 92, False, "Sans"))
         self.__staticTextVersion.SetForegroundColour(wx.Colour(69, 141, 196))
         sizer_text.Add(self.__staticTextVersion, 0, wx.LEFT, 5)

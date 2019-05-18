@@ -5,6 +5,11 @@ from xml.dom.minidom import parse
 import shutil
 import os
 
+this_directory = os.path.abspath(os.path.dirname(__file__))
+
+with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 
 class PostDevelopCommand(develop):
     """Post-installation for development mode."""
@@ -18,20 +23,19 @@ class PostInstallCommand(install):
     """Post-installation for installation mode."""
 
     def run(self):
-        working_directory = os.path.abspath(os.path.dirname(__file__))
         path = self.install_scripts + "/woeusbgui"
 
-        dom = parse(working_directory + '/polkit/com.github.woeusb.woeusb-ng.policy')
+        dom = parse(this_directory + '/polkit/com.github.woeusb.woeusb-ng.policy')
         for action in dom.getElementsByTagName('action'):
             if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
                 for annotate in action.getElementsByTagName('annotate'):
                     if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
                         annotate.childNodes[0].nodeValue = path
 
-        with open(working_directory + '/polkit/com.github.woeusb.woeusb-ng.policy', "w") as file:
+        with open(this_directory + '/polkit/com.github.woeusb.woeusb-ng.policy', "w") as file:
             dom.writexml(file)
 
-        shutil.copy2(working_directory + '/polkit/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
+        shutil.copy2(this_directory + '/polkit/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
         install.run(self)
 
 
@@ -39,9 +43,11 @@ setup(
     name='WoeUSB-ng',
     version_config={
         "version_format": "{tag}.dev{sha}",
-        "starting_version": "0.1.2"
+        "starting_version": "0.1.3"
     },
     description='Create bootable windows installer',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url='http://github.com/WoeUSB/WoeUSB-ng',
     author='Jakub Szymański',
     author_email='jakubmateusz@poczta.onet.pl',

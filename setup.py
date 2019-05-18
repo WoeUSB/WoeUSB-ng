@@ -39,7 +39,7 @@ setup(
     name='WoeUSB-ng',
     version_config={
         "version_format": "{tag}.dev{sha}",
-        "starting_version": "0.1.0"
+        "starting_version": "0.1.1"
     },
     description='Create bootable windows installer',
     url='http://github.com/WoeUSB/WoeUSB-ng',

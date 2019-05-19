@@ -14,19 +14,18 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 def post_install():
-    path = shutil.which('woeusbgui')  # I have no clue how to find were pip puts exec's
-    if path is None:
-        path = 'usr/local/bin/woeusbgui'
-    else:
-        dom = parse(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy')
-        for action in dom.getElementsByTagName('action'):
-            if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
-                for annotate in action.getElementsByTagName('annotate'):
-                    if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
-                        annotate.childNodes[0].nodeValue = path
+    path = '/usr/local/bin/woeusbgui'  # I give up, I have no clue how to get bin path that is used by pip
+    shutil.copy2(this_directory + '/WoeUSB/woeusbgui', path)  # I'll just hard code it until someone finds better way
 
-        with open(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "w") as file:
-            dom.writexml(file)
+    dom = parse(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy')
+    for action in dom.getElementsByTagName('action'):
+        if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
+            for annotate in action.getElementsByTagName('annotate'):
+                if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
+                    annotate.childNodes[0].nodeValue = path
+
+    with open(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "w") as file:
+        dom.writexml(file)
 
     shutil.copy2(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
 
@@ -67,7 +66,7 @@ class PostInstallCommand(install):
 
 setup(
     name='WoeUSB-ng',
-    version='0.1.8',
+    version='0.1.9',
     description='WoeUSB-ng is a simple tool that enable you to create your own usb stick windows installer from an iso image or a real DVD. This is a rewrite of original WoeUSB. ',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -80,7 +79,6 @@ setup(
     include_package_data=True,
     scripts=[
         'WoeUSB/woeusb',
-        'WoeUSB/woeusbgui'
     ],
     install_requires=[
         'termcolor',

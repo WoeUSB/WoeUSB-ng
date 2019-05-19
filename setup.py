@@ -65,7 +65,6 @@ class PostInstallCommand(install):
         install.run(self)
 
 
-
 setup(
     name='WoeUSB-ng',
     version='0.1.8',
@@ -93,4 +92,5 @@ setup(
     }
 )
 
-post_install()
+if os.getuid() == 0:
+    post_install()

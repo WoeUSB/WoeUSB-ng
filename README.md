@@ -34,14 +34,14 @@ sudo pacman -Suy python-pip python-wxpython
 
 #### Install WoeUSB-ng
 ```shell
-sudo pip install WoeUSB-ng
+sudo pip3 install WoeUSB-ng
 ```
 
 #### Installation from source code
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git
 cd WoeUSB-ng
-sudo pip install .
+sudo pip3 install .
 ```
 
 ## License

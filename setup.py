@@ -23,7 +23,7 @@ class PostInstallCommand(install):
     """Post-installation for installation mode."""
 
     def run(self):
-        path = self.install_scripts + "/woeusbgui"
+        path = shutil.which('woeusbgui')
 
         dom = parse(this_directory + '/polkit/com.github.woeusb.woeusb-ng.policy')
         for action in dom.getElementsByTagName('action'):
@@ -42,7 +42,7 @@ class PostInstallCommand(install):
 setup(
     name='WoeUSB-ng',
     version='0.1.5',
-    description='A Linux program to create a Windows USB stick installer from a real Windows DVD or image.',
+    description='WoeUSB-ng is a simple tool that enable you to create your own usb stick windows installer from an iso image or a real DVD. It is a rewrite of original WoeUSB. ',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='http://github.com/WoeUSB/WoeUSB-ng',

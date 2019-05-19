@@ -316,8 +316,11 @@ def create_target_partition(target_device, target_partition, filesystem_type, fi
     utils.print_with_color("Creating target partition...", "green")
 
     # Create target partition
-    # We start at 4MiB for grub (it needs a post-mbr gap for its code) and alignment of flash memery block erase segment in general, for details see http://www.gnu.org/software/grub/manual/grub.html#BIOS-installation and http://lwn.net/Articles/428584/
-    # If NTFS filesystem is used we leave a 512KiB partition at the end for installing UEFI:NTFS partition for NTFS support
+    # We start at 4MiB for grub (it needs a post-mbr gap for its code)
+    # and alignment of flash memory block erase segment in general, for details see
+    # http://www.gnu.org/software/grub/manual/grub.html#BIOS-installation and http://lwn.net/Articles/428584/
+    # If NTFS filesystem is used we leave a 512KiB partition
+    # at the end for installing UEFI:NTFS partition for NTFS support
     if parted_mkpart_fs_type == "fat32":
         subprocess.run(["parted",
                         "--script",

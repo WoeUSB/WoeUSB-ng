@@ -9,114 +9,114 @@ msgstr ""
 "Project-Id-Version: woeusb\n"
 "Report-Msgid-Bugs-To: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/"
 "issues>\n"
-"POT-Creation-Date: 2018-07-30 15:09+0200\n"
-"PO-Revision-Date: 2018-07-30 15:34+0200\n"
+"POT-Creation-Date: 2019-05-19 15:58+0200\n"
+"PO-Revision-Date: 2019-05-19 15:59+0200\n"
 "Last-Translator: Jakub Szymański <jakubmateusz@poczta.onet.pl>\n"
 "Language-Team: Polish\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.9\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: woeusbgui:67
+#: gui.py:36
 msgid "Show all drives"
 msgstr "Pokaż wszystkie dyski"
 
-#: woeusbgui:68
+#: gui.py:37
 msgid "Show all drives, even those not detected as USB stick."
 msgstr ""
-"Pokaż wszystkie dyski, nawet jeśli system nie widzi ich jako pamięci na USB."
+"Pokaż wszystkie dyski, nawet jeśli system nie widzi ich jako pamięci USB."
 
-#: woeusbgui:78
+#: gui.py:48
 msgid "Set boot flag"
 msgstr "Ustaw flagę boot"
 
-#: woeusbgui:79
+#: gui.py:49
 msgid "Sets boot flag after process of copying."
 msgstr "Ustawia flagę \"boot\" po zakończeniu kopiowania."
 
-#: woeusbgui:81
+#: gui.py:51
 msgid "Use NTFS"
 msgstr "Użyj NTFS"
 
-#: woeusbgui:82
+#: gui.py:52
 msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
 msgstr "Użyj NTFS zamiast FAT. Notka: NTFS zdaje się być wolniejszy od FAT."
 
-#: woeusbgui:88
+#: gui.py:58
 msgid "&File"
 msgstr "&Plik"
 
-#: woeusbgui:89
+#: gui.py:59
 msgid "&Options"
 msgstr "&Opcje"
 
-#: woeusbgui:90
+#: gui.py:60
 msgid "&Help"
 msgstr "&Pomoc"
 
-#: woeusbgui:146
+#: gui.py:116
 msgid "Source :"
 msgstr "Źródło :"
 
-#: woeusbgui:149
+#: gui.py:119
 msgid "From a disk image (iso)"
-msgstr "Z pliku (iso) na dysku"
+msgstr "Z pliku (iso)"
 
-#: woeusbgui:154
+#: gui.py:124
 msgid "Please select a disk image"
 msgstr "Prosze wybierz obraz dysku"
 
-#: woeusbgui:160
+#: gui.py:130
 msgid "From a CD/DVD drive"
 msgstr "Z napędu optycznego"
 
-#: woeusbgui:173
+#: gui.py:143
 msgid "Target device :"
 msgstr "Urządzenie docelowe :"
 
-#: woeusbgui:185
+#: gui.py:155
 msgid "Install"
 msgstr "Instaluj"
 
-#: woeusbgui:275
+#: gui.py:245
 msgid "Installing"
 msgstr "Instalacja"
 
-#: woeusbgui:275
+#: gui.py:245
 msgid "Please wait..."
 msgstr "Proszę czekać..."
 
-#: woeusbgui:286
+#: gui.py:256
 msgid "Are you sure you want to cancel the installation?"
 msgstr "Jesteś pewnien że chcesz przerwać instalacje?"
 
-#: woeusbgui:286
+#: gui.py:256
 msgid "Cancel"
-msgstr "Przerwi"
+msgstr "Przerwij"
 
-#: woeusbgui:295
+#: gui.py:265
 msgid "Installation succeeded!"
-msgstr "Instalacja!"
+msgstr "Instalacja zakończyła się sukcesem!"
 
-#: woeusbgui:295 woeusbgui:297
+#: gui.py:265 gui.py:267
 msgid "Installation"
 msgstr "Instalacja"
 
-#: woeusbgui:297
+#: gui.py:267
 msgid "Installation failed!"
-msgstr "Instalacja zakończona niepowodzeniem!"
+msgstr "Instalacja zakończyła się niepowodzeniem!"
 
-#: woeusbgui:312
+#: gui.py:283
 msgid "About"
 msgstr "O programie"
 
-#: woeusbgui:370
+#: gui.py:339
 msgid "License"
 msgstr "Licencja"

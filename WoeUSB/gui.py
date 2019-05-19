@@ -4,7 +4,6 @@ import os
 import time
 import gettext
 import threading
-import subprocess
 
 import wx
 import wx.adv
@@ -13,19 +12,13 @@ import WoeUSB
 import WoeUSB.core as core
 import WoeUSB.list_devices as list_devices
 
+data_directory = os.path.dirname(__file__) + "/data/"
+
 app = wx.App()
 
 locale = wx.Locale(wx.LANGUAGE_DEFAULT)
-locale.AddCatalogLookupPathPrefix("locale")
-locale.AddCatalog("woeusb")
-
-translation = gettext.translation("woeusb", "locale",
-                                  [locale.GetCanonicalName()], fallback=True)
+translation = gettext.translation("woeusb", data_directory + "locale", ['pl, zh, fr'], fallback=True)
 translation.install()
-
-__ = wx.GetTranslation
-
-PROG_FULL_NAME = "WoeUSB"
 
 
 class MainFrame(wx.Frame):
@@ -37,9 +30,11 @@ class MainFrame(wx.Frame):
     def __init__(self, title, pos, size, style=wx.DEFAULT_FRAME_STYLE):
         super(MainFrame, self).__init__(None, -1, title, pos, size, style)
 
+        self.SetIcon(wx.Icon(data_directory + "icon.png"))
+
         file_menu = wx.Menu()
-        self.__menuItemShowAll = wx.MenuItem(file_menu, wx.ID_ANY, __("Show all drives") + " \tCtrl+A",
-                                             __("Show all drives, even those not detected as USB stick."),
+        self.__menuItemShowAll = wx.MenuItem(file_menu, wx.ID_ANY, _("Show all drives") + " \tCtrl+A",
+                                             _("Show all drives, even those not detected as USB stick."),
                                              wx.ITEM_CHECK)
         file_menu.Append(self.__menuItemShowAll)
 
@@ -50,19 +45,19 @@ class MainFrame(wx.Frame):
         help_item = help_menu.Append(wx.ID_ABOUT)
 
         options_menu = wx.Menu()
-        self.options_boot = wx.MenuItem(options_menu, wx.ID_ANY, __("Set boot flag"),
-                                        __("Sets boot flag after process of copying."),
+        self.options_boot = wx.MenuItem(options_menu, wx.ID_ANY, _("Set boot flag"),
+                                        _("Sets boot flag after process of copying."),
                                         wx.ITEM_CHECK)
-        self.options_filesystem = wx.MenuItem(options_menu, wx.ID_ANY, __("Use NTFS"),
-                                              __("Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."),
+        self.options_filesystem = wx.MenuItem(options_menu, wx.ID_ANY, _("Use NTFS"),
+                                              _("Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."),
                                               wx.ITEM_CHECK)
         options_menu.Append(self.options_boot)
         options_menu.Append(self.options_filesystem)
 
         self.__MenuBar = wx.MenuBar()
-        self.__MenuBar.Append(file_menu, __("&File"))
-        self.__MenuBar.Append(options_menu, __("&Options"))
-        self.__MenuBar.Append(help_menu, __("&Help"))
+        self.__MenuBar.Append(file_menu, _("&File"))
+        self.__MenuBar.Append(options_menu, _("&Options"))
+        self.__MenuBar.Append(help_menu, _("&Help"))
 
         self.SetMenuBar(self.__MenuBar)
 
@@ -79,10 +74,10 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.on_quit, exit_item)
         self.Bind(wx.EVT_MENU, self.on_about, help_item)
 
-    def on_quit(self, _):
+    def on_quit(self, __):
         self.Close(True)
 
-    def on_about(self, _):
+    def on_about(self, __):
         my_dialog_about = DialogAbout(self, wx.ID_ANY)
         my_dialog_about.ShowModal()
 
@@ -118,21 +113,21 @@ class MainPanel(wx.Panel):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Iso / CD
-        main_sizer.Add(wx.StaticText(self, wx.ID_ANY, __("Source :")), 0, wx.ALL, 3)
+        main_sizer.Add(wx.StaticText(self, wx.ID_ANY, _("Source :")), 0, wx.ALL, 3)
 
         # Iso
-        self.__isoChoice = wx.RadioButton(self, wx.ID_ANY, __("From a disk image (iso)"))
+        self.__isoChoice = wx.RadioButton(self, wx.ID_ANY, _("From a disk image (iso)"))
         main_sizer.Add(self.__isoChoice, 0, wx.ALL, 3)
 
         tmp_sizer = wx.BoxSizer(wx.HORIZONTAL)
         tmp_sizer.AddSpacer(20)
-        self.__isoFile = wx.FilePickerCtrl(self, wx.ID_ANY, "", __("Please select a disk image"),
+        self.__isoFile = wx.FilePickerCtrl(self, wx.ID_ANY, "", _("Please select a disk image"),
                                            "Iso images (*.iso)|*.iso;*.ISO|All files|*")
         tmp_sizer.Add(self.__isoFile, 1, wx.LEFT | wx.RIGHT | wx.BOTTOM, 3)
         main_sizer.Add(tmp_sizer, 0, wx.EXPAND, 0)
 
         # DVD
-        self.__dvdChoice = wx.RadioButton(self, wx.ID_ANY, __("From a CD/DVD drive"))
+        self.__dvdChoice = wx.RadioButton(self, wx.ID_ANY, _("From a CD/DVD drive"))
         main_sizer.Add(self.__dvdChoice, 0, wx.ALL, 3)
 
         # List
@@ -145,7 +140,7 @@ class MainPanel(wx.Panel):
         # Target
         main_sizer.AddSpacer(20)
 
-        main_sizer.Add(wx.StaticText(self, wx.ID_ANY, __("Target device :")), 0, wx.ALL, 3)
+        main_sizer.Add(wx.StaticText(self, wx.ID_ANY, _("Target device :")), 0, wx.ALL, 3)
 
         # List
         self.__usbStickList = wx.ListBox(self, wx.ID_ANY)
@@ -157,7 +152,7 @@ class MainPanel(wx.Panel):
         bt_sizer = wx.BoxSizer(wx.HORIZONTAL)
         self.__btRefresh = wx.Button(self, wx.ID_REFRESH)
         bt_sizer.Add(self.__btRefresh, 0, wx.ALL, 3)
-        self.__btInstall = wx.Button(self, wx.ID_ANY, __("Install"))
+        self.__btInstall = wx.Button(self, wx.ID_ANY, _("Install"))
         bt_sizer.Add(self.__btInstall, 0, wx.ALL, 3)
 
         main_sizer.Add(bt_sizer, 0, wx.ALIGN_RIGHT, 0)
@@ -205,7 +200,7 @@ class MainPanel(wx.Panel):
 
         self.__btInstall.Enable(self.is_install_ok())
 
-    def on_source_option_changed(self, _):
+    def on_source_option_changed(self, __):
         is_iso = self.__isoChoice.GetValue()
 
         self.__isoFile.Enable(is_iso)
@@ -224,10 +219,10 @@ class MainPanel(wx.Panel):
 
         self.__btInstall.Enable(self.is_install_ok())
 
-    def on_refresh(self, _):
+    def on_refresh(self, __):
         self.refresh_list_content()
 
-    def on_install(self, _):
+    def on_install(self, __):
         global woe
         if self.is_install_ok():
             is_iso = self.__isoChoice.GetValue()
@@ -247,7 +242,7 @@ class MainPanel(wx.Panel):
             woe = WoeUSB_handler(iso, device, boot_flag=self.__parent.options_boot.IsChecked(), filesystem=filesystem)
             woe.start()
 
-            dialog = wx.ProgressDialog(__("Installing"), __("Please wait..."), 101, self.GetParent(),
+            dialog = wx.ProgressDialog(_("Installing"), _("Please wait..."), 101, self.GetParent(),
                                        wx.PD_APP_MODAL | wx.PD_SMOOTH | wx.PD_CAN_ABORT)
 
             while woe.is_alive():
@@ -258,7 +253,7 @@ class MainPanel(wx.Panel):
                     status = dialog.Update(woe.progress, woe.state)[0]
 
                 if not status:
-                    if wx.MessageBox(__("Are you sure you want to cancel the installation?"), __("Cancel"),
+                    if wx.MessageBox(_("Are you sure you want to cancel the installation?"), _("Cancel"),
                                      wx.YES_NO | wx.ICON_QUESTION, self) == wx.NO:
                         dialog.Resume()
                     else:
@@ -267,13 +262,13 @@ class MainPanel(wx.Panel):
             dialog.Destroy()
 
             if woe.error == "":
-                wx.MessageBox(__("Installation succeeded!"), __("Installation"), wx.OK | wx.ICON_INFORMATION, self)
+                wx.MessageBox(_("Installation succeeded!"), _("Installation"), wx.OK | wx.ICON_INFORMATION, self)
             else:
-                wx.MessageBox(__("Installation failed!") + "\n" + str(woe.error), __("Installation"),
+                wx.MessageBox(_("Installation failed!") + "\n" + str(woe.error), _("Installation"),
                               wx.OK | wx.ICON_ERROR,
                               self)
 
-    def on_show_all_drive(self, _):
+    def on_show_all_drive(self, __):
         self.refresh_list_content()
 
 
@@ -285,7 +280,7 @@ class DialogAbout(wx.Dialog):
     __MyPanelNoteBookAutors = None
     __BtOk = None
 
-    def __init__(self, parent, ID=wx.ID_ANY, title=__("About"), pos=wx.DefaultPosition, size=wx.Size(570, 590),
+    def __init__(self, parent, ID=wx.ID_ANY, title=_("About"), pos=wx.DefaultPosition, size=wx.Size(570, 590),
                  style=wx.DEFAULT_DIALOG_STYLE):
         super(DialogAbout, self).__init__(parent, ID, title, pos, size, style)
 
@@ -294,15 +289,13 @@ class DialogAbout(wx.Dialog):
         sizer_all = wx.BoxSizer(wx.VERTICAL)
         sizer_img = wx.BoxSizer(wx.HORIZONTAL)
 
-        img_file_name = "data/icon.png"
-
-        img = wx.Image(img_file_name, wx.BITMAP_TYPE_PNG)
+        img = wx.Image(data_directory + "icon.png", wx.BITMAP_TYPE_PNG)
         self.__bitmapIcone = wx.StaticBitmap(self, wx.ID_ANY, wx.Bitmap(img), wx.DefaultPosition, wx.Size(48, 48))
         sizer_img.Add(self.__bitmapIcone, 0, wx.ALL, 5)
 
         sizer_text = wx.BoxSizer(wx.VERTICAL)
 
-        self.__staticTextTitre = wx.StaticText(self, wx.ID_ANY, PROG_FULL_NAME)
+        self.__staticTextTitre = wx.StaticText(self, wx.ID_ANY, "WoeUSB-ng")
         self.__staticTextTitre.SetFont(wx.Font(16, 74, 90, 92, False, "Sans"))
         self.__staticTextTitre.SetForegroundColour(wx.Colour(0, 60, 118))
         sizer_text.Add(self.__staticTextTitre, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, 5)
@@ -317,33 +310,33 @@ class DialogAbout(wx.Dialog):
         self.__NotebookAutorLicence = wx.Notebook(self, wx.ID_ANY)
 
         self.__NotebookAutorLicence.AddPage(
-            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka et al.", "data/woeusb-logo.png",
+            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka et al.", data_directory + "woeusb-logo.png",
                                 "github.com/slacka/WoeUSB"), "Authors", True)
         self.__NotebookAutorLicence.AddPage(
             PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "Colin GILLE / Congelli501",
-                                "data/c501-logo.png", "www.congelli.eu"), "Original WinUSB Developer", False)
+                                data_directory + "c501-logo.png", "www.congelli.eu"), "Original WinUSB Developer", False)
 
         licence_str = '''
-            This file is part of WoeUSB.
+            This file is part of WoeUSB-ng.
 
-            WoeUSB is free software: you can redistribute it and/or modify
+            WoeUSB-ng is free software: you can redistribute it and/or modify
             it under the terms of the GNU General Public License as published by
             the Free Software Foundation, either version 3 of the License, or
             (at your option) any later version.
 
-            WoeUSB is distributed in the hope that it will be useful,
+            WoeUSB-ng is distributed in the hope that it will be useful,
             but WITHOUT ANY WARRANTY; without even the implied warranty of
             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
             GNU General Public License for more details.
 
             You should have received a copy of the GNU General Public License
-            along with WoeUSB.  If not, see <http://www.gnu.org/licenses/>.
+            along with WoeUSB-ng.  If not, see <http://www.gnu.org/licenses/>.
         '''
 
         licence_txt = wx.TextCtrl(self.__NotebookAutorLicence, wx.ID_ANY, licence_str, wx.DefaultPosition,
                                   wx.DefaultSize, wx.TE_MULTILINE | wx.TE_READONLY)
 
-        self.__NotebookAutorLicence.AddPage(licence_txt, __("License"))
+        self.__NotebookAutorLicence.AddPage(licence_txt, _("License"))
 
         sizer_all.Add(self.__NotebookAutorLicence, 1, wx.EXPAND | wx.ALL, 5)
 
@@ -370,7 +363,6 @@ class PanelNoteBookAutors(wx.Panel):
             sizer_note_book_autors.Add(autor_link, 0, wx.LEFT | wx.BOTTOM, 5)
 
         if imgName != "":
-            # img_file_name = findFile(imgName)
             img = wx.Image(imgName, wx.BITMAP_TYPE_PNG)
             img_autor_logo = wx.StaticBitmap(self, wx.ID_ANY, wx.Bitmap(img))
             sizer_note_book_autors.Add(img_autor_logo, 0, wx.LEFT, 5)
@@ -413,11 +405,7 @@ class WoeUSB_handler(threading.Thread):
 
 
 def run():
-    if os.getuid() != 0:
-        subprocess.run(["pkexec", os.path.realpath(__file__)])
-        exit(0)
-
-    frameTitle = PROG_FULL_NAME
+    frameTitle = "WoeUSB-ng"
 
     frame = MainFrame(frameTitle, wx.DefaultPosition, wx.Size(400, 600))
     frame.SetMinSize(wx.Size(300, 450))

@@ -22,6 +22,13 @@ You should have received a copy of the GNU General Public License
 along with WoeUSB-ng  If not, see <http://www.gnu.org/licenses/>.
 +"""
 
+import subprocess
+import os
+
 import WoeUSB.gui
+
+if os.getuid() != 0:
+    subprocess.run(["pkexec", os.path.realpath(__file__)])
+    exit(0)
 
 WoeUSB.gui.run()

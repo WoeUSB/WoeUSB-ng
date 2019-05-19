@@ -2,8 +2,10 @@ from setuptools import setup
 from setuptools.command.develop import develop
 from setuptools.command.install import install
 from xml.dom.minidom import parse
+import configparser
 import shutil
 import os
+
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 
@@ -23,19 +25,40 @@ class PostInstallCommand(install):
     """Post-installation for installation mode."""
 
     def run(self):
-        path = shutil.which('woeusbgui')
+        path = shutil.which('woeusbgui')  # I have no clue how to find were pip puts exec's
+        if path is None:
+            path = 'usr/local/bin/woeusbgui'
+        else:
+            dom = parse(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy')
+            for action in dom.getElementsByTagName('action'):
+                if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
+                    for annotate in action.getElementsByTagName('annotate'):
+                        if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
+                            annotate.childNodes[0].nodeValue = path
 
-        dom = parse(this_directory + '/polkit/com.github.woeusb.woeusb-ng.policy')
-        for action in dom.getElementsByTagName('action'):
-            if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
-                for annotate in action.getElementsByTagName('annotate'):
-                    if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
-                        annotate.childNodes[0].nodeValue = path
+            with open(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "w") as file:
+                dom.writexml(file)
 
-        with open(this_directory + '/polkit/com.github.woeusb.woeusb-ng.policy', "w") as file:
-            dom.writexml(file)
+        shutil.copy2(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
 
-        shutil.copy2(this_directory + '/polkit/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
+        try:
+            os.makedirs('/usr/share/icons/WoeUSB-ng')
+        except FileExistsError:
+            pass
+
+        shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', '/usr/share/icons/WoeUSB-ng/icon.ico')
+
+        desktop = configparser.ConfigParser()
+        desktop.read(this_directory + '/miscellaneous/WoeUSB-ng.desktop')
+        desktop.set('Desktop Entry', 'value', path)
+        with open(this_directory + '/miscellaneous/WoeUSB-ng.desktop', "w") as file:
+            desktop.write(file)
+
+        shutil.copy2(
+            this_directory + '/miscellaneous/WoeUSB-ng.desktop',
+            '/home/' + os.environ['SUDO_USER'] + '/.local/share/applications'
+        )
+
         install.run(self)
 
 
@@ -58,7 +81,7 @@ setup(
     ],
     install_requires=[
         'termcolor',
-        'wxPython'
+        'wxPython',
     ],
     cmdclass={
         'develop': PostDevelopCommand,

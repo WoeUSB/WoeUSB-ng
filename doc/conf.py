@@ -165,4 +165,4 @@ texinfo_documents = [
 todo_include_todos = True
 
 html_logo = "../src/data/woeusb-logo.png"
-html_favicon = "../src/data/icon.png"
+html_favicon = "../src/data/icon.ico"

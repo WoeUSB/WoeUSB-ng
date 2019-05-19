@@ -30,7 +30,7 @@ class MainFrame(wx.Frame):
     def __init__(self, title, pos, size, style=wx.DEFAULT_FRAME_STYLE):
         super(MainFrame, self).__init__(None, -1, title, pos, size, style)
 
-        self.SetIcon(wx.Icon(data_directory + "icon.png"))
+        self.SetIcon(wx.Icon(data_directory + "icon.ico"))
 
         file_menu = wx.Menu()
         self.__menuItemShowAll = wx.MenuItem(file_menu, wx.ID_ANY, _("Show all drives") + " \tCtrl+A",
@@ -289,7 +289,7 @@ class DialogAbout(wx.Dialog):
         sizer_all = wx.BoxSizer(wx.VERTICAL)
         sizer_img = wx.BoxSizer(wx.HORIZONTAL)
 
-        img = wx.Image(data_directory + "icon.png", wx.BITMAP_TYPE_PNG)
+        img = wx.Image(data_directory + "icon.ico", wx.BITMAP_TYPE_PNG)
         self.__bitmapIcone = wx.StaticBitmap(self, wx.ID_ANY, wx.Bitmap(img), wx.DefaultPosition, wx.Size(48, 48))
         sizer_img.Add(self.__bitmapIcone, 0, wx.ALL, 5)
 

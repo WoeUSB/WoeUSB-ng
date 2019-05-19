@@ -1,22 +1,5 @@
 #!/usr/bin/env python
 
-"""
-This file is part of WoeUSB.
-
-WoeUSB is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-WoeUSB is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with WoeUSB.  If not, see <http://www.gnu.org/licenses/>.
-"""
-
 import os
 import subprocess
 import time
@@ -39,13 +22,17 @@ def make_system_realize_partition_table_changed(target_device):
 
 def buggy_motherboards_that_ignore_disks_without_boot_flag_toggled(target_device):
     """
-    Some buggy BIOSes won't put detected device with valid MBR but no partitions with boot flag toggled into the boot menu, workaround this by setting the first partition's boot flag(which partition doesn't matter as GNU GRUB doesn't depend on it anyway
+    Some buggy BIOSes won't put detected device with valid MBR
+    but no partitions with boot flag toggled into the boot menu,
+    workaround this by setting the first partition's boot flag
+    (which partition doesn't matter as GNU GRUB doesn't depend on it anyway)
 
     :param target_device:
     :return:
     """
     utils.print_with_color(
-        "Applying workaround for buggy motherboards that will ignore disks with no partitions with the boot flag toggled")
+        "Applying workaround for buggy motherboards that will ignore disks with no partitions with the boot flag toggled"
+    )
 
     subprocess.run(["parted", "--script",
                     target_device,
@@ -58,7 +45,7 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
     bootloaders in the right location, we extract them from the
     system image manually
 
-    :TODO: Functionize Windows 7 checking
+    :TODO: Create Windows 7 checking
 
     :param source_fs_mountpoint:
     :param target_fs_mountpoint:

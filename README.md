@@ -25,11 +25,11 @@ This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB)
 
 ##### Ubuntu
 ```shell
-sudo apt-get install git python3-pip python3-wxtgk4.0 
+sudo apt-get install git p7zip-full python3-pip python3-wxtgk4.0 
 ```
 ##### Arch
 ```shell
-sudo pacman -Suy python-pip python-wxpython
+sudo pacman -Suy p7zip python-pip python-wxpython
 ```
 
 #### Install WoeUSB-ng

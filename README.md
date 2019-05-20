@@ -44,5 +44,16 @@ cd WoeUSB-ng
 sudo pip3 install .
 ```
 
+### Uninstalling
+
+To remove WoeUSB-ng completely run:
+```shell
+sudo pip3 uninstall WoeUSB-ng
+sudo rm /usr/share/icons/WoeUSB-ng/icon.ico \
+    /usr/share/applications/WoeUSB-ng.desktop \
+    /usr/local/bin/woeusbgui
+sudo rmdir /usr/share/icons/WoeUSB-ng/
+```
+
 ## License
 WoeUSB-ng is distributed under the [GPL license](https://github.com/WoeUSB/WoeUSB-ng/blob/master/COPYING).

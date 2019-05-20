@@ -2,8 +2,8 @@ from setuptools import setup
 from setuptools.command.develop import develop
 from setuptools.command.install import install
 from xml.dom.minidom import parse
-import configparser
 import shutil
+import stat
 import os
 
 
@@ -36,16 +36,19 @@ def post_install():
 
     shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', '/usr/share/icons/WoeUSB-ng/icon.ico')
 
-    desktop = configparser.ConfigParser()
-    desktop.read(this_directory + '/miscellaneous/WoeUSB-ng.desktop')
-    desktop.set('Desktop Entry', 'value', path)
     with open(this_directory + '/miscellaneous/WoeUSB-ng.desktop', "w") as file:
-        desktop.write(file)
+        file.write(
+            "#!/usr/bin/env xdg-open"
+            "[Desktop Entry]"
+            "Name=WoeUSB-ng"
+            "Exec=" + path +
+            "Icon=/usr/share/icons/WoeUSB-ng/icon.ico"
+            "Terminal=false"
+            "Type=Application"
+        )
 
-    shutil.copy2(
-        this_directory + '/miscellaneous/WoeUSB-ng.desktop',
-        '/home/' + os.environ['SUDO_USER'] + '/.local/share/applications'
-    )
+    shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', '/usr/share/applications')
+    os.chmod('/usr/share/applications', stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)  # 644
 
 
 class PostDevelopCommand(develop):
@@ -66,7 +69,7 @@ class PostInstallCommand(install):
 
 setup(
     name='WoeUSB-ng',
-    version='0.1.9',
+    version='0.1.10',
     description='WoeUSB-ng is a simple tool that enable you to create your own usb stick windows installer from an iso image or a real DVD. This is a rewrite of original WoeUSB. ',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -89,6 +92,3 @@ setup(
         'install': PostInstallCommand
     }
 )
-
-if os.getuid() == 0:
-    post_install()

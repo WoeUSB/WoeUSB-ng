@@ -38,17 +38,18 @@ def post_install():
 
     with open(this_directory + '/miscellaneous/WoeUSB-ng.desktop', "w") as file:
         file.write(
-            "#!/usr/bin/env xdg-open"
-            "[Desktop Entry]"
-            "Name=WoeUSB-ng"
-            "Exec=" + path +
-            "Icon=/usr/share/icons/WoeUSB-ng/icon.ico"
-            "Terminal=false"
-            "Type=Application"
+            """#!/usr/bin/env xdg-open
+            [Desktop Entry]
+            Name=WoeUSB-ng
+            Exec=""" + path + """
+            Icon=/usr/share/icons/WoeUSB-ng/icon.ico
+            Terminal=false
+            Type=Application
+            """
         )
 
     shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', '/usr/share/applications')
-    os.chmod('/usr/share/applications', stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)  # 644
+    os.chmod('/usr/share/applications/WoeUSB-ng.desktop', stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)  # 644
 
 
 class PostDevelopCommand(develop):
@@ -69,7 +70,7 @@ class PostInstallCommand(install):
 
 setup(
     name='WoeUSB-ng',
-    version='0.1.10',
+    version='0.1.11',
     description='WoeUSB-ng is a simple tool that enable you to create your own usb stick windows installer from an iso image or a real DVD. This is a rewrite of original WoeUSB. ',
     long_description=long_description,
     long_description_content_type='text/markdown',

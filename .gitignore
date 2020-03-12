@@ -6,3 +6,5 @@ doc/_build
 venv/
 WoeUSB_ng\.egg-info/
 dist/
+
+build/

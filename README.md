@@ -58,7 +58,7 @@ sudo rmdir /usr/share/icons/WoeUSB-ng/
 ## License
 WoeUSB-ng is distributed under the [GPL license](https://github.com/WoeUSB/WoeUSB-ng/blob/master/COPYING).
 
-#Help needed
+# Help needed
 We need somebody with knowledge how to create .deb package (or other packages for other linux distributions).
 Currently WoeUSB-ng is distributed via PyPi which does not exactly suit ours needs.
 What will package need to do? 

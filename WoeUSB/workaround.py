@@ -110,6 +110,7 @@ def linux_make_writeback_buffering_not_suck(mode):
     """
     :param mode: True - enable; False - disable
     """
+    return
     if mode:
         utils.print_with_color(
             "Applying workaround to prevent 64-bit systems with big primary memory from being unresponsive during copying files.",

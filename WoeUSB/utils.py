@@ -3,9 +3,11 @@
 import os
 import re
 import sys
+import stat
 import shutil
 import pathlib
 import subprocess
+from xml.dom.minidom import parseString
 
 #: Disable message coloring when set to True, set by --no-color
 no_color = False
@@ -215,7 +217,8 @@ def check_uefi_ntfs_support_partition(target_device):
 
     if re.findall("UEFI_NTFS", lsblk) != []:
         print_with_color(
-            "Warning: Your device doesn't seems to have an UEFI:NTFS partition, UEFI booting will fail if the motherboard firmware itself doesn't support NTFS filesystem!")
+            "Warning: Your device doesn't seems to have an UEFI:NTFS partition, "
+            "UEFI booting will fail if the motherboard firmware itself doesn't support NTFS filesystem!")
         print_with_color(
             "Info: You may recreate disk with an UEFI:NTFS partition by using the --device creation method")
 
@@ -251,8 +254,9 @@ def check_target_filesystem_free_space(target_fs_mountpoint, source_fs_mountpoin
     if needed_space > free_space:
         print_with_color("Error: Not enough free space on target partition!")
         print_with_color(
-            "Error: We required " + get_size(
-                str(needed_space)) + "(" + str(needed_space) + " bytes) but '" + target_partition + "' only has " + str(free_space) + "(" + str(free_space) + " bytes).")
+            "Error: We required " + str(get_size(
+                str(needed_space))) + "(" + str(needed_space) + " bytes) but '" + target_partition + "' only has " + str(
+                free_space) + "(" + str(free_space) + " bytes).")
         return 1
 
 
@@ -294,14 +298,6 @@ def get_size(path):
     return total_size
 
 
-# Ok, you may asking yourself, what the f**k is this, and why is it called everywhere. Let me explain
-# In python you can't just stop or kill thread, it must end its execution,
-# or recognize moment where you want it to stop and politely perform euthanasia on itself.
-# So, here, if gui is set, we throw exception which is going to be (hopefully) catch by GUI,
-# simultaneously ending whatever script was doing meantime!
-# Everyone goes to home happy and user is left with wrecked pendrive (just joking, next thing called by gui is cleanup)
-
-
 def check_kill_signal():
     """
     Ok, you may asking yourself, what the f**k is this, and why is it called everywhere. Let me explain
@@ -314,3 +310,64 @@ def check_kill_signal():
     if gui is not None:
         if gui.kill:
             raise sys.exit()
+
+
+# noinspection DuplicatedCode
+def update_policy_to_allow_for_running_gui_as_root(path):
+
+    dom = parseString(
+        "<?xml version=\"1.0\" ?>"
+        "<!DOCTYPE policyconfig  PUBLIC '-//freedesktop//DTD polkit Policy Configuration 1.0//EN'  "
+        "'http://www.freedesktop.org/software/polkit/policyconfig-1.dtd'><!-- \n"
+        "DOC: https://www.freedesktop.org/software/polkit/docs/latest/polkit.8.html\n"
+        "--><policyconfig>\n"
+        "	<vendor>The WoeUSB Project</vendor>\n"
+        "	<vendor_url>https://github.com/slacka/WoeUSB</vendor_url>\n"
+        "	<icon_name>woeusbgui-icon</icon_name>\n"
+        "\n"
+        "	<action id=\"com.github.slacka.woeusb.run-gui-using-pkexec\">\n"
+        "		<description>Run `woeusb` as SuperUser</description>\n"
+        "		<description xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb`</description>\n"
+        "		<description xml:lang=\"pl_PL\">Uruchom `woeusb` jako root</description>\n"
+        "		\n"
+        "		<message>Authentication is required to run `woeusb` as SuperUser.</message>\n"
+        "		<message xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb` 需要通過身份驗證。</message>\n"
+        "		<message xml:lang=\"pl_PL\">Wymagana jest autoryzacja do uruchomienia `woeusb` jako root</message>\n"
+        "		\n"
+        "		<defaults>\n"
+        "			<allow_any>auth_admin</allow_any>\n"
+        "			<allow_inactive>auth_admin</allow_inactive>\n"
+        "			<allow_active>auth_admin_keep</allow_active>\n"
+        "		</defaults>\n"
+        "		\n"
+        "		<annotate key=\"org.freedesktop.policykit.exec.path\">/usr/local/bin/woeusbgui</annotate>\n"
+        "   		<annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>\n"
+        "	</action>\n"
+        "	<action id=\"com.github.slacka.woeusb.run-gui-using-pkexec-local\">\n"
+        "		<description>Run `woeusb` as SuperUser</description>\n"
+        "		<description xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb`</description>\n"
+        "		<description xml:lang=\"pl_PL\">Uruchom `woeusb` jako root</description>\n"
+        "\n"
+        "		<message>Authentication is required to run `woeusb` as SuperUser.</message>\n"
+        "		<message xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb` 需要通過身份驗證。</message>\n"
+        "		<message xml:lang=\"pl_PL\">Wymagana jest autoryzacja do uruchomienia `woeusb` jako root</message>\n"
+        "\n"
+        "		<defaults>\n"
+        "			<allow_any>auth_admin</allow_any>\n"
+        "			<allow_inactive>auth_admin</allow_inactive>\n"
+        "			<allow_active>auth_admin_keep</allow_active>\n"
+        "		</defaults>\n"
+        "\n"
+        "		<annotate key=\"org.freedesktop.policykit.exec.path\">/usr/local/bin/woeusbgui</annotate>\n"
+        "   		<annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>\n"
+        "	</action>\n"
+        "</policyconfig>"
+    )
+    for action in dom.getElementsByTagName('action'):
+        if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
+            for annotate in action.getElementsByTagName('annotate'):
+                if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
+                    annotate.childNodes[0].nodeValue = path
+
+    with open("/usr/share/polkit-1/actions/com.github.woeusb.woeusb-ng.policy", "w") as file:
+        file.write(dom.toxml())

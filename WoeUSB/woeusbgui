@@ -30,9 +30,8 @@ import os
 if os.getuid() != 0:
     subprocess.run(["pkexec", os.path.realpath(__file__)])
 else:
-    if len(sys.argv) > 1 and sys.argv[1] == "end":
-        import WoeUSB.utils
-        WoeUSB.utils.update_policy_to_allow_for_running_gui_as_root(__file__)
+    if len(sys.argv) > 1 and sys.argv[1] == "setup":
+        print(__file__)
         exit(0)
 
     try:

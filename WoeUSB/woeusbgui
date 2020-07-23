@@ -31,7 +31,7 @@ if os.getuid() != 0:
     subprocess.run(["pkexec", os.path.realpath(__file__)])
 else:
     if len(sys.argv) > 1 and sys.argv[1] == "setup":
-        print(__file__)
+        print(os.getcwd())
         exit(0)
 
     try:

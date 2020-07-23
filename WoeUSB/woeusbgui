@@ -26,12 +26,11 @@ import subprocess
 import sys
 import os
 
-
 if os.getuid() != 0:
-    subprocess.run(["pkexec", os.path.realpath(__file__)])
+    subprocess.run(["pkexec", os.path.realpath(__file__), " ".join(sys.argv[1:])])
 else:
     if len(sys.argv) > 1 and sys.argv[1] == "setup":
-        print(os.getcwd())
+        print(os.path.dirname(os.path.realpath(__file__)))
         exit(0)
 
     try:

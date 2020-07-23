@@ -1,6 +1,7 @@
 from setuptools import setup
 from setuptools.command.develop import develop
 from setuptools.command.install import install
+from xml.dom.minidom import parse
 import shutil
 import stat
 import os

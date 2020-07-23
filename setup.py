@@ -14,8 +14,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 def post_install():
-    path = '/usr/local/bin/woeusbgui'  # I give up, I have no clue how to get bin path that is used by pip
-    shutil.copy2(this_directory + '/WoeUSB/woeusbgui', path)  # I'll just hard code it until someone finds better way
+    path = os.environ["PATH"].split(":")[0] + '/woeusbgui'
 
     dom = parse(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy')
     for action in dom.getElementsByTagName('action'):
@@ -49,7 +48,8 @@ def post_install():
         )
 
     shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', '/usr/share/applications')
-    os.chmod('/usr/share/applications/WoeUSB-ng.desktop', stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)  # 644
+    os.chmod('/usr/share/applications/WoeUSB-ng.desktop',
+             stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH | stat.S_IEXEC)  # 755
 
 
 class PostDevelopCommand(develop):
@@ -83,6 +83,7 @@ setup(
     include_package_data=True,
     scripts=[
         'WoeUSB/woeusb',
+        'WoeUSB/woeusbgui'
     ],
     install_requires=[
         'termcolor',

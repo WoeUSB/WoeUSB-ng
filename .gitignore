@@ -8,3 +8,5 @@ WoeUSB_ng\.egg-info/
 dist/
 
 build/
+
+create_tarball

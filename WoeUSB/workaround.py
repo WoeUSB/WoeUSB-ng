@@ -104,30 +104,3 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
 
     with open(efi_boot_directory + "/bootx64.efi", "wb") as target_bootloader:
         target_bootloader.write(bootloader)
-
-
-def linux_make_writeback_buffering_not_suck(mode):
-    """
-    :param mode: True - enable; False - disable
-    """
-    return
-    if mode:
-        utils.print_with_color(
-            "Applying workaround to prevent 64-bit systems with big primary memory from being unresponsive during copying files.",
-            "yellow")
-
-        vm_dirty_background_bytes = str(16 * 1024 * 1024)  # 16MiB
-        vm_dirty_bytes = str(48 * 1024 * 1024)  # 48MiB
-    else:
-        utils.print_with_color(
-            "Resetting workaround to prevent 64-bit systems with big primary memory from being unresponsive during copying files.",
-            "yellow")
-
-        vm_dirty_background_bytes = "0"
-        vm_dirty_bytes = "0"
-
-    with open("/proc/sys/vm/dirty_background_bytes", "w") as dirty_background_bytes:
-        dirty_background_bytes.write(vm_dirty_background_bytes)
-
-    with open("/proc/sys/vm/dirty_bytes", "w") as dirty_bytes:
-        dirty_bytes.write(vm_dirty_bytes)

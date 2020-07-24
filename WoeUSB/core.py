@@ -188,8 +188,6 @@ def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media,
 
     current_state = "copying-filesystem"
 
-    workaround.linux_make_writeback_buffering_not_suck(True)
-
     copy_filesystem_files(source_fs_mountpoint, target_fs_mountpoint)
 
     workaround.support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint)
@@ -578,9 +576,6 @@ def cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory):
     """
     if CopyFiles_handle.is_alive():
         CopyFiles_handle.stop = True
-
-    if current_state in ["copying-filesystem", "finished"]:
-        workaround.linux_make_writeback_buffering_not_suck(False)
 
     flag_unclean = False
     flag_unsafe = False

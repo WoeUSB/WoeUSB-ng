@@ -21,15 +21,10 @@ This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB)
 
 ## Installation
 
+### Ubuntu
 #### Install WoeUSB-ng's Build Dependencies
-
-##### Ubuntu
 ```shell
 sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 
-```
-##### Arch
-```shell
-sudo pacman -Suy p7zip python-pip python-wxpython
 ```
 
 #### Install WoeUSB-ng
@@ -37,14 +32,30 @@ sudo pacman -Suy p7zip python-pip python-wxpython
 sudo pip3 install WoeUSB-ng
 ```
 
-#### Installation from source code
+### Arch
+```shell
+yay woeusb-ng
+```
+
+## Installation from source code
+
+### Install WoeUSB-ng's Build Dependencies
+#### Ubuntu
+```shell
+sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 
+```
+#### Arch
+```shell
+sudo pacman -Suy p7zip python-pip python-wxpython
+```
+### Install WoeUSB-ng
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git
 cd WoeUSB-ng
 sudo pip3 install .
 ```
 
-#### Installation from source code locally or in virtual environment 
+### Installation from source code locally or in virtual environment 
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git
 git apply development.patch
@@ -55,7 +66,7 @@ Please note that this will not create menu shortcut and you may need to run gui 
 
 ### Uninstalling
 
-To remove WoeUSB-ng completely run:
+To remove WoeUSB-ng completely run (needed only when using installation from source code):
 ```shell
 sudo pip3 uninstall WoeUSB-ng
 sudo rm /usr/share/icons/WoeUSB-ng/icon.ico \

@@ -72,7 +72,6 @@ setup(
     include_package_data=True,
     scripts=[
         'WoeUSB/woeusb',
-        'WoeUSB/woeusbgui'
     ],
     install_requires=[
         'termcolor',

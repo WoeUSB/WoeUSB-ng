@@ -27,7 +27,7 @@ import sys
 import os
 
 if os.getuid() != 0:
-    subprocess.run(["pkexec", os.path.realpath(__file__), " ".join(sys.argv[1:])])
+    subprocess.run(["pkexec", os.path.realpath(__file__)])
 else:
     try:
         import WoeUSB.gui

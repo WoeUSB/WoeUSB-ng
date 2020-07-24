@@ -1,11 +1,10 @@
+import os
+import shutil
+import stat
+
 from setuptools import setup
 from setuptools.command.develop import develop
 from setuptools.command.install import install
-from xml.dom.minidom import parse
-import shutil
-import stat
-import os
-
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 
@@ -17,16 +16,6 @@ def post_install():
     path = '/usr/local/bin/woeusbgui'  # I give up, I have no clue how to get bin path that is used by pip
     shutil.copy2(this_directory + '/WoeUSB/woeusbgui', path)  # I'll just hard code it until someone finds better way
 
-    dom = parse(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy')
-    for action in dom.getElementsByTagName('action'):
-        if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
-            for annotate in action.getElementsByTagName('annotate'):
-                if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
-                    annotate.childNodes[0].nodeValue = path
-
-    with open(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "w") as file:
-        dom.writexml(file)
-
     shutil.copy2(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
 
     try:
@@ -36,7 +25,7 @@ def post_install():
 
     shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', '/usr/share/icons/WoeUSB-ng/icon.ico')
 
-    with open(this_directory + '/miscellaneous/WoeUSB-ng.desktop', "w") as file:
+    with open("/usr/share/applications/WoeUSB-ng.desktop", "w") as file:
         file.write(
             """#!/usr/bin/env xdg-open
             [Desktop Entry]
@@ -48,8 +37,8 @@ def post_install():
             """
         )
 
-    shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', '/usr/share/applications')
-    os.chmod('/usr/share/applications/WoeUSB-ng.desktop', stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)  # 644
+    os.chmod('/usr/share/applications/WoeUSB-ng.desktop',
+             stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH | stat.S_IEXEC)  # 755
 
 
 class PostDevelopCommand(develop):

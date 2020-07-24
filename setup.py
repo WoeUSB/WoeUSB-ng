@@ -1,8 +1,6 @@
 from setuptools import setup
 from setuptools.command.develop import develop
 from setuptools.command.install import install
-from xml.dom.minidom import parse
-import subprocess
 import shutil
 import stat
 import os
@@ -15,25 +13,10 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 def post_install():
-    path_to_bin = ""
-    # noinspection PyBroadException
-    try:
-        process = subprocess.Popen(["woeusbgui", "setup"], stdout=subprocess.PIPE)
-        process.wait()
-        path_to_bin = process.stdout.read().decode("utf-8")
-    except:
-        pass
+    path = '/usr/local/bin/woeusbgui'  # I give up, I have no clue how to get bin path that is used by pip
+    shutil.copy2(this_directory + '/WoeUSB/woeusbgui', path)  # I'll just hard code it until someone finds better way
 
-    dom = parse(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy')
-    # noinspection DuplicatedCode
-    for action in dom.getElementsByTagName('action'):
-        if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
-            for annotate in action.getElementsByTagName('annotate'):
-                if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
-                    annotate.childNodes[0].nodeValue = path_to_bin
-
-    with open("/usr/share/polkit-1/actions/com.github.woeusb.woeusb-ng.policy", "w") as file:
-        file.write(dom.toxml())
+    shutil.copy2(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
 
     try:
         os.makedirs('/usr/share/icons/WoeUSB-ng')
@@ -42,16 +25,16 @@ def post_install():
 
     shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', '/usr/share/icons/WoeUSB-ng/icon.ico')
 
-    with open('/usr/share/applications/WoeUSB-ng.desktop', "w") as file:
+    with open("/usr/share/applications/WoeUSB-ng.desktop", "w") as file:
         file.write(
             """#!/usr/bin/env xdg-open
             [Desktop Entry]
             Name=WoeUSB-ng
-            Exec=""" + path_to_bin + """
-            Icon=/usr/share/icons/WoeUSB-ng/icon.ico
-            Terminal=false
-            Type=Application
-            """
+            Exec=""" + path + """
+                Icon=/usr/share/icons/WoeUSB-ng/icon.ico
+                Terminal=false
+                Type=Application
+                """
         )
 
     os.chmod('/usr/share/applications/WoeUSB-ng.desktop',

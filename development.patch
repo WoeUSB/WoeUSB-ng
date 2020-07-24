@@ -1,0 +1,12 @@
+diff --git a/setup.py b/setup.py
+index dca8421..b3e02fe 100644
+--- a/setup.py
++++ b/setup.py
+@@ -72,6 +72,7 @@ setup(
+     include_package_data=True,
+     scripts=[
+         'WoeUSB/woeusb',
++        'WoeUSB/woeusbgui',
+     ],
+     install_requires=[
+         'termcolor',

@@ -1,10 +1,10 @@
+import os
+import shutil
+import stat
+
 from setuptools import setup
 from setuptools.command.develop import develop
 from setuptools.command.install import install
-import shutil
-import stat
-import os
-
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,10 +31,10 @@ def post_install():
             [Desktop Entry]
             Name=WoeUSB-ng
             Exec=""" + path + """
-                Icon=/usr/share/icons/WoeUSB-ng/icon.ico
-                Terminal=false
-                Type=Application
-                """
+            Icon=/usr/share/icons/WoeUSB-ng/icon.ico
+            Terminal=false
+            Type=Application
+            """
         )
 
     os.chmod('/usr/share/applications/WoeUSB-ng.desktop',

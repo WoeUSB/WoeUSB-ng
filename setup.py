@@ -30,7 +30,7 @@ def post_install():
         if action.getAttribute('id') == "com.github.slacka.woeusb.run-gui-using-pkexec":
             for annotate in action.getElementsByTagName('annotate'):
                 if annotate.getAttribute('key') == "org.freedesktop.policykit.exec.path":
-                    annotate.childNodes[0].nodeValue = path_to_bin + "/woeusbgui"
+                    annotate.childNodes[0].nodeValue = path_to_bin
 
     with open("/usr/share/polkit-1/actions/com.github.woeusb.woeusb-ng.policy", "w") as file:
         file.write(dom.toxml())
@@ -47,7 +47,7 @@ def post_install():
             """#!/usr/bin/env xdg-open
             [Desktop Entry]
             Name=WoeUSB-ng
-            Exec=""" + path_to_bin + "/woeusbgui" + """
+            Exec=""" + path_to_bin + """
             Icon=/usr/share/icons/WoeUSB-ng/icon.ico
             Terminal=false
             Type=Application

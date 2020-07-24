@@ -26,10 +26,6 @@ import subprocess
 import sys
 import os
 
-if len(sys.argv) > 1 and sys.argv[1] == "setup":
-    print(__file__)
-    exit(0)
-
 if os.getuid() != 0:
     subprocess.run(["pkexec", os.path.realpath(__file__), " ".join(sys.argv[1:])])
 else:

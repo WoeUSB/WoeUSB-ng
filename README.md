@@ -58,8 +58,8 @@ sudo pip3 install .
 ### Installation from source code locally or in virtual environment 
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git
-git apply development.patch
 cd WoeUSB-ng
+git apply development.patch
 sudo pip3 install -e .
 ```
 Please note that this will not create menu shortcut and you may need to run gui twice as it may want to adjust policy. 

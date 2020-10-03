@@ -16,9 +16,9 @@ data_directory = os.path.dirname(__file__) + "/data/"
 
 app = wx.App()
 
-locale = wx.Locale(wx.LANGUAGE_DEFAULT)
-translation = gettext.translation("woeusb", data_directory + "locale", ['pl, zh, fr'], fallback=True)
+translation = gettext.translation("woeusb", os.path.dirname(__file__) + "/locale", ['pl', 'zh', 'fr'], fallback=True)
 translation.install()
+_ = translation.gettext
 
 
 class MainFrame(wx.Frame):
@@ -280,7 +280,7 @@ class DialogAbout(wx.Dialog):
     __MyPanelNoteBookAutors = None
     __BtOk = None
 
-    def __init__(self, parent, ID=wx.ID_ANY, title=_("About"), pos=wx.DefaultPosition, size=wx.Size(570, 590),
+    def __init__(self, parent, ID=wx.ID_ANY, title=_("About"), pos=wx.DefaultPosition, size=wx.Size(650, 590),
                  style=wx.DEFAULT_DIALOG_STYLE):
         super(DialogAbout, self).__init__(parent, ID, title, pos, size, style)
 
@@ -311,12 +311,12 @@ class DialogAbout(wx.Dialog):
 
         self.__NotebookAutorLicence.AddPage(
             PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka et al.", data_directory + "woeusb-logo.png",
-                                "github.com/slacka/WoeUSB"), "Authors", True)
+                                "github.com/slacka/WoeUSB"), _("Authors"), True)
         self.__NotebookAutorLicence.AddPage(
             PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "Colin GILLE / Congelli501",
-                                data_directory + "c501-logo.png", "www.congelli.eu"), "Original WinUSB Developer", False)
+                                data_directory + "c501-logo.png", "www.congelli.eu"), _("Original WinUSB Developer"), False)
 
-        licence_str = '''
+        licence_str = _('''
             This file is part of WoeUSB-ng.
 
             WoeUSB-ng is free software: you can redistribute it and/or modify
@@ -331,7 +331,7 @@ class DialogAbout(wx.Dialog):
 
             You should have received a copy of the GNU General Public License
             along with WoeUSB-ng.  If not, see <http://www.gnu.org/licenses/>.
-        '''
+        ''')
 
         licence_txt = wx.TextCtrl(self.__NotebookAutorLicence, wx.ID_ANY, licence_str, wx.DefaultPosition,
                                   wx.DefaultSize, wx.TE_MULTILINE | wx.TE_READONLY)

@@ -1,0 +1,162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: winusb\n"
+"Report-Msgid-Bugs-To: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/"
+"issues>\n"
+"POT-Creation-Date: 2019-05-19 17:54+0200\n"
+"PO-Revision-Date: 2019-05-19 17:54+0200\n"
+"Last-Translator: Cihan Alkan <cihanalk@gmail.com>\n"
+"Language-Team: Cihan Alkan <cihanalk@gmail.com>\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: ../../../gui.py:36
+msgid "Show all drives"
+msgstr "Tüm sürücüleri göster"
+
+#: ../../../gui.py:37
+msgid "Show all drives, even those not detected as USB stick."
+msgstr "USB bellek olarak algılanmayanlar da dahil olmak üzere tüm sürücüleri gösterin."
+
+#: ../../../gui.py:48
+msgid "Set boot flag"
+msgstr "Önyükleme bayrağını ayarla"
+
+#: ../../../gui.py:49
+msgid "Sets boot flag after process of copying."
+msgstr "Kopyalama işleminden sonra önyükleme bayrağını ayarlar."
+
+#: ../../../gui.py:51
+msgid "Use NTFS"
+msgstr "NTFS Kullan"
+
+#: ../../../gui.py:52
+msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
+msgstr "FAT yerine NTFS kullanın. NOT: NTFS, FAT'tan daha yavaş görünüyor."
+
+#: ../../../gui.py:58
+msgid "&File"
+msgstr "Dosya(&F)"
+
+#: ../../../gui.py:59
+msgid "&Options"
+msgstr "Seçenekler"
+
+#: ../../../gui.py:60
+msgid "&Help"
+msgstr "Yardım(&H)"
+
+#: ../../../gui.py:116
+msgid "Source :"
+msgstr "Kaynak:："
+
+#: ../../../gui.py:119
+msgid "From a disk image (iso)"
+msgstr "Bir disk görüntüsünden (iso)"
+
+#: ../../../gui.py:124
+msgid "Please select a disk image"
+msgstr "Lütfen bir disk görüntüsü seçin"
+
+#: ../../../gui.py:130
+msgid "From a CD/DVD drive"
+msgstr "CD/DVD sürücüsünden"
+
+#: ../../../gui.py:143
+msgid "Target device :"
+msgstr "Hedef cihaz:"
+
+#: ../../../gui.py:155
+msgid "Install"
+msgstr "Kur"
+
+#: ../../../gui.py:245
+#, fuzzy
+#| msgid "Installing.."
+msgid "Installing"
+msgstr "Kuruluyor……"
+
+#: ../../../gui.py:245
+msgid "Please wait..."
+msgstr "Lütfen bekleyin……"
+
+#: ../../../gui.py:256
+msgid "Are you sure you want to cancel the installation?"
+msgstr "Kurulumu iptal etmek istediğinizden emin misiniz?"
+
+#: ../../../gui.py:256
+msgid "Cancel"
+msgstr "İptal"
+
+#: ../../../gui.py:265
+msgid "Installation succeeded!"
+msgstr "Kurulum başarılı!"
+
+#: ../../../gui.py:265 ../../../gui.py:267
+msgid "Installation"
+msgstr "Kurulum"
+
+#: ../../../gui.py:267
+msgid "Installation failed!"
+msgstr "Yükleme başarısız!"
+
+#: ../../../gui.py:283
+msgid "About"
+msgstr "Hakkında"
+
+#: ../../../gui.py:339
+msgid "License"
+msgstr "Lisans"
+
+#~ msgid "Error : "
+#~ msgstr "Hata:"
+
+#~ msgid "Error..."
+#~ msgstr "Hata:……"
+
+#~ msgid "Unknown error as occurred!"
+#~ msgstr "Bilinmeyen bir hata oluştu!"
+
+#~ msgid "Fatal error : "
+#~ msgstr "Ölümcül hata :"
+
+#~ msgid "Version %s"
+#~ msgstr "Sürüm %s"
+
+#~ msgid "Developer"
+#~ msgstr "Geliştirici"
+
+#~ msgid ""
+#~ "%s is free software: you can redistribute it and/or modify it under the "
+#~ "terms of the GNU General Public License as published by the Free Software "
+#~ "Foundation, either version 3 of the License, or (at your option) any "
+#~ "later version.\n"
+#~ "\n"
+#~ "%s is distributed in the hope that it will be useful, but WITHOUT ANY "
+#~ "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+#~ "FOR A PARTICULAR PURPOSE.  See theGNU General Public License for more "
+#~ "details.\n"
+#~ "\n"
+#~ "You should have received a copy of the GNU General Public Licensealong "
+#~ "with %s.  If not, see <http://www.gnu.org/licenses/>."
+#~ msgstr ""
+
+
+#~ msgid "File not Found : "
+#~ msgstr "Dosya bulunamadı :"
+
+#~ msgid "Error"
+#~ msgstr "Hata"
+
+#~ msgid "bytes"
+#~ msgstr "bayt"
+
+#~ msgid "WinUSB"
+#~ msgstr ""

@@ -8,110 +8,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: woeusb\n"
 "Report-Msgid-Bugs-To: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/issues>\n"
-"POT-Creation-Date: 2018-07-30 15:09+0200\n"
+"POT-Creation-Date: 2020-10-04 00:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jakub Szymański <jakubmateusz@poczta.onet.pl>\n"
 "Language-Team: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/issues>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: woeusbgui:67
+#: gui.py:36
 msgid "Show all drives"
 msgstr ""
 
-#: woeusbgui:68
+#: gui.py:37
 msgid "Show all drives, even those not detected as USB stick."
 msgstr ""
 
-#: woeusbgui:78
+#: gui.py:48
 msgid "Set boot flag"
 msgstr ""
 
-#: woeusbgui:79
+#: gui.py:49
 msgid "Sets boot flag after process of copying."
 msgstr ""
 
-#: woeusbgui:81
+#: gui.py:51
 msgid "Use NTFS"
 msgstr ""
 
-#: woeusbgui:82
+#: gui.py:52
 msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
 msgstr ""
 
-#: woeusbgui:88
+#: gui.py:58
 msgid "&File"
 msgstr ""
 
-#: woeusbgui:89
+#: gui.py:59
 msgid "&Options"
 msgstr ""
 
-#: woeusbgui:90
+#: gui.py:60
 msgid "&Help"
 msgstr ""
 
-#: woeusbgui:146
+#: gui.py:116
 msgid "Source :"
 msgstr ""
 
-#: woeusbgui:149
+#: gui.py:119
 msgid "From a disk image (iso)"
 msgstr ""
 
-#: woeusbgui:154
+#: gui.py:124
 msgid "Please select a disk image"
 msgstr ""
 
-#: woeusbgui:160
+#: gui.py:130
 msgid "From a CD/DVD drive"
 msgstr ""
 
-#: woeusbgui:173
+#: gui.py:143
 msgid "Target device :"
 msgstr ""
 
-#: woeusbgui:185
+#: gui.py:155
 msgid "Install"
 msgstr ""
 
-#: woeusbgui:275
+#: gui.py:245
 msgid "Installing"
 msgstr ""
 
-#: woeusbgui:275
+#: gui.py:245
 msgid "Please wait..."
 msgstr ""
 
-#: woeusbgui:286
+#: gui.py:256
 msgid "Are you sure you want to cancel the installation?"
 msgstr ""
 
-#: woeusbgui:286
+#: gui.py:256
 msgid "Cancel"
 msgstr ""
 
-#: woeusbgui:295
+#: gui.py:265
 msgid "Installation succeeded!"
 msgstr ""
 
-#: woeusbgui:295 woeusbgui:297
+#: gui.py:265 gui.py:267
 msgid "Installation"
 msgstr ""
 
-#: woeusbgui:297
+#: gui.py:267
 msgid "Installation failed!"
 msgstr ""
 
-#: woeusbgui:312
+#: gui.py:283
 msgid "About"
 msgstr ""
 
-#: woeusbgui:370
+#: gui.py:314
+msgid "Authors"
+msgstr ""
+
+#: gui.py:317
+msgid "Original WinUSB Developer"
+msgstr ""
+
+#: gui.py:319
+msgid ""
+"\n"
+"            This file is part of WoeUSB-ng.\n"
+"\n"
+"            WoeUSB-ng is free software: you can redistribute it and/or modify\n"
+"            it under the terms of the GNU General Public License as published by\n"
+"            the Free Software Foundation, either version 3 of the License, or\n"
+"            (at your option) any later version.\n"
+"\n"
+"            WoeUSB-ng is distributed in the hope that it will be useful,\n"
+"            but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"            GNU General Public License for more details.\n"
+"\n"
+"            You should have received a copy of the GNU General Public License\n"
+"            along with WoeUSB-ng.  If not, see <http://www.gnu.org/licenses/>.\n"
+"        "
+msgstr ""
+
+#: gui.py:339
 msgid "License"
 msgstr ""

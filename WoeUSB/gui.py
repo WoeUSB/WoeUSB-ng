@@ -2,23 +2,21 @@
 
 import os
 import time
-import gettext
 import threading
 
 import wx
 import wx.adv
 
-import WoeUSB
+
 import WoeUSB.core as core
 import WoeUSB.list_devices as list_devices
+import WoeUSB.i18n as i18n
 
 data_directory = os.path.dirname(__file__) + "/data/"
 
 app = wx.App()
 
-translation = gettext.translation("woeusb", os.path.dirname(__file__) + "/locale", ['pl', 'zh', 'fr'], fallback=True)
-translation.install()
-_ = translation.gettext
+_ = i18n.i18n
 
 
 class MainFrame(wx.Frame):

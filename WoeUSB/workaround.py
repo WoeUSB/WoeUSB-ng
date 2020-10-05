@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
-
 import os
 import subprocess
 import time
 
 import WoeUSB.utils as utils
+import WoeUSB.i18n as i18n
+
+_ = i18n.i18n
 
 
 def make_system_realize_partition_table_changed(target_device):
@@ -12,10 +13,10 @@ def make_system_realize_partition_table_changed(target_device):
     :param target_device:
     :return:
     """
-    utils.print_with_color("Making system realize that partition table has changed...")
+    utils.print_with_color(_("Making system realize that partition table has changed..."))
 
     subprocess.run(["blockdev", "--rereadpt", target_device])
-    utils.print_with_color("Wait 3 seconds for block device nodes to populate...")
+    utils.print_with_color(_("Wait 3 seconds for block device nodes to populate..."))
 
     time.sleep(3)
 
@@ -31,7 +32,7 @@ def buggy_motherboards_that_ignore_disks_without_boot_flag_toggled(target_device
     :return:
     """
     utils.print_with_color(
-        "Applying workaround for buggy motherboards that will ignore disks with no partitions with the boot flag toggled"
+        _("Applying workaround for buggy motherboards that will ignore disks with no partitions with the boot flag toggled")
     )
 
     subprocess.run(["parted", "--script",
@@ -58,7 +59,7 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
         return 0
 
     utils.print_with_color(
-        "Source media seems to be Windows 7-based with EFI support, applying workaround to make it support UEFI booting",
+        _("Source media seems to be Windows 7-based with EFI support, applying workaround to make it support UEFI booting"),
         "yellow")
 
     test_efi_directory = subprocess.run(["find", target_fs_mountpoint, "-ipath", target_fs_mountpoint + "/efi"],
@@ -67,11 +68,11 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
     if test_efi_directory == "":
         efi_directory = target_fs_mountpoint + "/efi"
         if utils.verbose:
-            print("DEBUG: Can't find efi directory, use " + efi_directory)
+            utils.print_with_color(_("DEBUG: Can't find efi directory, use {0}").format(efi_directory), "yellow")
     else:
         efi_directory = test_efi_directory
         if utils.verbose:
-            print("DEBUG: " + efi_directory + " detected.")
+            utils.print_with_color(_("DEBUG: {0} detected.").format(efi_directory), "yellow")
 
     test_efi_boot_directory = subprocess.run(["find", target_fs_mountpoint, "-ipath", target_fs_mountpoint + "/boot"],
                                              stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
@@ -79,11 +80,11 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
     if test_efi_boot_directory == "":
         efi_boot_directory = target_fs_mountpoint + "/boot"
         if utils.verbose:
-            print("DEBUG: Can't find efi/boot directory, use " + efi_boot_directory)
+            utils.print_with_color(_("DEBUG: Can't find efi/boot directory, use ").format(efi_boot_directory), "yellow")
     else:
         efi_boot_directory = test_efi_boot_directory
         if utils.verbose:
-            print("DEBUG: " + efi_boot_directory + " detected.")
+            utils.print_with_color(_("DEBUG: {0} detected.").format(efi_boot_directory), "yellow")
 
     # If there's already an EFI bootloader existed, skip the workaround
     test_efi_bootloader = subprocess.run(
@@ -91,7 +92,7 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
         stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
 
     if test_efi_bootloader != "":
-        print("INFO: Detected existing EFI bootloader, workaround skipped.")
+        utils.print_with_color(_("INFO: Detected existing EFI bootloader, workaround skipped."))
         return 0
 
     os.makedirs(efi_boot_directory, exist_ok=True)

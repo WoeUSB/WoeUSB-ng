@@ -48,6 +48,10 @@ sudo apt install git p7zip-full python3-pip python3-wxgtk4.0
 ```shell
 sudo pacman -Suy p7zip python-pip python-wxpython
 ```
+#### Fedora (tested on: Fedora Workstation 33) 
+```shell
+sudo dnf install git p7zip python3-pip python3-wxpython4
+```
 ### Install WoeUSB-ng
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git

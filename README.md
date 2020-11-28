@@ -21,24 +21,20 @@ This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB)
 
 ## Installation
 
-### Ubuntu
-#### Install WoeUSB-ng's Build Dependencies
-```shell
-sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 
-```
-
-#### Install WoeUSB-ng
-```shell
-sudo pip3 install WoeUSB-ng
-```
-
 ### Arch
 ```shell
 yay woeusb-ng
 ```
 
-### Fedora (tested on: Fedora Workstation 33)
-#### Install WoeUSB-ng's Build Dependencies
+### For other distributions
+### Install WoeUSB-ng's Build Dependencies
+#### Ubuntu
+
+```shell
+sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 
+```
+
+#### Fedora (tested on: Fedora Workstation 33)
 ```shell
 sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
 ```

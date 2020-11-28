@@ -37,6 +37,17 @@ sudo pip3 install WoeUSB-ng
 yay woeusb-ng
 ```
 
+### Fedora (tested on: Fedora Workstation 33)
+#### Install WoeUSB-ng's Build Dependencies
+```shell
+sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
+```
+
+#### Install WoeUSB-ng
+```shell
+sudo pip3 install WoeUSB-ng
+```
+
 ## Installation from source code
 
 ### Install WoeUSB-ng's Build Dependencies
@@ -50,7 +61,7 @@ sudo pacman -Suy p7zip python-pip python-wxpython
 ```
 #### Fedora (tested on: Fedora Workstation 33) 
 ```shell
-sudo dnf install git p7zip python3-pip python3-wxpython4
+sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
 ```
 ### Install WoeUSB-ng
 ```shell

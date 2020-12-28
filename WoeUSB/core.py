@@ -323,7 +323,7 @@ def create_target_partition(target_device, target_partition, filesystem_type, fi
                         "-1025s"])  # Leave 512KiB==1024sector in traditional 512bytes/sector disk, disks with sector with more than 512bytes only result in partition size greater than 512KiB and is intentionally let-it-be.
     # FIXME: Leave exact 512KiB in all circumstances is better, but the algorithm to do so is quite brainkilling.
     else:
-        utils.print_with_color(_("FATAL: Illegal parted_mkpart_fs_type, please report bug."), "red")
+        utils.print_with_color(_("FATAL: Illegal {0}, please report bug.").format(parted_mkpart_fs_type), "red")
 
     utils.check_kill_signal()
 
@@ -602,7 +602,7 @@ def cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory):
 
     if flag_unsafe:
         utils.print_with_color(
-            _("We unable to unmount target filesystem for you, please make sure target filesystem is unmounted before detaching to prevent data corruption"),
+            _("We were unable to unmount target filesystem for you, please make sure target filesystem is unmounted before detaching to prevent data corruption"),
             "yellow")
         utils.print_with_color(_("Some mountpoints are not unmount/cleaned successfully and must be done manually"),
                                "yellow")

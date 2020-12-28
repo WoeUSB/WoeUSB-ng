@@ -80,7 +80,7 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
     if test_efi_boot_directory == "":
         efi_boot_directory = target_fs_mountpoint + "/boot"
         if utils.verbose:
-            utils.print_with_color(_("DEBUG: Can't find efi/boot directory, use ").format(efi_boot_directory), "yellow")
+            utils.print_with_color(_("DEBUG: Can't find efi/boot directory, use {0}").format(efi_boot_directory), "yellow")
     else:
         efi_boot_directory = test_efi_boot_directory
         if utils.verbose:

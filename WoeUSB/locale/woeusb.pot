@@ -8,110 +8,411 @@ msgid ""
 msgstr ""
 "Project-Id-Version: woeusb\n"
 "Report-Msgid-Bugs-To: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/issues>\n"
-"POT-Creation-Date: 2018-07-30 15:09+0200\n"
+"POT-Creation-Date: 2020-10-05 21:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jakub Szymański <jakubmateusz@poczta.onet.pl>\n"
 "Language-Team: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/issues>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: woeusbgui:67
+#: core.py:85
+msgid "You need to specify installation type (--device or --partition)"
+msgstr ""
+
+#: core.py:148
+#, python-brace-format
+msgid "Warning: You are not running {0} as root!"
+msgstr ""
+
+#: core.py:149
+msgid "Warning: This might be the reason of the following failure."
+msgstr ""
+
+#: core.py:163
+msgid "Error: Unable to mount source filesystem"
+msgstr ""
+
+#: core.py:186
+msgid "Error: Unable to mount target filesystem"
+msgstr ""
+
+#: core.py:222
+#, python-brace-format
+msgid "Wiping all existing partition table and filesystem signatures in {0}"
+msgstr ""
+
+#: core.py:236
+#, python-brace-format
+msgid "Ensure that {0} is really wiped..."
+msgstr ""
+
+#: core.py:243
+msgid "Error: Partition is still detected after wiping all signatures, this indicates that the drive might be locked into readonly mode due to end of lifespan."
+msgstr ""
+
+#: core.py:257
+#, python-brace-format
+msgid "Creating new partition table on {0}..."
+msgstr ""
+
+#: core.py:262
+msgid "Error: Currently GUID partition table is not supported."
+msgstr ""
+
+#: core.py:265
+msgid "Error: Partition table not supported."
+msgstr ""
+
+#: core.py:292
+msgid "Error: Filesystem not supported"
+msgstr ""
+
+#: core.py:295
+msgid "Creating target partition..."
+msgstr ""
+
+#: core.py:326
+msgid "FATAL: Illegal parted_mkpart_fs_type, please report bug."
+msgstr ""
+
+#: core.py:338
+msgid "FATAL: Shouldn't be here"
+msgstr ""
+
+#: core.py:378
+msgid "Warning: Unable to download UEFI:NTFS partition image from GitHub, installation skipped.  Target device might not be bootable if the UEFI firmware doesn't support NTFS filesystem."
+msgstr ""
+
+#: core.py:394
+msgid "Mounting source filesystem..."
+msgstr ""
+
+#: core.py:399 core.py:434
+#, python-brace-format
+msgid "Error: Unable to create {0} mountpoint directory"
+msgstr ""
+
+#: core.py:408 core.py:415
+msgid "Error: Unable to mount source media"
+msgstr ""
+
+#: core.py:429
+msgid "Mounting target filesystem..."
+msgstr ""
+
+#: core.py:440
+msgid "Error: Unable to mount target media"
+msgstr ""
+
+#: core.py:462
+msgid "Copying files from source media..."
+msgstr ""
+
+#: core.py:520
+msgid "Installing GRUB bootloader for legacy PC booting support..."
+msgstr ""
+
+#: core.py:541
+msgid "Installing custom GRUB config for legacy PC booting..."
+msgstr ""
+
+#: core.py:560
+#, python-brace-format
+msgid "Unmounting and removing {0}..."
+msgstr ""
+
+#: core.py:562
+msgid "Warning: Unable to unmount filesystem."
+msgstr ""
+
+#: core.py:568
+msgid "Warning: Unable to remove source mountpoint"
+msgstr ""
+
+#: core.py:600 core.py:607
+msgid "Some mountpoints are not unmount/cleaned successfully and must be done manually"
+msgstr ""
+
+#: core.py:605
+msgid "We unable to unmount target filesystem for you, please make sure target filesystem is unmounted before detaching to prevent data corruption"
+msgstr ""
+
+#: core.py:612
+msgid "Target device is busy, please make sure you unmount all filesystems on target device or shutdown the computer before detaching it."
+msgstr ""
+
+#: core.py:615
+msgid "You may now safely detach the target device"
+msgstr ""
+
+#: core.py:620
+msgid "Done :)"
+msgstr ""
+
+#: core.py:621
+msgid "The target device should be bootable now"
+msgstr ""
+
+#: gui.py:34
 msgid "Show all drives"
 msgstr ""
 
-#: woeusbgui:68
+#: gui.py:35
 msgid "Show all drives, even those not detected as USB stick."
 msgstr ""
 
-#: woeusbgui:78
+#: gui.py:46
 msgid "Set boot flag"
 msgstr ""
 
-#: woeusbgui:79
+#: gui.py:47
 msgid "Sets boot flag after process of copying."
 msgstr ""
 
-#: woeusbgui:81
+#: gui.py:49
 msgid "Use NTFS"
 msgstr ""
 
-#: woeusbgui:82
+#: gui.py:50
 msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
 msgstr ""
 
-#: woeusbgui:88
+#: gui.py:56
 msgid "&File"
 msgstr ""
 
-#: woeusbgui:89
+#: gui.py:57
 msgid "&Options"
 msgstr ""
 
-#: woeusbgui:90
+#: gui.py:58
 msgid "&Help"
 msgstr ""
 
-#: woeusbgui:146
+#: gui.py:114
 msgid "Source :"
 msgstr ""
 
-#: woeusbgui:149
+#: gui.py:117
 msgid "From a disk image (iso)"
 msgstr ""
 
-#: woeusbgui:154
+#: gui.py:122
 msgid "Please select a disk image"
 msgstr ""
 
-#: woeusbgui:160
+#: gui.py:128
 msgid "From a CD/DVD drive"
 msgstr ""
 
-#: woeusbgui:173
+#: gui.py:141
 msgid "Target device :"
 msgstr ""
 
-#: woeusbgui:185
+#: gui.py:153
 msgid "Install"
 msgstr ""
 
-#: woeusbgui:275
+#: gui.py:243
 msgid "Installing"
 msgstr ""
 
-#: woeusbgui:275
+#: gui.py:243
 msgid "Please wait..."
 msgstr ""
 
-#: woeusbgui:286
+#: gui.py:254
 msgid "Are you sure you want to cancel the installation?"
 msgstr ""
 
-#: woeusbgui:286
+#: gui.py:254
 msgid "Cancel"
 msgstr ""
 
-#: woeusbgui:295
+#: gui.py:263
 msgid "Installation succeeded!"
 msgstr ""
 
-#: woeusbgui:295 woeusbgui:297
+#: gui.py:263 gui.py:265
 msgid "Installation"
 msgstr ""
 
-#: woeusbgui:297
+#: gui.py:265
 msgid "Installation failed!"
 msgstr ""
 
-#: woeusbgui:312
+#: gui.py:281
 msgid "About"
 msgstr ""
 
-#: woeusbgui:370
+#: gui.py:312
+msgid "Authors"
+msgstr ""
+
+#: gui.py:315
+msgid "Original WinUSB Developer"
+msgstr ""
+
+#: gui.py:317
+msgid ""
+"\n"
+"            This file is part of WoeUSB-ng.\n"
+"\n"
+"            WoeUSB-ng is free software: you can redistribute it and/or modify\n"
+"            it under the terms of the GNU General Public License as published by\n"
+"            the Free Software Foundation, either version 3 of the License, or\n"
+"            (at your option) any later version.\n"
+"\n"
+"            WoeUSB-ng is distributed in the hope that it will be useful,\n"
+"            but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"            GNU General Public License for more details.\n"
+"\n"
+"            You should have received a copy of the GNU General Public License\n"
+"            along with WoeUSB-ng.  If not, see <http://www.gnu.org/licenses/>.\n"
+"        "
+msgstr ""
+
+#: gui.py:337
 msgid "License"
+msgstr ""
+
+#: utils.py:38
+#, python-brace-format
+msgid "Error: {0} requires {1} command in the executable search path, but it is not found."
+msgstr ""
+
+#: utils.py:50
+msgid "Error: mkdosfs/mkfs.msdos/mkfs.vfat/mkfs.fat command not found!"
+msgstr ""
+
+#: utils.py:51
+msgid "Error: Please make sure that dosfstools is properly installed!"
+msgstr ""
+
+#: utils.py:56
+msgid "Error: mkntfs command not found!"
+msgstr ""
+
+#: utils.py:57
+msgid "Error: Please make sure that ntfs-3g is properly installed!"
+msgstr ""
+
+#: utils.py:67
+msgid "Error: grub-install or grub2-install command not found!"
+msgstr ""
+
+#: utils.py:68
+msgid "Error: Please make sure that GNU GRUB is properly installed!"
+msgstr ""
+
+#: utils.py:86
+#, python-brace-format
+msgid "Error: Source media \"{0}\" not found or not a regular file or a block device file!"
+msgstr ""
+
+#: utils.py:92
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not a block device file!"
+msgstr ""
+
+#: utils.py:96
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not an entire storage device!"
+msgstr ""
+
+#: utils.py:100
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not an partition!"
+msgstr ""
+
+#: utils.py:122
+#, python-brace-format
+msgid "Info: Target device is {0}"
+msgstr ""
+
+#: utils.py:123
+#, python-brace-format
+msgid "Info: Target partition is {0}"
+msgstr ""
+
+#: utils.py:148
+msgid "Error: Source media is currently mounted, unmount the partition then try again"
+msgstr ""
+
+#: utils.py:153
+msgid "Error: Target partition is currently mounted, unmount the partition then try again"
+msgstr ""
+
+#: utils.py:160
+msgid "Error: Target device is currently busy, unmount all mounted partitions in target device then try again"
+msgstr ""
+
+#: utils.py:176
+#, python-brace-format
+msgid "Warining: File {0} in source image has exceed the FAT32 Filesystem 4GiB Single File Size Limitation, swiching to NTFS filesystem."
+msgstr ""
+
+#: utils.py:181
+msgid "Refer: https://github.com/slacka/WoeUSB/wiki/Limitations#fat32-filesystem-4gib-single-file-size-limitation for more info."
+msgstr ""
+
+#: utils.py:205
+msgid "Error: Target filesystem not supported, currently supported filesystem: FAT, NTFS."
+msgstr ""
+
+#: utils.py:226
+msgid "Warning: Your device doesn't seems to have an UEFI:NTFS partition, UEFI booting will fail if the motherboard firmware itself doesn't support NTFS filesystem!"
+msgstr ""
+
+#: utils.py:229
+msgid "Info: You may recreate disk with an UEFI:NTFS partition by using the --device creation method"
+msgstr ""
+
+#: utils.py:261
+msgid "Error: Not enough free space on target partition!"
+msgstr ""
+
+#: utils.py:263
+#, python-brace-format
+msgid "Error: We required {0}({1} bytes) but '{2}' only has {3}({4} bytes)."
+msgstr ""
+
+#: workaround.py:16
+msgid "Making system realize that partition table has changed..."
+msgstr ""
+
+#: workaround.py:19
+msgid "Wait 3 seconds for block device nodes to populate..."
+msgstr ""
+
+#: workaround.py:35
+msgid "Applying workaround for buggy motherboards that will ignore disks with no partitions with the boot flag toggled"
+msgstr ""
+
+#: workaround.py:62
+msgid "Source media seems to be Windows 7-based with EFI support, applying workaround to make it support UEFI booting"
+msgstr ""
+
+#: workaround.py:71
+#, python-brace-format
+msgid "DEBUG: Can't find efi directory, use {0}"
+msgstr ""
+
+#: workaround.py:75 workaround.py:87
+#, python-brace-format
+msgid "DEBUG: {0} detected."
+msgstr ""
+
+#: workaround.py:83
+msgid "DEBUG: Can't find efi/boot directory, use "
+msgstr ""
+
+#: workaround.py:95
+msgid "INFO: Detected existing EFI bootloader, workaround skipped."
 msgstr ""

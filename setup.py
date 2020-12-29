@@ -53,7 +53,7 @@ class PostInstallCommand(install):
     """Post-installation for installation mode."""
 
     def run(self):
-        post_install()
+        #post_install()
         install.run(self)
 
 
@@ -72,6 +72,7 @@ setup(
     include_package_data=True,
     scripts=[
         'WoeUSB/woeusb',
+        'WoeUSB/woeusbgui',
     ],
     install_requires=[
         'termcolor',

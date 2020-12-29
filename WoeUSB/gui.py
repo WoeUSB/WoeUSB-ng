@@ -8,6 +8,7 @@ import wx
 import wx.adv
 
 
+import WoeUSB
 import WoeUSB.core as core
 import WoeUSB.list_devices as list_devices
 import WoeUSB.i18n as i18n

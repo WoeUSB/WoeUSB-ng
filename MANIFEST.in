@@ -2,3 +2,4 @@ graft WoeUSB/data
 graft WoeUSB/locale
 graft miscellaneous
 include README.md
+include WoeUSB/woeusbgui

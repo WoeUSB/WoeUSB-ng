@@ -9,6 +9,7 @@ import traceback
 import threading
 import subprocess
 import urllib.request
+import urllib.error
 from datetime import datetime
 
 import WoeUSB.utils as utils
@@ -373,7 +374,7 @@ def install_uefi_ntfs_support_partition(uefi_ntfs_partition, download_directory)
 
     try:
         file = urllib.request.urlretrieve("https://github.com/pbatard/rufus/raw/master/res/uefi/", "uefi-ntfs.img")[0]
-    except urllib.request.ContentTooShortError:
+    except (urllib.error.ContentTooShortError, urllib.error.HTTPError, urllib.error.URLError):
         utils.print_with_color(
             _("Warning: Unable to download UEFI:NTFS partition image from GitHub, installation skipped.  Target device might not be bootable if the UEFI firmware doesn't support NTFS filesystem."), "yellow")
         return 1

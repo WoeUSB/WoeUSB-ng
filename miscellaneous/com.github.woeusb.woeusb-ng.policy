@@ -20,7 +20,7 @@ DOC: https://www.freedesktop.org/software/polkit/docs/latest/polkit.8.html
 			<allow_active>auth_admin_keep</allow_active>
 		</defaults>
 		
-		<annotate key="org.freedesktop.policykit.exec.path">/usr/bin/woeusbgui</annotate>
+		<annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/woeusbgui</annotate>
    		<annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
 	</action>
 </policyconfig>

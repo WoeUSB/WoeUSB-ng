@@ -42,7 +42,7 @@ def check_runtime_dependencies(application_name):
 
     fat = ["mkdosfs", "mkfs.msdos", "mkfs.vfat", "mkfs.fat"]
     for command in fat:
-        if shutil.which(command) != "":
+        if shutil.which(command) is not None:
             fat = command
             break
 
@@ -52,14 +52,14 @@ def check_runtime_dependencies(application_name):
         result = "failed"
 
     ntfs = "mkntfs"
-    if shutil.which("mkntfs") == "":
+    if shutil.which("mkntfs") is None:
         print_with_color(_("Error: mkntfs command not found!"), "red")
         print_with_color(_("Error: Please make sure that ntfs-3g is properly installed!"), "red")
         result = "failed"
 
     grub = ["grub-install", "grub2-install"]
     for command in grub:
-        if shutil.which(command) != "":
+        if shutil.which(command) is not None:
             grub = command
             break
 

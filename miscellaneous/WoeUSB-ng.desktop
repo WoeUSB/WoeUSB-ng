@@ -5,3 +5,4 @@ Exec=/usr/bin/woeusbgui
 Icon=/usr/share/icons/WoeUSB-ng/icon.ico
 Terminal=false
 Type=Application
+Categories=Utility;

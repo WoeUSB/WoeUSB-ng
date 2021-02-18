@@ -133,6 +133,7 @@ def check_is_target_device_busy(device):
     mount = subprocess.run("mount", stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
     if re.findall(device, mount) != []:
         mounts = re.findall(rf'{device}\S*', mount)
+        print_with_color(_("Warning: The following partitions will be unmounted: {0}").format(mounts), "yellow")
         for partition in mounts:
             if subprocess.run(["umount", partition]).returncode:
                 return 1

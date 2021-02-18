@@ -177,7 +177,7 @@ def check_fat32_filesize_limitation(source_fs_mountpoint):
             if os.path.getsize(path) > (2 ** 32) - 1:  # Max fat32 file size
                 print_with_color(
                     _(
-                        "Warining: File {0} in source image has exceed the FAT32 Filesystem 4GiB Single File Size Limitation, swiching to NTFS filesystem.").format(
+                        "Warning: File {0} in source image has exceed the FAT32 Filesystem 4GiB Single File Size Limitation, swiching to NTFS filesystem.").format(
                         path),
                     "yellow")
                 print_with_color(

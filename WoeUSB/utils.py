@@ -31,7 +31,7 @@ def check_runtime_dependencies(application_name):
     """
     result = "success"
 
-    system_commands = ["mount", "wipefs", "lsblk", "blockdev", "df", "parted", "7z"]
+    system_commands = ["mount", "umount", "wipefs", "lsblk", "blockdev", "df", "parted", "7z"]
     for command in system_commands:
         if shutil.which(command) is None:
             print_with_color(
@@ -132,7 +132,11 @@ def check_is_target_device_busy(device):
     """
     mount = subprocess.run("mount", stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
     if re.findall(device, mount) != []:
-        return 1
+        mounts = re.findall(rf'{device}\S*', mount)
+        print_with_color(_("Warning: The following partitions will be unmounted: {0}").format(mounts), "yellow")
+        for partition in mounts:
+            if subprocess.run(["umount", partition]).returncode:
+                return 1
     return 0
 
 
@@ -173,7 +177,7 @@ def check_fat32_filesize_limitation(source_fs_mountpoint):
             if os.path.getsize(path) > (2 ** 32) - 1:  # Max fat32 file size
                 print_with_color(
                     _(
-                        "Warining: File {0} in source image has exceed the FAT32 Filesystem 4GiB Single File Size Limitation, swiching to NTFS filesystem.").format(
+                        "Warning: File {0} in source image has exceed the FAT32 Filesystem 4GiB Single File Size Limitation, swiching to NTFS filesystem.").format(
                         path),
                     "yellow")
                 print_with_color(

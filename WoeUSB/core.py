@@ -373,13 +373,13 @@ def install_uefi_ntfs_support_partition(uefi_ntfs_partition, download_directory)
     utils.check_kill_signal()
 
     try:
-        file = urllib.request.urlretrieve("https://github.com/pbatard/rufus/raw/master/res/uefi/", "uefi-ntfs.img")[0]
+        fileName = urllib.request.urlretrieve("https://github.com/pbatard/rufus/raw/master/res/uefi/uefi-ntfs.img", "uefi-ntfs.img")[0] #[local_filename, headers]
     except (urllib.error.ContentTooShortError, urllib.error.HTTPError, urllib.error.URLError):
         utils.print_with_color(
             _("Warning: Unable to download UEFI:NTFS partition image from GitHub, installation skipped.  Target device might not be bootable if the UEFI firmware doesn't support NTFS filesystem."), "yellow")
         return 1
 
-    shutil.move(file, download_directory + "/" + file)  # move file to download_directory
+    shutil.move(fileName, download_directory + "/" + fileName)  # move file to download_directory
 
     shutil.copy2(download_directory + "/uefi-ntfs.img", uefi_ntfs_partition)
 

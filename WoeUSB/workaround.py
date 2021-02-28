@@ -3,9 +3,9 @@ import subprocess
 import time
 
 import WoeUSB.utils as utils
-import WoeUSB.i18n as i18n
+import WoeUSB.miscellaneous as miscellaneous
 
-_ = i18n.i18n
+_ = miscellaneous.i18n
 
 
 def make_system_realize_partition_table_changed(target_device):

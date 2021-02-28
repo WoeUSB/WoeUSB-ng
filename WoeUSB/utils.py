@@ -6,9 +6,9 @@ import subprocess
 import sys
 from xml.dom.minidom import parseString
 
-import WoeUSB.i18n as i18n
+import WoeUSB.miscellaneous as miscellaneous
 
-_ = i18n.i18n
+_ = miscellaneous.i18n
 
 #: Disable message coloring when set to True, set by --no-color
 no_color = False

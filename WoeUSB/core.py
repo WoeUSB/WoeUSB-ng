@@ -14,12 +14,12 @@ from datetime import datetime
 
 import WoeUSB.utils as utils
 import WoeUSB.workaround as workaround
-import WoeUSB.i18n as i18n
+import WoeUSB.miscellaneous as miscellaneous
 
-_ = i18n.i18n
+_ = miscellaneous.i18n
 
 application_name = 'WoeUSB'
-application_version = '@@WOEUSB_VERSION@@'
+application_version = miscellaneous.__version__
 DEFAULT_NEW_FS_LABEL = 'Windows USB'
 
 application_site_url = 'https://github.com/slacka/WoeUSB'

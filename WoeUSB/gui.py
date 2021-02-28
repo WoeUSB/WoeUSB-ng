@@ -8,16 +8,15 @@ import wx
 import wx.adv
 
 
-import WoeUSB
 import WoeUSB.core as core
 import WoeUSB.list_devices as list_devices
-import WoeUSB.i18n as i18n
+import WoeUSB.miscellaneous as miscellaneous
 
 data_directory = os.path.dirname(__file__) + "/data/"
 
 app = wx.App()
 
-_ = i18n.i18n
+_ = miscellaneous.i18n
 
 
 class MainFrame(wx.Frame):
@@ -299,7 +298,7 @@ class DialogAbout(wx.Dialog):
         self.__staticTextTitre.SetForegroundColour(wx.Colour(0, 60, 118))
         sizer_text.Add(self.__staticTextTitre, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, 5)
 
-        self.__staticTextVersion = wx.StaticText(self, wx.ID_ANY, WoeUSB.__version__)
+        self.__staticTextVersion = wx.StaticText(self, wx.ID_ANY, miscellaneous.__version__)
         self.__staticTextVersion.SetFont(wx.Font(10, 74, 90, 92, False, "Sans"))
         self.__staticTextVersion.SetForegroundColour(wx.Colour(69, 141, 196))
         sizer_text.Add(self.__staticTextVersion, 0, wx.LEFT, 5)

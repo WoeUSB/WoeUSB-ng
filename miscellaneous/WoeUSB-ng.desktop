@@ -1,7 +1,8 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=WoeUSB-ng
-Exec=/usr/bin/woeusbgui
+Exec=woeusbgui
 Icon=/usr/share/icons/WoeUSB-ng/icon.ico
 Terminal=false
 Type=Application
+Categories=Utility;

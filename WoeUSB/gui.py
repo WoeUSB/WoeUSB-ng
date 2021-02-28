@@ -8,16 +8,15 @@ import wx
 import wx.adv
 
 
-import WoeUSB
 import WoeUSB.core as core
 import WoeUSB.list_devices as list_devices
-import WoeUSB.i18n as i18n
+import WoeUSB.miscellaneous as miscellaneous
 
 data_directory = os.path.dirname(__file__) + "/data/"
 
 app = wx.App()
 
-_ = i18n.i18n
+_ = miscellaneous.i18n
 
 
 class MainFrame(wx.Frame):
@@ -288,7 +287,7 @@ class DialogAbout(wx.Dialog):
         sizer_all = wx.BoxSizer(wx.VERTICAL)
         sizer_img = wx.BoxSizer(wx.HORIZONTAL)
 
-        img = wx.Image(data_directory + "icon.ico", wx.BITMAP_TYPE_PNG)
+        img = wx.Image(data_directory + "icon.ico", wx.BITMAP_TYPE_ICO).Scale(48, 48, wx.IMAGE_QUALITY_BILINEAR)
         self.__bitmapIcone = wx.StaticBitmap(self, wx.ID_ANY, wx.Bitmap(img), wx.DefaultPosition, wx.Size(48, 48))
         sizer_img.Add(self.__bitmapIcone, 0, wx.ALL, 5)
 
@@ -299,7 +298,7 @@ class DialogAbout(wx.Dialog):
         self.__staticTextTitre.SetForegroundColour(wx.Colour(0, 60, 118))
         sizer_text.Add(self.__staticTextTitre, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, 5)
 
-        self.__staticTextVersion = wx.StaticText(self, wx.ID_ANY, WoeUSB.__version__)
+        self.__staticTextVersion = wx.StaticText(self, wx.ID_ANY, miscellaneous.__version__)
         self.__staticTextVersion.SetFont(wx.Font(10, 74, 90, 92, False, "Sans"))
         self.__staticTextVersion.SetForegroundColour(wx.Colour(69, 141, 196))
         sizer_text.Add(self.__staticTextVersion, 0, wx.LEFT, 5)
@@ -309,8 +308,8 @@ class DialogAbout(wx.Dialog):
         self.__NotebookAutorLicence = wx.Notebook(self, wx.ID_ANY)
 
         self.__NotebookAutorLicence.AddPage(
-            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka et al.", data_directory + "woeusb-logo.png",
-                                "github.com/slacka/WoeUSB"), _("Authors"), True)
+            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka \nLin-Buo-Ren\nWaxyMocha", data_directory + "woeusb-logo.png",
+                                "github.com/WoeUSB/WoeUSB-ng"), _("Authors"), True)
         self.__NotebookAutorLicence.AddPage(
             PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "Colin GILLE / Congelli501",
                                 data_directory + "c501-logo.png", "www.congelli.eu"), _("Original WinUSB Developer"), False)

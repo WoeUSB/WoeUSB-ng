@@ -24,18 +24,7 @@ def post_install():
         pass
 
     shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', '/usr/share/icons/WoeUSB-ng/icon.ico')
-
-    with open("/usr/share/applications/WoeUSB-ng.desktop", "w") as file:
-        file.write(
-            """#!/usr/bin/env xdg-open
-            [Desktop Entry]
-            Name=WoeUSB-ng
-            Exec=""" + path + """
-            Icon=/usr/share/icons/WoeUSB-ng/icon.ico
-            Terminal=false
-            Type=Application
-            """
-        )
+    shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', "/usr/share/applications/WoeUSB-ng.desktop")
 
     os.chmod('/usr/share/applications/WoeUSB-ng.desktop',
              stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH | stat.S_IEXEC)  # 755

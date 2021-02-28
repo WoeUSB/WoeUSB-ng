@@ -287,7 +287,7 @@ class DialogAbout(wx.Dialog):
         sizer_all = wx.BoxSizer(wx.VERTICAL)
         sizer_img = wx.BoxSizer(wx.HORIZONTAL)
 
-        img = wx.Image(data_directory + "icon.ico", wx.BITMAP_TYPE_PNG)
+        img = wx.Image(data_directory + "icon.ico", wx.BITMAP_TYPE_ICO).Scale(48, 48, wx.IMAGE_QUALITY_BILINEAR)
         self.__bitmapIcone = wx.StaticBitmap(self, wx.ID_ANY, wx.Bitmap(img), wx.DefaultPosition, wx.Size(48, 48))
         sizer_img.Add(self.__bitmapIcone, 0, wx.ALL, 5)
 

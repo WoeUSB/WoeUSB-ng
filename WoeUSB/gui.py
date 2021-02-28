@@ -308,8 +308,8 @@ class DialogAbout(wx.Dialog):
         self.__NotebookAutorLicence = wx.Notebook(self, wx.ID_ANY)
 
         self.__NotebookAutorLicence.AddPage(
-            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka et al.", data_directory + "woeusb-logo.png",
-                                "github.com/slacka/WoeUSB"), _("Authors"), True)
+            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka \nLin-Buo-Ren\nWaxyMocha", data_directory + "woeusb-logo.png",
+                                "github.com/WoeUSB/WoeUSB-ng"), _("Authors"), True)
         self.__NotebookAutorLicence.AddPage(
             PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "Colin GILLE / Congelli501",
                                 data_directory + "c501-logo.png", "www.congelli.eu"), _("Original WinUSB Developer"), False)

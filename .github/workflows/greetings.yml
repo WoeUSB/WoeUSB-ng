@@ -1,0 +1,12 @@
+name: Greetings
+
+on: [pull_request]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        pr-message: "Thank you, I will check it and merge it if everything is ok.\nAt the moment I'm very busy so it might take a while."

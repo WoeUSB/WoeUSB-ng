@@ -645,7 +645,7 @@ def setup_arguments():
                         help="Specify label for the newly created file system in --device creation method")
     parser.add_argument("--workaround-bios-boot-flag", action="store_true",
                         help="Workaround BIOS bug that won't include the device in boot menu if non of the partition's boot flag is toggled")
-    parser.add_argument("--target-filesystem", "--tgt-fs", choices=["FAT", "NTFS"], default="FAT",
+    parser.add_argument("--target-filesystem", "--tgt-fs", choices=["FAT", "NTFS"], default="FAT", type=str.upper,
                         help="Specify the filesystem to use as the target partition's filesystem.")
     parser.add_argument('--for-gui', action="store_true", help=argparse.SUPPRESS)
 

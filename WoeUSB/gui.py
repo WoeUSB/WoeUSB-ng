@@ -222,6 +222,12 @@ class MainPanel(wx.Panel):
 
     def on_install(self, __):
         global woe
+        if wx.MessageBox(
+            _("Are you sure? This will delete all your files and wipe out the selected partition."),
+            _("Cancel"),
+            wx.YES_NO | wx.ICON_QUESTION,
+            self) == wx.NO:
+            return
         if self.is_install_ok():
             is_iso = self.__isoChoice.GetValue()
 

@@ -31,9 +31,6 @@ verbose = False
 
 debug = False
 
-#: used in cleanup()
-target_device = ""
-
 CopyFiles_handle = threading.Thread()
 
 #: Execution state for cleanup functions to determine if clean up is required
@@ -572,7 +569,7 @@ def cleanup_mountpoint(fs_mountpoint):
     return 0
 
 
-def cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory):
+def cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media):
     """
     :param source_fs_mountpoint:
     :param target_fs_mountpoint:
@@ -608,7 +605,7 @@ def cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory):
         utils.print_with_color(_("Some mountpoints are not unmount/cleaned successfully and must be done manually"),
                                "yellow")
 
-    if utils.check_is_target_device_busy(target_device):
+    if utils.check_is_target_device_busy(target_media):
         utils.print_with_color(
             _("Target device is busy, please make sure you unmount all filesystems on target device or shutdown the computer before detaching it."),
             "yellow")
@@ -645,7 +642,7 @@ def setup_arguments():
                         help="Specify label for the newly created file system in --device creation method")
     parser.add_argument("--workaround-bios-boot-flag", action="store_true",
                         help="Workaround BIOS bug that won't include the device in boot menu if non of the partition's boot flag is toggled")
-    parser.add_argument("--target-filesystem", "--tgt-fs", choices=["FAT", "NTFS"], default="FAT",
+    parser.add_argument("--target-filesystem", "--tgt-fs", choices=["FAT", "NTFS"], default="FAT", type=str.upper,
                         help="Specify the filesystem to use as the target partition's filesystem.")
     parser.add_argument('--for-gui', action="store_true", help=argparse.SUPPRESS)
 
@@ -712,6 +709,7 @@ def run():
         install_mode, source_media, target_media, \
         workaround_bios_boot_flag, target_filesystem_type, new_file_system_label, \
         verbose, debug, parser = result
+
     try:
         main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media, install_mode, temp_directory,
              target_filesystem_type, workaround_bios_boot_flag, parser)
@@ -722,7 +720,7 @@ def run():
         if debug:
             traceback.print_exc()
 
-    cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory)
+    cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media)
 
 
 if __name__ == "__main__":

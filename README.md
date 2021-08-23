@@ -27,7 +27,7 @@ yay woeusb-ng
 ```
 
 ### For other distributions
-### Install WoeUSB-ng's Build Dependencies
+### Install WoeUSB-ng's Dependencies
 #### Ubuntu
 
 ```shell

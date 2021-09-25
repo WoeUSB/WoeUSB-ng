@@ -393,7 +393,7 @@ class WoeUSB_handler(threading.Thread):
         self.filesystem = filesystem
 
     def run(self):
-        source_fs_mountpoint, target_fs_mountpoint, temp_directory = core.init(
+        source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media = core.init(
             from_cli=False,
             install_mode="device",
             source_media=self.source,
@@ -405,7 +405,7 @@ class WoeUSB_handler(threading.Thread):
         except SystemExit:
             pass
 
-        core.cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory)
+        core.cleanup(source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media)
 
 
 def run():

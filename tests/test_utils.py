@@ -1,9 +1,12 @@
 import os
+import sys
 
 import pytest
 
-import WoeUSB.utils
 from mocks import mock_os
+
+sys.path.append(".")
+import WoeUSB.utils
 
 
 @pytest.mark.parametrize(

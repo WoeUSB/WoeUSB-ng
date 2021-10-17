@@ -108,7 +108,7 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
         return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, install_mode, source_media, target_media,
                 workaround_bios_boot_flag, target_filesystem_type, filesystem_label, verbose, debug, parser]
     else:
-        return [source_fs_mountpoint, target_fs_mountpoint, temp_directory]
+        return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media]
 
 
 def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media, install_mode, temp_directory,

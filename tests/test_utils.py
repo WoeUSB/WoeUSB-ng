@@ -13,11 +13,12 @@ import WoeUSB.utils
     "size, output",
     [
         (2 ** 16, 0),
+        (2 ** (32 - 1), 0),
         (2 ** 32, 1)
     ]
 )
 class TestCheckFat32FilesizeLimitation:
-    def test_size_ok(self, size, output, monkeypatch):
+    def test_size(self, size, output, monkeypatch):
         mock_os.size_of_file_two = size
 
         monkeypatch.setattr(os, "walk", mock_os.walk)

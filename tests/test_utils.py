@@ -10,6 +10,18 @@ sys.path.append(".")
 import WoeUSB.utils
 
 
+class TestDetermineTargetParameters:
+    def test_device(self):
+        [target_device, target_partition] = WoeUSB.utils.determine_target_parameters("device", "/dev/sda")
+        assert {target_device, target_partition} \
+               .difference(["/dev/sda", "/dev/sda1"]) == set()
+
+    def test_partition(self):
+        [target_device, target_partition] = WoeUSB.utils.determine_target_parameters("partition", "/dev/sda1")
+        assert {target_device, target_partition} \
+               .difference(["/dev/sda", "/dev/sda1"]) == set()
+
+
 class TestCheckRuntimeDependencies:
     _system_commands = ["mount", "umount", "wipefs", "lsblk", "blockdev", "df", "parted", "7z"]
     _fat = ["mkdosfs", "mkfs.msdos", "mkfs.vfat", "mkfs.fat"]

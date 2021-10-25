@@ -4,8 +4,6 @@ import sys
 
 import pytest
 
-from mocks import mock_os
-
 sys.path.append(".")
 import WoeUSB.utils
 
@@ -121,12 +119,26 @@ class TestCheckRuntimeDependencies:
 
 
 class TestCheckFat32FilesizeLimitation:
-    @staticmethod
     @pytest.fixture()
-    def setup(monkeypatch):
-        monkeypatch.setattr(os, "walk", mock_os.walk)
-        monkeypatch.setattr(os.path, "getsize", mock_os.getsize)
+    def setup(self, monkeypatch):
+        monkeypatch.setattr(os, "walk", self.walk)
+        monkeypatch.setattr(os.path, "getsize", self.getsize)
         yield "setup"
+
+    size_of_file_two = 10
+
+    @staticmethod
+    def walk(path):
+        dirpath = "/test/"
+        dirnames = ["dir_one", "dir_two"]
+        filenames = ["file_one", "file_two", "file_three"]
+        yield dirpath, dirnames, filenames
+
+    def getsize(self, path):
+        if path == "/test/file_two":
+            return self.size_of_file_two
+        else:
+            return 10
 
     @pytest.mark.parametrize(
         "size, output",
@@ -137,7 +149,7 @@ class TestCheckFat32FilesizeLimitation:
         ]
     )
     def test_size(self, size, output, setup):
-        mock_os.size_of_file_two = size
+        self.size_of_file_two = size
 
         result = WoeUSB.utils.check_fat32_filesize_limitation("../")
         assert result == output

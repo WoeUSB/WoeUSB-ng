@@ -2,7 +2,7 @@ import gettext
 import locale
 import os
 
-__version__ = "0.2.9"
+__version__ = "0.2.10"
 
 translation = gettext.translation("woeusb", os.path.dirname(__file__) + "/locale", [locale.getlocale()[0]], fallback=True)
 translation.install()

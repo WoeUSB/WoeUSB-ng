@@ -318,7 +318,7 @@ def create_target_partition(target_device, target_partition, filesystem_type, fi
                         parted_mkpart_fs_type,
                         "4MiB",
                         "--",
-                        "-1025s"])  # Leave 512KiB==1024sector in traditional 512bytes/sector disk, disks with sector with more than 512bytes only result in partition size greater than 512KiB and is intentionally let-it-be.
+                        "-2049s"])  # Leave 512KiB==1024sector in traditional 512bytes/sector disk, disks with sector with more than 512bytes only result in partition size greater than 512KiB and is intentionally let-it-be.
     # FIXME: Leave exact 512KiB in all circumstances is better, but the algorithm to do so is quite brainkilling.
     else:
         utils.print_with_color(_("FATAL: Illegal {0}, please report bug.").format(parted_mkpart_fs_type), "red")
@@ -354,7 +354,7 @@ def create_uefi_ntfs_support_partition(target_device):
                     "mkpart",
                     "primary",
                     "fat16",
-                    "--", "-1024s", "-1s"])
+                    "--", "-2048s", "-1s"])
 
 
 def install_uefi_ntfs_support_partition(uefi_ntfs_partition, download_directory):

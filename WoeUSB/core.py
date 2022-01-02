@@ -459,9 +459,6 @@ def copy_filesystem_files(source_fs_mountpoint, target_fs_mountpoint):
 
     utils.print_with_color(_("Copying files from source media..."), "green")
 
-    CopyFiles_handle = ReportCopyProgress(source_fs_mountpoint, target_fs_mountpoint)
-    CopyFiles_handle.start()
-
     for dirpath, __, filenames in os.walk(source_fs_mountpoint):
         utils.check_kill_signal()
 
@@ -471,13 +468,7 @@ def copy_filesystem_files(source_fs_mountpoint, target_fs_mountpoint):
             path = os.path.join(dirpath, file)
             CopyFiles_handle.file = path
 
-            if os.path.getsize(path) > 5 * 1024 * 1024:  # Files bigger than 5 MiB
-                copy_large_file(path, target_fs_mountpoint + path.replace(source_fs_mountpoint, ""))
-            else:
-                shutil.copy2(path, target_fs_mountpoint + path.replace(source_fs_mountpoint, ""))
-
-    CopyFiles_handle.stop = True
-
+            copy_large_file(path, target_fs_mountpoint + path.replace(source_fs_mountpoint, ""))
 
 def copy_large_file(source, target):
     """
@@ -491,7 +482,9 @@ def copy_large_file(source, target):
     :return: None
     """
     source_file = open(source, "rb")  # Open for reading in byte mode
-    target_file = open(target, "wb")  # Open for writing in byte mode
+    source_file_size = os.stat(source).st_size
+    target_file = os.open(target, os.O_RDWR | os.O_SYNC | os.O_CREAT | os.O_TRUNC)  # Open for writing in byte mode
+    target_file_progress_size = 0
 
     while True:
         utils.check_kill_signal()
@@ -500,10 +493,12 @@ def copy_large_file(source, target):
         if data == b"":
             break
 
-        target_file.write(data)
+        target_file_size = os.write(target_file, data)
+        target_file_progress_size += target_file_size
+        utils.print_with_color('Writing %d/%d byte(s) to %s' %(target_file_progress_size, source_file_size, target))
 
     source_file.close()
-    target_file.close()
+    os.close(target_file)
 
 
 def install_legacy_pc_bootloader_grub(target_fs_mountpoint, target_device, command_grubinstall):
@@ -647,58 +642,6 @@ def setup_arguments():
     parser.add_argument('--for-gui', action="store_true", help=argparse.SUPPRESS)
 
     return parser
-
-
-class ReportCopyProgress(threading.Thread):
-    """
-    Classes for threading module
-    """
-    file = ""
-    stop = False
-
-    def __init__(self, source, target):
-        threading.Thread.__init__(self)
-        self.source = source
-        self.target = target
-
-    def run(self):
-        source_size = utils.get_size(self.source)
-        len_ = 0
-        file_old = None
-
-        while not self.stop:
-            target_size = utils.get_size(self.target)
-
-            if len_ != 0 and gui is None:
-                print('\033[3A')
-                print(" " * len_)
-                print(" " * 4)
-                print('\033[3A')
-
-            # Prevent printing same filenames
-            if self.file != file_old:
-                file_old = self.file
-                utils.print_with_color(self.file.replace(self.source, ""))
-
-            string = "Copied " + utils.convert_to_human_readable_format(
-                target_size) + " from a total of " + utils.convert_to_human_readable_format(source_size)
-
-            len_ = len(string)
-            percentage = (target_size * 100) // source_size
-
-            if gui is not None:
-                gui.state = string
-                gui.progress = percentage
-            else:
-                print(string)
-                print(str(percentage) + "%")
-
-            time.sleep(0.05)
-        if gui is not None:
-            gui.progress = False
-
-        return 0
-
 
 def run():
     result = init()

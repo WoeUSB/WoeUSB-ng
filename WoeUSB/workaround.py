@@ -16,7 +16,7 @@ def make_system_realize_partition_table_changed(target_device):
     utils.print_with_color(_("Making system realize that partition table has changed..."))
 
     subprocess.run(["blockdev", "--rereadpt", target_device])
-    utils.print_with_color(_("Wait 3 seconds for block device nodes to populate..."))
+    utils.print_with_color(_("Waiting for block device nodes to populate..."))
 
     time.sleep(3)
 

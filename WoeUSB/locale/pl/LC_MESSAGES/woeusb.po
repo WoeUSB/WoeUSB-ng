@@ -486,7 +486,7 @@ msgid "Making system realize that partition table has changed..."
 msgstr "Powiadamianie systemu że tablica partycji się zmieniła..."
 
 #: workaround.py:19
-msgid "Wait 3 seconds for block device nodes to populate..."
+msgid "Waiting for block device nodes to populate..."
 msgstr "Czekanie 3 sekundy na aktualizacje urządzeń blokowych..."
 
 #: workaround.py:35

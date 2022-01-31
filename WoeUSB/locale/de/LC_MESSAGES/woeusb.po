@@ -501,7 +501,7 @@ msgid "Making system realize that partition table has changed..."
 msgstr "Vermittle dem System, dass sich die Partitionstabelle geändert hat…"
 
 #: workaround.py:19
-msgid "Wait 3 seconds for block device nodes to populate..."
+msgid "Waiting for block device nodes to populate..."
 msgstr "Warte 3 Sekunden, bis die Block-Gerätedateien gefüllt sind…"
 
 #: workaround.py:35

@@ -49,8 +49,12 @@ class MainFrame(wx.Frame):
         self.options_filesystem = wx.MenuItem(options_menu, wx.ID_ANY, _("Use NTFS"),
                                               _("Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."),
                                               wx.ITEM_CHECK)
+        self.options_skip_grub = wx.MenuItem(options_menu, wx.ID_ANY, _("Skip legacy grub bootloader"),
+                                              _("No legacy grub bootloader will be created. NOTE: It will only boot on system with UEFI support."),
+                                              wx.ITEM_CHECK)
         options_menu.Append(self.options_boot)
         options_menu.Append(self.options_filesystem)
+        options_menu.Append(self.options_skip_grub)
 
         self.__MenuBar = wx.MenuBar()
         self.__MenuBar.Append(file_menu, _("&File"))
@@ -242,8 +246,8 @@ class MainPanel(wx.Panel):
                 filesystem = "NTFS"
             else:
                 filesystem = "FAT"
-
-            woe = WoeUSB_handler(iso, device, boot_flag=self.__parent.options_boot.IsChecked(), filesystem=filesystem)
+		
+            woe = WoeUSB_handler(iso, device, boot_flag=self.__parent.options_boot.IsChecked(), filesystem=filesystem, skip_grub=self.__parent.options_skip_grub.IsChecked())
             woe.start()
 
             dialog = wx.ProgressDialog(_("Installing"), _("Please wait..."), 101, self.GetParent(),
@@ -383,7 +387,7 @@ class WoeUSB_handler(threading.Thread):
     error = ""
     kill = False
 
-    def __init__(self, source, target, boot_flag, filesystem):
+    def __init__(self, source, target, boot_flag, filesystem, skip_grub=False):
         threading.Thread.__init__(self)
 
         core.gui = self
@@ -391,6 +395,7 @@ class WoeUSB_handler(threading.Thread):
         self.target = target
         self.boot_flag = boot_flag
         self.filesystem = filesystem
+        self.skip_grub = skip_grub
 
     def run(self):
         source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media = core.init(
@@ -401,7 +406,7 @@ class WoeUSB_handler(threading.Thread):
         )
         try:
             core.main(source_fs_mountpoint, target_fs_mountpoint, self.source, self.target, "device", temp_directory,
-                      self.filesystem, self.boot_flag)
+                      self.filesystem, self.boot_flag , None, self.skip_grub)
         except SystemExit:
             pass
 

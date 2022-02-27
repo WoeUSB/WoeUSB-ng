@@ -89,6 +89,8 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
         target_media = args.target
 
         workaround_bios_boot_flag = args.workaround_bios_boot_flag
+        
+        skip_legacy_bootloader = args.workaround_skip_grub
 
         target_filesystem_type = args.target_filesystem
 
@@ -106,13 +108,13 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
 
     if from_cli:
         return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, install_mode, source_media, target_media,
-                workaround_bios_boot_flag, target_filesystem_type, filesystem_label, verbose, debug, parser]
+                workaround_bios_boot_flag, skip_legacy_bootloader, target_filesystem_type, filesystem_label, verbose, debug, parser]
     else:
         return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media]
 
 
 def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media, install_mode, temp_directory,
-         target_filesystem_type, workaround_bios_boot_flag, parser=None):
+         target_filesystem_type, workaround_bios_boot_flag, parser=None, skip_legacy_bootloader=False):
     """
     :param parser:
     :param source_fs_mountpoint:
@@ -192,10 +194,10 @@ def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media,
     copy_filesystem_files(source_fs_mountpoint, target_fs_mountpoint)
 
     workaround.support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint)
+    if not skip_legacy_bootloader:
+        install_legacy_pc_bootloader_grub(target_fs_mountpoint, target_device, command_grubinstall)
 
-    install_legacy_pc_bootloader_grub(target_fs_mountpoint, target_device, command_grubinstall)
-
-    install_legacy_pc_bootloader_grub_config(target_fs_mountpoint, target_device, command_grubinstall, name_grub_prefix)
+        install_legacy_pc_bootloader_grub_config(target_fs_mountpoint, target_device, command_grubinstall, name_grub_prefix)
 
     if workaround_bios_boot_flag:
         workaround.buggy_motherboards_that_ignore_disks_without_boot_flag_toggled(target_device)
@@ -642,6 +644,8 @@ def setup_arguments():
                         help="Specify label for the newly created file system in --device creation method")
     parser.add_argument("--workaround-bios-boot-flag", action="store_true",
                         help="Workaround BIOS bug that won't include the device in boot menu if non of the partition's boot flag is toggled")
+    parser.add_argument("--workaround-skip-grub", action="store_true",
+                        help="This will skip the legacy grub bootloader creation step.")
     parser.add_argument("--target-filesystem", "--tgt-fs", choices=["FAT", "NTFS"], default="FAT", type=str.upper,
                         help="Specify the filesystem to use as the target partition's filesystem.")
     parser.add_argument('--for-gui', action="store_true", help=argparse.SUPPRESS)
@@ -707,12 +711,12 @@ def run():
 
     source_fs_mountpoint, target_fs_mountpoint, temp_directory, \
         install_mode, source_media, target_media, \
-        workaround_bios_boot_flag, target_filesystem_type, new_file_system_label, \
-        verbose, debug, parser = result
+        workaround_bios_boot_flag, skip_legacy_bootloader, target_filesystem_type, \
+        new_file_system_label, verbose, debug, parser = result
 
     try:
         main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media, install_mode, temp_directory,
-             target_filesystem_type, workaround_bios_boot_flag, parser)
+             target_filesystem_type, workaround_bios_boot_flag, parser, skip_legacy_bootloader)
     except KeyboardInterrupt:
         pass
     except Exception as error:

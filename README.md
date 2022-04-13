@@ -23,7 +23,7 @@ This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB)
 
 ### Arch
 ```shell
-yay woeusb-ng
+yay -S woeusb-ng
 ```
 
 ### For other distributions

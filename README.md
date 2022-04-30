@@ -53,7 +53,7 @@ sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-p
 ```
 #### Arch
 ```shell
-sudo pacman -Suy p7zip python-pip python-wxpython
+sudo pacman -Suy git p7zip python-pip python-wxpython
 ```
 #### Fedora (tested on: Fedora Workstation 33) 
 ```shell

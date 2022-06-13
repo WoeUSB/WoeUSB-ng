@@ -1,0 +1,522 @@
+# Swedish translation for WoeUSB-ng.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: woeusb\n"
+"Report-Msgid-Bugs-To: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/"
+"issues>\n"
+"POT-Creation-Date: 2020-10-05 21:33+0200\n"
+"PO-Revision-Date: 2022-06-13 09:45+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 3.1\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: core.py:85
+msgid "You need to specify installation type (--device or --partition)"
+msgstr "Du måste specificera installationstyp (--device eller --partition)"
+
+#: core.py:148
+#, python-brace-format
+msgid "Warning: You are not running {0} as root!"
+msgstr "Varning! Du kör inte {0} som root!"
+
+#: core.py:149
+msgid "Warning: This might be the reason of the following failure."
+msgstr "Varning! Detta kan vara orsaken till följande fel."
+
+#: core.py:163
+msgid "Error: Unable to mount source filesystem"
+msgstr "Fel: Kunde inte montera källfilsystemet"
+
+#: core.py:186
+msgid "Error: Unable to mount target filesystem"
+msgstr "Fel: Kunde inte montera målfilsystemet"
+
+#: core.py:222
+#, python-brace-format
+msgid "Wiping all existing partition table and filesystem signatures in {0}"
+msgstr ""
+"Rensar alla befintliga partitionstabell- och filsystemsignaturer på {0}"
+
+#: core.py:236
+#, python-brace-format
+msgid "Ensure that {0} is really wiped..."
+msgstr "Tillse att {0} verkligen är rensad..."
+
+#: core.py:243
+msgid ""
+"Error: Partition is still detected after wiping all signatures, this "
+"indicates that the drive might be locked into readonly mode due to end of "
+"lifespan."
+msgstr ""
+"Fel: Partitionen upptäcks fortfarande efter att alla signaturer har "
+"raderats, vilket indikerar att enheten kan vara låst i skrivskyddat läge på "
+"grund av slutet på livslängden."
+
+#: core.py:257
+#, python-brace-format
+msgid "Creating new partition table on {0}..."
+msgstr "Skapar ny partitionstabell på {0}..."
+
+#: core.py:262
+msgid "Error: Currently GUID partition table is not supported."
+msgstr "Fel: GUID-partitionstabellen stöds för närvarande inte."
+
+#: core.py:265
+msgid "Error: Partition table not supported."
+msgstr "Fel: Partitionstabellen stöds inte."
+
+#: core.py:292
+msgid "Error: Filesystem not supported"
+msgstr "Fel: Filsystemet stöds inte"
+
+#: core.py:295
+msgid "Creating target partition..."
+msgstr "Skapar målpartition..."
+
+#: core.py:326
+msgid "FATAL: Illegal parted_mkpart_fs_type, please report bug."
+msgstr "FATALT FEL: Olaglig parted_mkpart_fs_type, rapportera gärna felet."
+
+#: core.py:338
+msgid "FATAL: Shouldn't be here"
+msgstr "FATALT FEL: Skulle inte vara här"
+
+#: core.py:378
+msgid ""
+"Warning: Unable to download UEFI:NTFS partition image from GitHub, "
+"installation skipped.  Target device might not be bootable if the UEFI "
+"firmware doesn't support NTFS filesystem."
+msgstr ""
+"Varning! Kan inte ladda ned UEFI:NTFS-partitionsavbildningen från GitHub, "
+"installationen har hoppats över.  Målenheten kanske inte kan startas om UEFI-"
+"mjukvaran inte stöder NTFS-filsystem."
+
+#: core.py:394
+msgid "Mounting source filesystem..."
+msgstr "Monterar källfilsystem..."
+
+#: core.py:399 core.py:434
+#, python-brace-format
+msgid "Error: Unable to create {0} mountpoint directory"
+msgstr "Fel: Kunde inte skapa monteringspunktskatalog {0}"
+
+#: core.py:408 core.py:415
+msgid "Error: Unable to mount source media"
+msgstr "Fel: Kunde inte montera källmedia"
+
+#: core.py:429
+msgid "Mounting target filesystem..."
+msgstr "Monterar målfilsystem..."
+
+#: core.py:440
+msgid "Error: Unable to mount target media"
+msgstr "Fel: Kunde inte montera målmedia"
+
+#: core.py:462
+msgid "Copying files from source media..."
+msgstr "Kopierar filer från källmedia..."
+
+#: core.py:520
+msgid "Installing GRUB bootloader for legacy PC booting support..."
+msgstr "Installerar GRUB-bootloader för äldre PC-startstöd..."
+
+#: core.py:541
+msgid "Installing custom GRUB config for legacy PC booting..."
+msgstr "Installerar anpassad GRUB-konfiguration för äldre PC-uppstart..."
+
+#: core.py:560
+#, python-brace-format
+msgid "Unmounting and removing {0}..."
+msgstr "Avmonterar och tar bort {0}..."
+
+#: core.py:562
+msgid "Warning: Unable to unmount filesystem."
+msgstr "Varning! Kan inte avmontera filsystem."
+
+#: core.py:568
+msgid "Warning: Unable to remove source mountpoint"
+msgstr "Varning! Det går inte att ta bort källmonteringspunkten"
+
+#: core.py:600 core.py:607
+msgid ""
+"Some mountpoints are not unmount/cleaned successfully and must be done "
+"manually"
+msgstr ""
+"Vissa monteringspunkter demonteras/rensas inte och detta måste göras manuellt"
+
+#: core.py:605
+msgid ""
+"We unable to unmount target filesystem for you, please make sure target "
+"filesystem is unmounted before detaching to prevent data corruption"
+msgstr ""
+"Vi kan inte avmontera målfilsystemet åt dig, se till att målfilsystemet är "
+"avmonterat innan du kopplar ifrån för att förhindra dataskador."
+
+#: core.py:612
+msgid ""
+"Target device is busy, please make sure you unmount all filesystems on "
+"target device or shutdown the computer before detaching it."
+msgstr ""
+"Målenheten är upptagen, tillse att du demonterat alla filsystem på "
+"målenheten eller stänger av datorn innan du tar bort den."
+
+#: core.py:615
+msgid "You may now safely detach the target device"
+msgstr "Du kan nu säkert ta bort målenheten"
+
+#: core.py:620
+msgid "Done :)"
+msgstr "Klart! :)"
+
+#: core.py:621
+msgid "The target device should be bootable now"
+msgstr "Målenheten skall vara startbar nu"
+
+#: gui.py:34
+msgid "Show all drives"
+msgstr "Visa alla enheter"
+
+#: gui.py:35
+msgid "Show all drives, even those not detected as USB stick."
+msgstr "Visa alla enheter, även de som inte identifieras som USB-minne."
+
+#: gui.py:46
+msgid "Set boot flag"
+msgstr "Ange boot-flagga"
+
+#: gui.py:47
+msgid "Sets boot flag after process of copying."
+msgstr "Ställer in boot-flagga efter kopieringsprocessen."
+
+#: gui.py:49
+msgid "Use NTFS"
+msgstr "Använd NTFS"
+
+#: gui.py:50
+msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
+msgstr ""
+"Använd NTFS istället för FAT. Notera att NTFS verkar vara långsammare än FAT."
+
+#: gui.py:52
+msgid "Skip legacy grub bootloader"
+msgstr "Skippa GRUB-bootloader för äldre PC"
+
+#: gui.py:56
+msgid "&File"
+msgstr "&Arkiv"
+
+#: gui.py:57
+msgid "&Options"
+msgstr "A&lternativ"
+
+#: gui.py:58
+msgid "&Help"
+msgstr "&Hjälp"
+
+#: gui.py:114
+msgid "Source :"
+msgstr "Källa :"
+
+#: gui.py:117
+msgid "From a disk image (iso)"
+msgstr "Från en skivavbild (iso)"
+
+#: gui.py:122
+msgid "Please select a disk image"
+msgstr "Välj en skivavbild"
+
+#: gui.py:128
+msgid "From a CD/DVD drive"
+msgstr "Från en CD-/DVD-enhet"
+
+#: gui.py:141
+msgid "Target device :"
+msgstr "Målenhet :"
+
+#: gui.py:153
+msgid "Install"
+msgstr "Installera"
+
+#: gui.py:243
+msgid "Installing"
+msgstr "Installerar"
+
+#: gui.py:243
+msgid "Please wait..."
+msgstr "Vänta..."
+
+#: gui.py:254
+msgid "Are you sure you want to cancel the installation?"
+msgstr "Vill du verkligen avbryta installationen?"
+
+#: gui.py:254
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: gui.py:263
+msgid "Installation succeeded!"
+msgstr "Installation slutförd!"
+
+#: gui.py:263 gui.py:265
+msgid "Installation"
+msgstr "Installation"
+
+#: gui.py:265
+msgid "Installation failed!"
+msgstr "Installation misslyckades!"
+
+#: gui.py:281
+msgid "About"
+msgstr "Om"
+
+#: gui.py:312
+msgid "Authors"
+msgstr "Utvecklare"
+
+#: gui.py:315
+msgid "Original WinUSB Developer"
+msgstr "Ursprunglig WinUSB-utvecklare"
+
+#: gui.py:317
+msgid ""
+"\n"
+"            This file is part of WoeUSB-ng.\n"
+"\n"
+"            WoeUSB-ng is free software: you can redistribute it and/or "
+"modify\n"
+"            it under the terms of the GNU General Public License as "
+"published by\n"
+"            the Free Software Foundation, either version 3 of the License, "
+"or\n"
+"            (at your option) any later version.\n"
+"\n"
+"            WoeUSB-ng is distributed in the hope that it will be useful,\n"
+"            but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"            GNU General Public License for more details.\n"
+"\n"
+"            You should have received a copy of the GNU General Public "
+"License\n"
+"            along with WoeUSB-ng.  If not, see <http://www.gnu.org/licenses/"
+">.\n"
+"        "
+msgstr ""
+"\n"
+"            Denna fil är en del av WoeUSB-ng.\n"
+"\n"
+"            WoeUSB-ng är fri mjukvara. Du kan återdistribuera och/eller "
+"ändra\n"
+"            den under villkoren för GNU General Public License som "
+"publicerad av\n"
+"            Free Software Foundation, antingen version 3 av licensen, eller\n"
+"            (valfritt) någon senare version.\n"
+"\n"
+"            WoeUSB-ng distribueras med hopp om användbarhet,\n"
+"            men UTAN NÅGRA GARANTIER. Utan ens underförstådd garanti för\n"
+"            SÄLJBARHET eller LÄMPLIGHET FÖR ETT VISST ÄNDAMÅL.\n"
+"            Se GNU General Public License för detaljerad info.\n"
+"\n"
+"            Du bör ha fått en kopia av GNU General Public License "
+"tillsammans\n"
+"            med WoeUSB-ng. Om inte, se <http://www.gnu.org/licenses/>.\n"
+"        "
+
+#: gui.py:337
+msgid "License"
+msgstr "Licens"
+
+#: utils.py:38
+#, python-brace-format
+msgid ""
+"Error: {0} requires {1} command in the executable search path, but it is not "
+"found."
+msgstr ""
+"Fel: {0} kräver kommandot {1} i den körbara sökvägen, men det hittas inte."
+
+#: utils.py:50
+msgid "Error: mkdosfs/mkfs.msdos/mkfs.vfat/mkfs.fat command not found!"
+msgstr "Fel: Kommando för mkdosfs/mkfs.msdos/mkfs.vfat/mkfs.fat hittades inte!"
+
+#: utils.py:51
+msgid "Error: Please make sure that dosfstools is properly installed!"
+msgstr "Fel: Tillse att dosfstools är korrekt installerat!"
+
+#: utils.py:56
+msgid "Error: mkntfs command not found!"
+msgstr "Fel: Kommando för mkntfs hittades inte!"
+
+#: utils.py:57
+msgid "Error: Please make sure that ntfs-3g is properly installed!"
+msgstr "Fel: Tillse att ntfs-3g är korrekt installerat!"
+
+#: utils.py:67
+msgid "Error: grub-install or grub2-install command not found!"
+msgstr "Fel: Kommando för grub-install eller grub2-install hittades inte!"
+
+#: utils.py:68
+msgid "Error: Please make sure that GNU GRUB is properly installed!"
+msgstr "Fel: Tillse att GNU GRUB är korrekt installerat!"
+
+#: utils.py:86
+#, python-brace-format
+msgid ""
+"Error: Source media \"{0}\" not found or not a regular file or a block "
+"device file!"
+msgstr ""
+"Fel: Källmedia \"{0}\" hittades inte eller är ingen vanlig fil, eller en "
+"blockenhetsfil!"
+
+#: utils.py:92
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not a block device file!"
+msgstr "Fel: Målmedia \"{0}\" är inte en blockenhetsfil!"
+
+#: utils.py:96
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not an entire storage device!"
+msgstr "Fel: Målmedia \"{0}\" är inte en hel lagringsenhet!"
+
+#: utils.py:100
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not an partition!"
+msgstr "Fel: Målmedia \"{0}\" är inte en partition!"
+
+#: utils.py:122
+#, python-brace-format
+msgid "Info: Target device is {0}"
+msgstr "Info: Målenhet är {0}"
+
+#: utils.py:123
+#, python-brace-format
+msgid "Info: Target partition is {0}"
+msgstr "Info: Målpartition är {0}"
+
+#: utils.py:148
+msgid ""
+"Error: Source media is currently mounted, unmount the partition then try "
+"again"
+msgstr ""
+"Fel: Källmediet är för närvarande monterat, avmontera partitionen och försök "
+"sedan igen"
+
+#: utils.py:153
+msgid ""
+"Error: Target partition is currently mounted, unmount the partition then try "
+"again"
+msgstr ""
+"Fel: Målpartitionen är för närvarande monterad, avmontera partitionen och "
+"försök sedan igen"
+
+#: utils.py:160
+msgid ""
+"Error: Target device is currently busy, unmount all mounted partitions in "
+"target device then try again"
+msgstr ""
+"Fel: Målenheten är för närvarande upptagen, avmontera alla monterade "
+"partitioner på målenheten och försök sedan igen"
+
+#: utils.py:176
+#, python-brace-format
+msgid ""
+"Warining: File {0} in source image has exceed the FAT32 Filesystem 4GiB "
+"Single File Size Limitation, swiching to NTFS filesystem."
+msgstr ""
+"Varning! Filen {0} i källavbilden har överskridit FAT32:s "
+"filsystembegränsning på 4GiB för enskilda filer, byter till NTFS-filsystem."
+
+#: utils.py:181
+msgid ""
+"Refer: https://github.com/slacka/WoeUSB/wiki/Limitations#fat32-"
+"filesystem-4gib-single-file-size-limitation for more info."
+msgstr ""
+"Se https://github.com/slacka/WoeUSB/wiki/Limitations#fat32-filesystem-4gib-"
+"single-file-size-limitation för mer information."
+
+#: utils.py:205
+msgid ""
+"Error: Target filesystem not supported, currently supported filesystem: FAT, "
+"NTFS."
+msgstr ""
+"Fel: Målfilsystemet stöds inte, filsystem som för närvarande stöds är FAT "
+"och NTFS."
+
+#: utils.py:226
+msgid ""
+"Warning: Your device doesn't seems to have an UEFI:NTFS partition, UEFI "
+"booting will fail if the motherboard firmware itself doesn't support NTFS "
+"filesystem!"
+msgstr ""
+"Varning! Din enhet verkar inte ha en UEFI: NTFS-partition, UEFI-uppstart "
+"kommer att misslyckas om moderkortets mjukvara inte själv stöder NTFS-"
+"filsystem!"
+
+#: utils.py:229
+msgid ""
+"Info: You may recreate disk with an UEFI:NTFS partition by using the --"
+"device creation method"
+msgstr ""
+"Info: Du kan återskapa en disk med en UEFI:NTFS-partition med hjälp av "
+"metoden --device"
+
+#: utils.py:261
+msgid "Error: Not enough free space on target partition!"
+msgstr "Fel: Inte tillräckligt med ledigt utrymme på målpartitionen!"
+
+#: utils.py:263
+#, python-brace-format
+msgid "Error: We required {0}({1} bytes) but '{2}' only has {3}({4} bytes)."
+msgstr "Fel: Vi krävde {0} ({1} byte) men \"{2}\" har bara {3} ({4} byte)."
+
+#: workaround.py:16
+msgid "Making system realize that partition table has changed..."
+msgstr "Får systemet att inse att partitionstabellen har förändrats..."
+
+#: workaround.py:19
+msgid "Wait 3 seconds for block device nodes to populate..."
+msgstr "Vänta 3 sekunder tills blockenhetsnoder fyllts i..."
+
+#: workaround.py:35
+msgid ""
+"Applying workaround for buggy motherboards that will ignore disks with no "
+"partitions with the boot flag toggled"
+msgstr ""
+"Tillämpar en lösning för buggiga moderkort som ignorerar diskar utan "
+"partitioner när boot-flaggan används."
+
+#: workaround.py:62
+msgid ""
+"Source media seems to be Windows 7-based with EFI support, applying "
+"workaround to make it support UEFI booting"
+msgstr ""
+"Källmedia verkar vara Windows 7-baserat med EFI-stöd, tillämpar därför en "
+"lösning för att det skall stödja UEFI-uppstart"
+
+#: workaround.py:71
+#, python-brace-format
+msgid "DEBUG: Can't find efi directory, use {0}"
+msgstr "FELSÖKNING: Kan inte hitta efi-katalogen, använd {0}"
+
+#: workaround.py:75 workaround.py:87
+#, python-brace-format
+msgid "DEBUG: {0} detected."
+msgstr "FELSÖKNING: {0} har identifierats."
+
+#: workaround.py:83
+msgid "DEBUG: Can't find efi/boot directory, use "
+msgstr "FELSÖKNING: Kan inte hitta efi/boot-katalogen, använd "
+
+#: workaround.py:95
+msgid "INFO: Detected existing EFI bootloader, workaround skipped."
+msgstr "INFO: Identifierade befintlig EFI-bootloader, lösning hoppades över."

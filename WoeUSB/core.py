@@ -4,6 +4,7 @@ import os
 import time
 import shutil
 import argparse
+import platform
 import tempfile
 import traceback
 import threading
@@ -32,6 +33,9 @@ verbose = False
 debug = False
 
 CopyFiles_handle = threading.Thread()
+
+IS_LINUX = platform.system() == 'Linux'
+MiB5 = 5 * 1024 * 1024
 
 #: Execution state for cleanup functions to determine if clean up is required
 current_state = 'pre-init'
@@ -473,11 +477,13 @@ def copy_filesystem_files(source_fs_mountpoint, target_fs_mountpoint):
             path = os.path.join(dirpath, file)
             CopyFiles_handle.file = path
 
-            if os.path.getsize(path) > 5 * 1024 * 1024:  # Files bigger than 5 MiB
+            if os.path.getsize(path) > MiB5:  # Files bigger than 5 MiB
+                os.sync()  # sync smaller files before copything a big one
                 copy_large_file(path, target_fs_mountpoint + path.replace(source_fs_mountpoint, ""))
             else:
                 shutil.copy2(path, target_fs_mountpoint + path.replace(source_fs_mountpoint, ""))
 
+    os.sync()  # make sure everything is flushed
     CopyFiles_handle.stop = True
 
 
@@ -487,25 +493,36 @@ def copy_large_file(source, target):
     It is not a big problem when using cli (user can just hit ctrl+c and throw exception),
     but when using gui this part of script needs to "ping" gui for progress reporting
     and check if user didn't click "cancel" (see utils.check_kill_signal())
+    on Linux sendfile is used to get a good speed.
+    speeds of shitty pendrives can be as low as 2 MiB/s
+    but yet if you got a good drive or external ssd you want it to be fast
 
     :param source:
     :param target:
     :return: None
     """
-    source_file = open(source, "rb")  # Open for reading in byte mode
-    target_file = open(target, "wb")  # Open for writing in byte mode
+    utils.print_with_color(_("got a large file named ") + target[37:], "green", no_gui=True)
+    with open(source, "rb") as source_file:  # Open for reading in byte mode
+        with open(target, "wb") as target_file:  # Open for writing in byte mode
+            if IS_LINUX:
+                # On Linux, if offset is given as None, the bytes are read from
+                # the current position of in_fd and the position of in_fd is updated.
+                tgt = target_file.fileno()
+                src = source_file.fileno()
+                while os.sendfile(tgt, src, None, MiB5):
+                    utils.check_kill_signal()
+                    target_file.flush()
+                    os.fsync(tgt)  # also sync to make the kernel actually write the data on the directory
+                    # os.sync()  # sync all because smaller files copied by shutil needs to be synced too
+            else:
+                while True:
+                    utils.check_kill_signal()
+                    data = source_file.read(MiB5)  # Read 5 MiB, 
+                    if not data:
+                        break
+                    target_file.write(data)
 
-    while True:
-        utils.check_kill_signal()
-
-        data = source_file.read(5 * 1024 * 1024)  # Read 5 MiB, speeds of shitty pendrives can be as low as 2 MiB/s
-        if data == b"":
-            break
-
-        target_file.write(data)
-
-    source_file.close()
-    target_file.close()
+    shutil.copystat(source, target)
 
 
 def install_legacy_pc_bootloader_grub(target_fs_mountpoint, target_device, command_grubinstall):
@@ -523,6 +540,7 @@ def install_legacy_pc_bootloader_grub(target_fs_mountpoint, target_device, comma
                     "--target=i386-pc",
                     "--boot-directory=" + target_fs_mountpoint,
                     "--force", target_device])
+    utils.print_with_color(_("grub installed"), "green", no_gui=True)
 
 
 def install_legacy_pc_bootloader_grub_config(target_fs_mountpoint, target_device, command_grubinstall,

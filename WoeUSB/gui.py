@@ -229,8 +229,8 @@ class MainPanel(wx.Panel):
         if wx.MessageBox(
             _("Are you sure? This will delete all your files and wipe out the selected partition."),
             _("Cancel"),
-            wx.YES_NO | wx.ICON_QUESTION,
-            self) == wx.NO:
+            wx.YES_NO | wx.ICON_QUESTION | wx.NO_DEFAULT,
+            self) != wx.YES:
             return
         if self.is_install_ok():
             is_iso = self.__isoChoice.GetValue()

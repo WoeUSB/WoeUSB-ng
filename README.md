@@ -1,12 +1,14 @@
-# WoeUSB-ng
-![brand](.github/woeusb-logo.png)
+<div align="center">
+<h1>WoeUSB-ng</h1>
+<img src=".github/woeusb-logo.png" alt="brand" width="28%" />
+</div>
 
 _A Linux program to create a Windows USB stick installer from a real Windows DVD or image._
 
 This package contains two programs:
 
-* woeusb: A command-line utility that enables you to create your own bootable Windows installation USB storage device from an existing Windows Installation disc or disk image
-* woeusbgui: Graphic version of woeusb
+* **woeusb**: A command-line utility that enables you to create your own bootable Windows installation USB storage device from an existing Windows Installation disc or disk image
+* **woeusbgui**: Graphic version of woeusb
 
 Supported images:
 
@@ -27,7 +29,8 @@ yay -S woeusb-ng
 ```
 
 ### For other distributions
-### Install WoeUSB-ng's Dependencies
+
+### 1. Install WoeUSB-ng's Dependencies
 #### Ubuntu
 
 ```shell
@@ -39,14 +42,14 @@ sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-p
 sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
 ```
 
-#### Install WoeUSB-ng
+### 2. Install WoeUSB-ng
 ```shell
 sudo pip3 install WoeUSB-ng
 ```
 
 ## Installation from source code
 
-### Install WoeUSB-ng's Build Dependencies
+### 1. Install WoeUSB-ng's Build Dependencies
 #### Ubuntu
 ```shell
 sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin
@@ -59,14 +62,14 @@ sudo pacman -Suy p7zip python-pip python-wxpython
 ```shell
 sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
 ```
-### Install WoeUSB-ng
+### 2. Install WoeUSB-ng
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git
 cd WoeUSB-ng
 sudo pip3 install .
 ```
 
-### Installation from source code locally or in virtual environment 
+## Installation from source code locally or in virtual environment 
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git
 cd WoeUSB-ng
@@ -75,7 +78,7 @@ sudo pip3 install -e .
 ```
 Please note that this will not create menu shortcut and you may need to run gui twice as it may want to adjust policy. 
 
-### Uninstalling
+## Uninstalling
 
 To remove WoeUSB-ng completely run (needed only when using installation from source code):
 ```shell

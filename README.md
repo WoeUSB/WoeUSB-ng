@@ -34,7 +34,7 @@ yay -S woeusb-ng
 #### Ubuntu
 
 ```shell
-sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin
+sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g
 ```
 
 #### Fedora (tested on: Fedora Workstation 33)
@@ -52,7 +52,7 @@ sudo pip3 install WoeUSB-ng
 ### 1. Install WoeUSB-ng's Build Dependencies
 #### Ubuntu
 ```shell
-sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin
+sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g
 ```
 #### Arch
 ```shell

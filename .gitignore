@@ -4,7 +4,7 @@
 \.idea/
 doc/_build
 venv/
-WoeUSB_ng\.egg-info/
+*.egg-info*
 dist/
 
 build/

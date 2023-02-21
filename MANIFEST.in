@@ -1,5 +1,4 @@
-graft WoeUSB/data
-graft WoeUSB/locale
+graft src/WoeUSB/data*
+graft src/WoeUSB/locale*
 graft miscellaneous
 include README.md
-include WoeUSB/woeusbgui

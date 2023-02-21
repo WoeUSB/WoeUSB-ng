@@ -274,7 +274,7 @@ def check_target_filesystem_free_space(target_fs_mountpoint, source_fs_mountpoin
         return 1
 
 
-def print_with_color(text, color=""):
+def print_with_color(text, color="", no_gui=False):
     """
     Print function
     This function takes into account no_color flag
@@ -282,8 +282,9 @@ def print_with_color(text, color=""):
 
     :param text: Text to be printed
     :param color: Color of the text
+    :param no_gui: Even when gui is used, print to stdout anyway
     """
-    if gui is not None:
+    if gui is not None and not no_gui:
         gui.state = text
         if color == "red":
             gui.error = text

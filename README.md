@@ -28,6 +28,11 @@ This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB)
 yay -S woeusb-ng
 ```
 
+### Fedora
+```shell
+sudo dnf install WoeUSB
+```
+
 ### For other distributions
 
 ### 1. Install WoeUSB-ng's Dependencies
@@ -58,7 +63,7 @@ sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-p
 ```shell
 sudo pacman -Suy p7zip python-pip python-wxpython
 ```
-#### Fedora (tested on: Fedora Workstation 33) 
+#### Fedora (tested on: Fedora Workstation 38) https://src.fedoraproject.org/rpms/WoeUSB
 ```shell
 sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
 ```

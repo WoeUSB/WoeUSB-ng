@@ -17,8 +17,8 @@ no_color = False
 try:
     import termcolor
 except ImportError:
+    termcolor = None
     print("Module termcolor is not installed, text coloring disabled")
-    no_color = True
 
 gui = None
 verbose = False
@@ -289,7 +289,7 @@ def print_with_color(text, color=""):
             gui.error = text
             sys.exit()
     else:
-        if no_color or color == "":
+        if no_color or color == "" or termcolor is None:
             sys.stdout.write(text + "\n")
         else:
             termcolor.cprint(text, color)

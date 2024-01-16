@@ -37,19 +37,19 @@ msgstr ""
 
 #: ../../../gui.py:51
 msgid "Use NTFS"
-msgstr ""
+msgstr "Utiliser NTFS"
 
 #: ../../../gui.py:52
 msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
-msgstr ""
+msgstr "Utilisez le système de fichiers NTFS plutôt que FAT. NOTE : NTFS semble être plus lent que FAT."
 
 #: ../../../gui.py:58
 msgid "&File"
-msgstr "$Fichier"
+msgstr "&Fichier"
 
 #: ../../../gui.py:59
 msgid "&Options"
-msgstr ""
+msgstr "&Options"
 
 #: ../../../gui.py:60
 msgid "&Help"

@@ -1,14 +1,14 @@
 <div align="center">
-<h1>WoeUSB-ng</h1>
-<img src=".github/woeusb-logo.png" alt="brand" width="28%" />
+  <h1>WoeUSB-ng</h1>
+  <img src=".github/woeusb-logo.png" alt="brand" width="28%" />
 </div>
 
 _A Linux program to create a Windows USB stick installer from a real Windows DVD or image._
 
 This package contains two programs:
 
-* **woeusb**: A command-line utility that enables you to create your own bootable Windows installation USB storage device from an existing Windows Installation disc or disk image
-* **woeusbgui**: Graphic version of woeusb
+- **woeusb**: A command-line utility that enables you to create your own bootable Windows installation USB storage device from an existing Windows Installation disc or disk image
+- **woeusbgui**: Graphic version of woeusb
 
 Supported images:
 
@@ -16,10 +16,10 @@ Windows Vista, Windows 7, Window 8.x, Windows 10. All languages and any version 
 
 Supported bootmodes:
 
-* Legacy/MBR-style/IBM PC compatible bootmode
-* Native UEFI booting is supported for Windows 7 and later images (limited to the FAT filesystem as the target)
+- Legacy/MBR-style/IBM PC compatible bootmode
+- Native UEFI booting is supported for Windows 7 and later images (limited to the FAT filesystem as the target)
 
-This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB) 
+This project is a rewrite of the original [WoeUSB](https://github.com/slacka/WoeUSB).
 
 ## Installation
 
@@ -76,11 +76,11 @@ cd WoeUSB-ng
 git apply development.patch
 sudo pip3 install -e .
 ```
-Please note that this will not create menu shortcut and you may need to run gui twice as it may want to adjust policy. 
+Please note that this will not create a menu shortcut and you may need to run the GUI twice as it may want to adjust policy. 
 
 ## Uninstalling
 
-To remove WoeUSB-ng completely run (needed only when using installation from source code):
+To remove WoeUSB-ng completely, run (needed only when using installation from source code):
 ```shell
 sudo pip3 uninstall WoeUSB-ng
 sudo rm /usr/share/icons/WoeUSB-ng/icon.ico \

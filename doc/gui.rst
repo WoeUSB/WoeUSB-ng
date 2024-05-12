@@ -1,6 +1,6 @@
 GUI for WoeUSB
 **************************
 
-.. automodule:: gui
-	:members:
-	:undoc-members:
+.. automodule:: WoeUSB.gui
+    :members:
+    :undoc-members:

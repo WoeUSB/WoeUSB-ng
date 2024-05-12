@@ -10,8 +10,7 @@ Welcome to WoeUSB's documentation!
    :caption: Contents:
 
    woeusb.rst
-   gui.rst
-
+   WoeUSB.gui
 
 Indices and tables
 ==================

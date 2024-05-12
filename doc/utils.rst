@@ -1,6 +1,6 @@
 utils.py
 **************************
 
-..	automodule:: utils
-	:members:
-	:undoc-members:
+.. automodule:: utils
+   :members:
+   :undoc-members:

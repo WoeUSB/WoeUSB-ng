@@ -1,5 +1,6 @@
 WoeUSB
 **************************
+
 .. toctree::
    :maxdepth: 2
    :caption: Imported modules:
@@ -8,5 +9,5 @@ WoeUSB
    workaround.rst
 
 .. automodule:: woeusb
-	:members:
-	:undoc-members:
+   :members:
+   :undoc-members:

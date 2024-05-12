@@ -13,19 +13,20 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 def post_install():
-    path = '/usr/local/bin/woeusbgui'  # I give up, I have no clue how to get bin path that is used by pip
-    shutil.copy2(this_directory + '/WoeUSB/woeusbgui', path)  # I'll just hard code it until someone finds better way
+    path = '/usr/local/bin/woeusbgui'  # Assuming default installation path
+    shutil.copy2(os.path.join(this_directory, 'WoeUSB/woeusbgui'), path)
 
-    shutil.copy2(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
+    shutil.copy2(os.path.join(this_directory, 'miscellaneous/com.github.woeusb.woeusb-ng.policy'),
+                 "/usr/share/polkit-1/actions")
 
-    try:
-        os.makedirs('/usr/share/icons/WoeUSB-ng')
-    except FileExistsError:
-        pass
+    icons_directory = '/usr/share/icons/WoeUSB-ng'
+    os.makedirs(icons_directory, exist_ok=True)
+    shutil.copy2(os.path.join(this_directory, 'WoeUSB/data/icon.ico'), os.path.join(icons_directory, 'icon.ico'))
 
-    shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', '/usr/share/icons/WoeUSB-ng/icon.ico')
-    shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', "/usr/share/applications/WoeUSB-ng.desktop")
+    shutil.copy2(os.path.join(this_directory, 'miscellaneous/WoeUSB-ng.desktop'),
+                 "/usr/share/applications/WoeUSB-ng.desktop")
 
+    # Setting permissions
     os.chmod('/usr/share/applications/WoeUSB-ng.desktop',
              stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH | stat.S_IEXEC)  # 755
 
@@ -34,7 +35,7 @@ class PostDevelopCommand(develop):
     """Post-installation for development mode."""
 
     def run(self):
-        # TODO
+        post_install()
         develop.run(self)
 
 
@@ -49,7 +50,7 @@ class PostInstallCommand(install):
 setup(
     name='WoeUSB-ng',
     version='0.2.12',
-    description='WoeUSB-ng is a simple tool that enable you to create your own usb stick windows installer from an iso image or a real DVD. This is a rewrite of original WoeUSB. ',
+    description='WoeUSB-ng is a simple tool that enables you to create your own USB stick Windows installer from an ISO image or a real DVD. This is a rewrite of the original WoeUSB.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/WoeUSB/WoeUSB-ng',

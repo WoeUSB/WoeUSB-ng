@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 """
-A Linux program to create bootable Windows USB stick from a real Windows DVD or an image
+WoeUSB-ng: A Linux program to create bootable Windows USB sticks from a real Windows DVD or an image.
+
 Copyright © 2013 Colin GILLE / congelli501
 Copyright © 2017 slacka et. al.
 Python port - 2019 WaxyMocha
@@ -19,22 +20,54 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with WoeUSB-ng  If not, see <http://www.gnu.org/licenses/>.
-+"""
+along with WoeUSB-ng. If not, see <http://www.gnu.org/licenses/>.
+"""
 
 import subprocess
 import sys
 import os
+import logging
 
-if os.getuid() != 0:
-    subprocess.run(["pkexec", os.path.realpath(__file__)])
-else:
+# Version of the script
+__version__ = "1.0"
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
+
+def elevate_privileges():
+    """Elevate privileges if not already running as root."""
+    if os.getuid() != 0:
+        logger.info("Elevating privileges using pkexec...")
+        subprocess.run(["pkexec", os.path.realpath(__file__)])
+    else:
+        run_gui()
+
+def run_gui():
+    """Run the WoeUSB GUI."""
     try:
         import WoeUSB.gui
+        logger.info("Running WoeUSB GUI...")
         WoeUSB.gui.run()
+    except ImportError:
+        logger.error("Error: WoeUSB GUI module not found.")
+        sys.exit(1)
     except SystemExit:
         import WoeUSB.utils
-
+        logger.info("Policy update required. Updating policy to allow running GUI as root...")
         WoeUSB.utils.update_policy_to_allow_for_running_gui_as_root(__file__)
         print("Policy was updated, please run this program again")
+        sys.exit(0)
 
+def main():
+    """Main function."""
+    logger.info(f"Running WoeUSB-ng v{__version__}...")
+
+    try:
+        elevate_privileges()
+    except Exception as e:
+        logger.error(f"An error occurred: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

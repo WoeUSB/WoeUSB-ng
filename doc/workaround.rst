@@ -1,5 +1,6 @@
 workaround.py
 **************************
-..	automodule:: workaround
-	:members:
-	:undoc-members:
+
+.. automodule:: workaround
+   :members:
+   :undoc-members:

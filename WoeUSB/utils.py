@@ -6,9 +6,7 @@ import subprocess
 import sys
 from xml.dom.minidom import parseString
 
-import WoeUSB.miscellaneous as miscellaneous
-
-_ = miscellaneous.i18n
+_ = lambda s: s  # Placeholder for translation function
 
 #: Disable message coloring when set to True, set by --no-color
 no_color = False
@@ -97,7 +95,7 @@ def check_runtime_parameters(install_mode, source_media, target_media):
         return 1
 
     if install_mode == "partition" and not target_media[-1].isdigit():
-        print_with_color(_("Error: Target media \"{0}\" is not an partition!").format(target_media), "red")
+        print_with_color(_("Error: Target media \"{0}\" is not a partition!").format(target_media), "red")
         return 1
     return 0
 
@@ -177,7 +175,7 @@ def check_fat32_filesize_limitation(source_fs_mountpoint):
             if os.path.getsize(path) > (2 ** 32) - 1:  # Max fat32 file size
                 print_with_color(
                     _(
-                        "Warning: File {0} in source image has exceed the FAT32 Filesystem 4GiB Single File Size Limitation, swiching to NTFS filesystem.").format(
+                        "Warning: File {0} in source image has exceed the FAT32 Filesystem 4GiB Single File Size Limitation, switching to NTFS filesystem.").format(
                         path),
                     "yellow")
                 print_with_color(
@@ -193,7 +191,9 @@ def check_target_partition(target_partition, target_device):
     Check target partition for potential problems before mounting them for --partition creation mode as we don't know about the existing partition
 
     :param target_partition: The target partition to check
-    :param target_device: The parent device of the target partition, this is passed in to check UEFI:NTFS filesystem's existence on check_uefi_ntfs_support_partition
+    :param target_device: The parent device of the target partition, this is passed in to check UEFI:NTFS filesystem's existence on check
+
+_uefi_ntfs_support_partition
     :return:
     """
     target_filesystem = subprocess.run(["lsblk",
@@ -217,7 +217,7 @@ def check_uefi_ntfs_support_partition(target_device):
     Check if the UEFI:NTFS support partition exists
     Currently it depends on the fact that this partition has a label of "UEFI_NTFS"
 
-    :param target_device: The UEFI:NTFS partition residing entier device file
+    :param target_device: The UEFI:NTFS partition residing entire device file
     :return:
     """
     lsblk = subprocess.run(["lsblk",
@@ -227,10 +227,10 @@ def check_uefi_ntfs_support_partition(target_device):
 
     if re.findall("UEFI_NTFS", lsblk) != []:
         print_with_color(
-            _("Warning: Your device doesn't seems to have an UEFI:NTFS partition, "
+            _("Warning: Your device doesn't seem to have a UEFI:NTFS partition, "
               "UEFI booting will fail if the motherboard firmware itself doesn't support NTFS filesystem!"))
         print_with_color(
-            _("Info: You may recreate disk with an UEFI:NTFS partition by using the --device creation method"))
+            _("Info: You may recreate disk with a UEFI:NTFS partition by using the --device creation method"))
 
 
 def check_target_filesystem_free_space(target_fs_mountpoint, source_fs_mountpoint, target_partition):
@@ -262,14 +262,14 @@ def check_target_filesystem_free_space(target_fs_mountpoint, source_fs_mountpoin
     needed_space += additional_space_required_for_grub_installation
 
     if needed_space > free_space:
-        print_with_color(_("Error: Not enough free space on target partition!"))
+        print_with_color(_("Error: Not enough free space on the target partition!"))
         print_with_color(
-            _("Error: We required {0}({1} bytes) but '{2}' only has {3}({4} bytes).")
+            _("Error: We required {0} ({1} bytes), but '{2}' only has {3} ({4} bytes).")
             .format(
-                str(get_size(str(needed_space))),
+                str(convert_to_human_readable_format(needed_space)),
                 str(needed_space),
                 target_partition,
-                str(free_space),
+                str(convert_to_human_readable_format(free_space)),
                 str(free_space)))
         return 1
 
@@ -317,9 +317,9 @@ def check_kill_signal():
     Ok, you may asking yourself, what the f**k is this, and why is it called everywhere. Let me explain
     In python you can't just stop or kill thread, it must end its execution,
     or recognize moment where you want it to stop and politely perform euthanasia on itself.
-    So, here, if gui is set, we throw exception which is going to be (hopefully) catch by GUI,
+    So, here, if gui is set, we throw an exception which is going to be (hopefully) caught by GUI,
     simultaneously ending whatever script was doing meantime!
-    Everyone goes to home happy and user is left with wrecked pendrive (just joking, next thing called by gui is cleanup)
+    Everyone goes home happy and the user is left with a wrecked pendrive (just joking, next thing called by gui is cleanup)
     """
     if gui is not None:
         if gui.kill:
@@ -328,6 +328,11 @@ def check_kill_signal():
 
 # noinspection DuplicatedCode
 def update_policy_to_allow_for_running_gui_as_root(path):
+    """
+    Update the polkit policy to allow running the GUI as root
+
+    :param path: Path to the GUI executable
+    """
     dom = parseString(
         "<?xml version=\"1.0\" ?>"
         "<!DOCTYPE policyconfig  PUBLIC '-//freedesktop//DTD polkit Policy Configuration 1.0//EN'  "

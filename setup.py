@@ -1,6 +1,8 @@
 import os
 import shutil
 import stat
+import sys
+import sysconfig
 
 from setuptools import setup
 from setuptools.command.develop import develop
@@ -12,21 +14,36 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 
+def get_bin_path() -> str:
+    return sysconfig.get_path('scripts')
+
+def get_datarootdir() -> str:
+    # Getting datarootdir directly will ignore venv
+    return os.path.join(sys.prefix, 'share')
+
 def post_install():
-    path = '/usr/local/bin/woeusbgui'  # I give up, I have no clue how to get bin path that is used by pip
-    shutil.copy2(this_directory + '/WoeUSB/woeusbgui', path)  # I'll just hard code it until someone finds better way
+    bin_path = get_bin_path()
+    shutil.copy2(this_directory + '/WoeUSB/woeusbgui', os.path.join(bin_path, 'woeusbgui'))
 
-    shutil.copy2(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', "/usr/share/polkit-1/actions")
+    datarootdir_path = get_datarootdir()
 
-    try:
-        os.makedirs('/usr/share/icons/WoeUSB-ng')
-    except FileExistsError:
-        pass
+    actions_path = os.path.join(datarootdir_path, "polkit-1/actions")
+    os.makedirs(actions_path, exist_ok=True)
+    shutil.copy2(this_directory + '/miscellaneous/com.github.woeusb.woeusb-ng.policy', actions_path)
 
-    shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', '/usr/share/icons/WoeUSB-ng/icon.ico')
-    shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', "/usr/share/applications/WoeUSB-ng.desktop")
+    icons_path = os.path.join(datarootdir_path, 'icons/WoeUSB-ng')
+    os.makedirs(icons_path, exist_ok=True)
 
-    os.chmod('/usr/share/applications/WoeUSB-ng.desktop',
+    icon_path = os.path.join(icons_path, 'icon.ico')
+    shutil.copy2(this_directory + '/WoeUSB/data/icon.ico', icon_path)
+
+    applications_path = os.path.join(datarootdir_path, 'applications')
+    os.makedirs(applications_path, exist_ok=True)
+
+    desktopfile_path = os.path.join(applications_path, 'WoeUSB-ng.desktop')
+    shutil.copy2(this_directory + '/miscellaneous/WoeUSB-ng.desktop', desktopfile_path)
+
+    os.chmod(desktopfile_path,
              stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH | stat.S_IEXEC)  # 755
 
 

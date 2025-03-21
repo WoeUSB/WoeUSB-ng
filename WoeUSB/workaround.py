@@ -52,7 +52,7 @@ def support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint):
     :param target_fs_mountpoint:
     :return:
     """
-    grep = subprocess.run(["grep", "--extended-regexp", "--quiet", "^MinServer=7[0-9]{3}\.[0-9]",
+    grep = subprocess.run(["grep", "--extended-regexp", "--quiet", r"^MinServer=7[0-9]{3}\.[0-9]",
                            source_fs_mountpoint + "/sources/cversion.ini"],
                           stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
     if grep == "" and not os.path.isfile(source_fs_mountpoint + "/bootmgr.efi"):

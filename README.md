@@ -34,7 +34,7 @@ yay -S woeusb-ng
 #### Ubuntu
 
 ```shell
-sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g
+sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g python3-setuptools
 ```
 
 #### Fedora (tested on: Fedora Workstation 33)

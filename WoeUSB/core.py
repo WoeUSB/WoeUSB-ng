@@ -22,8 +22,8 @@ application_name = 'WoeUSB'
 application_version = miscellaneous.__version__
 DEFAULT_NEW_FS_LABEL = 'Windows USB'
 
-application_site_url = 'https://github.com/slacka/WoeUSB'
-application_copyright_declaration = "Copyright © Colin GILLE / congelli501 2013\\nCopyright © slacka et.al. 2017"
+application_site_url = 'https://github.com/Nguyen12345tt/WoeUSB'
+application_copyright_declaration = "Copyright © Colin GILLE / congelli501 2013\\nCopyright © slacka et.al. 2017\\nCopyright © Nguyen12345tt"
 application_copyright_notice = application_name + " is free software licensed under the GNU General Public License version 3(or any later version of your preference) that gives you THE 4 ESSENTIAL FREEDOMS\\nhttps://www.gnu.org/philosophy/"
 
 #: Increase verboseness, provide more information when required
@@ -40,7 +40,8 @@ gui = None
 
 
 def init(from_cli=True, install_mode=None, source_media=None, target_media=None, workaround_bios_boot_flag=False,
-         target_filesystem_type="FAT", filesystem_label=DEFAULT_NEW_FS_LABEL):
+         target_filesystem_type="FAT", filesystem_label=DEFAULT_NEW_FS_LABEL, 
+         bypass_hardware_check = False, bypass_ms_account = False, disable_bitlocker=False):
     """
     :param from_cli:
     :type from_cli: bool
@@ -50,6 +51,9 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
     :param workaround_bios_boot_flag:
     :param target_filesystem_type:
     :param filesystem_label:
+    :param bypass_hardware_check: Bypass TPM/SecureBoot/RAM
+    :param bypass_ms_account: Bypass Microsoft Account Requirement
+    :param disable_bitlocker: Disable BitLocker Device Encryption
     :return: List
     """
     source_fs_mountpoint = "/media/woeusb_source_" + str(
@@ -66,6 +70,11 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
     debug = False
 
     parser = None
+    
+    # Initialize default flags
+    bypass_hardware_check_flag = bypass_hardware_check
+    bypass_ms_account_flag = bypass_ms_account
+    disable_bitlocker_flag = disable_bitlocker
 
     if from_cli:
         parser = setup_arguments()
@@ -95,6 +104,11 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
         target_filesystem_type = args.target_filesystem
 
         filesystem_label = args.label
+        
+        # Capture CLI arguments for Windows 11 tweaks
+        bypass_hardware_check_flag = args.bypass_hardware_check
+        bypass_ms_account_flag = args.bypass_ms_account
+        disable_bitlocker_flag = args.disable_bitlocker
 
         verbose = args.verbose
 
@@ -107,14 +121,17 @@ def init(from_cli=True, install_mode=None, source_media=None, target_media=None,
     utils.gui = gui
 
     if from_cli:
+        # Added new flags to the return list
         return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, install_mode, source_media, target_media,
-                workaround_bios_boot_flag, skip_legacy_bootloader, target_filesystem_type, filesystem_label, verbose, debug, parser]
+                workaround_bios_boot_flag, skip_legacy_bootloader, target_filesystem_type, filesystem_label, verbose, debug, parser, 
+                bypass_hardware_check_flag, bypass_ms_account_flag, disable_bitlocker_flag]
     else:
         return [source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media]
 
 
 def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media, install_mode, temp_directory,
-         target_filesystem_type, workaround_bios_boot_flag, parser=None, skip_legacy_bootloader=False):
+         target_filesystem_type, workaround_bios_boot_flag, parser=None, skip_legacy_bootloader=False, 
+         bypass_hardware_check_flag=False, bypass_ms_account_flag=False, disable_bitlocker_flag=False):
     """
     :param parser:
     :param source_fs_mountpoint:
@@ -125,6 +142,9 @@ def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media,
     :param temp_directory:
     :param target_filesystem_type:
     :param workaround_bios_boot_flag:
+    :param bypass_hardware_check_flag: Hardware bypass
+    :param bypass_ms_account_flag: MS Account bypass
+    :param disable_bitlocker_flag: BitLocker disable
     :return: 0 - succes; 1 - failure
     """
     global debug
@@ -192,6 +212,20 @@ def main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media,
     current_state = "copying-filesystem"
 
     copy_filesystem_files(source_fs_mountpoint, target_fs_mountpoint)
+
+    # --- START WINDOWS 11 TWEAKS LOGIC ---
+    if bypass_hardware_check_flag or bypass_ms_account_flag or disable_bitlocker_flag:
+        utils.print_with_color(_("Applying Windows 11 customizations..."), "green")
+        if hasattr(utils, 'write_win11_bypass'):
+            utils.write_win11_bypass(
+                target_fs_mountpoint,
+                bypass_hardware=bypass_hardware_check_flag,
+                bypass_ms_account=bypass_ms_account_flag,
+                disable_bitlocker=disable_bitlocker_flag
+            )
+        else:
+             utils.print_with_color(_("Error: write_win11_bypass function not found in utils!"), "red")
+    # --- END WINDOWS 11 TWEAKS LOGIC ---
 
     workaround.support_windows_7_uefi_boot(source_fs_mountpoint, target_fs_mountpoint)
     if not skip_legacy_bootloader:
@@ -648,6 +682,16 @@ def setup_arguments():
                         help="This will skip the legacy grub bootloader creation step.")
     parser.add_argument("--target-filesystem", "--tgt-fs", choices=["FAT", "NTFS"], default="FAT", type=str.upper,
                         help="Specify the filesystem to use as the target partition's filesystem.")
+    
+    # --- NEW ARGUMENTS ---
+    parser.add_argument("--bypass_hardware_check", action="store_true",
+                        help="Bypass Windows 11 TPM 2.0 / Secure Boot requirements.")
+    parser.add_argument("--bypass-ms-account", action="store_true",
+                        help="Bypass Microsoft Account Requirement (allows offline account creation).")
+    parser.add_argument("--disable-bitlocker", action="store_true",
+                        help="Disable automatic BitLocker device encryption.")
+    # --------------------
+    
     parser.add_argument('--for-gui', action="store_true", help=argparse.SUPPRESS)
 
     return parser
@@ -709,14 +753,18 @@ def run():
     if isinstance(result, list) is False:
         return
 
+    # Updated unpacking to include new flags
     source_fs_mountpoint, target_fs_mountpoint, temp_directory, \
         install_mode, source_media, target_media, \
         workaround_bios_boot_flag, skip_legacy_bootloader, target_filesystem_type, \
-        new_file_system_label, verbose, debug, parser = result
+        new_file_system_label, verbose, debug, parser, \
+        bypass_hardware_check_flag, bypass_ms_account_flag, disable_bitlocker_flag = result
 
     try:
+        # Updated main call to include new flags
         main(source_fs_mountpoint, target_fs_mountpoint, source_media, target_media, install_mode, temp_directory,
-             target_filesystem_type, workaround_bios_boot_flag, parser, skip_legacy_bootloader)
+             target_filesystem_type, workaround_bios_boot_flag, parser, skip_legacy_bootloader, 
+             bypass_hardware_check_flag, bypass_ms_account_flag, disable_bitlocker_flag)
     except KeyboardInterrupt:
         pass
     except Exception as error:

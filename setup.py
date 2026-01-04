@@ -48,13 +48,23 @@ class PostInstallCommand(install):
 
 setup(
     name='WoeUSB-ng',
-    version='0.2.12',
-    description='WoeUSB-ng is a simple tool that enable you to create your own usb stick windows installer from an iso image or a real DVD. This is a rewrite of original WoeUSB. ',
+    version='0.2.14-alpha',
+    
+    # Add 
+    description='WoeUSB-ng fork with Windows 11 Bypass (TPM, SecureBoot, MS Account) & BitLocker fix. Originally by congelli501 & slacka.',
+    
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/WoeUSB/WoeUSB-ng',
-    author='Jakub Szymański',
-    author_email='jakubmateusz@poczta.onet.pl',
+    
+    # SỬA DÒNG NÀY: Link về kho GitHub của bạn
+    url='https://github.com/Nguyen12345tt/WoeUSB-ng', 
+    
+    # SỬA DÒNG NÀY: Để khẳng định chủ quyền
+    author='Nguyen12345tt', 
+    
+    # SỬA DÒNG NÀY: Email của bạn (để trống hoặc điền email thật)
+    author_email='thanhnguyennguyen496@gmail.com',
+    
     license='GPL-3',
     zip_safe=False,
     packages=['WoeUSB'],

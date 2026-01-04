@@ -331,49 +331,47 @@ def update_policy_to_allow_for_running_gui_as_root(path):
     dom = parseString(
         "<?xml version=\"1.0\" ?>"
         "<!DOCTYPE policyconfig  PUBLIC '-//freedesktop//DTD polkit Policy Configuration 1.0//EN'  "
-        "'http://www.freedesktop.org/software/polkit/policyconfig-1.dtd'><!-- \n"
-        "DOC: https://www.freedesktop.org/software/polkit/docs/latest/polkit.8.html\n"
-        "--><policyconfig>\n"
-        "	<vendor>The WoeUSB Project</vendor>\n"
-        "	<vendor_url>https://github.com/slacka/WoeUSB</vendor_url>\n"
-        "	<icon_name>woeusbgui-icon</icon_name>\n"
+        "'http://www.freedesktop.org/software/polkit/policyconfig-1.dtd'><policyconfig>\n"
+        "   <vendor>The WoeUSB Project</vendor>\n"
+        "   <vendor_url>https://github.com/slacka/WoeUSB</vendor_url>\n"
+        "   <icon_name>woeusbgui-icon</icon_name>\n"
         "\n"
-        "	<action id=\"com.github.slacka.woeusb.run-gui-using-pkexec\">\n"
-        "		<description>Run `woeusb` as SuperUser</description>\n"
-        "		<description xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb`</description>\n"
-        "		<description xml:lang=\"pl_PL\">Uruchom `woeusb` jako root</description>\n"
-        "		\n"
-        "		<message>Authentication is required to run `woeusb` as SuperUser.</message>\n"
-        "		<message xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb` 需要通過身份驗證。</message>\n"
-        "		<message xml:lang=\"pl_PL\">Wymagana jest autoryzacja do uruchomienia `woeusb` jako root</message>\n"
-        "		\n"
-        "		<defaults>\n"
-        "			<allow_any>auth_admin</allow_any>\n"
-        "			<allow_inactive>auth_admin</allow_inactive>\n"
-        "			<allow_active>auth_admin_keep</allow_active>\n"
-        "		</defaults>\n"
-        "		\n"
-        "		<annotate key=\"org.freedesktop.policykit.exec.path\">/usr/local/bin/woeusbgui</annotate>\n"
-        "   		<annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>\n"
-        "	</action>\n"
-        "	<action id=\"com.github.slacka.woeusb.run-gui-using-pkexec-local\">\n"
-        "		<description>Run `woeusb` as SuperUser</description>\n"
-        "		<description xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb`</description>\n"
-        "		<description xml:lang=\"pl_PL\">Uruchom `woeusb` jako root</description>\n"
+        "   <action id=\"com.github.slacka.woeusb.run-gui-using-pkexec\">\n"
+        "       <description>Run `woeusb` as SuperUser</description>\n"
+        "       <description xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb`</description>\n"
+        "       <description xml:lang=\"pl_PL\">Uruchom `woeusb` jako root</description>\n"
+        "       \n"
+        "       <message>Authentication is required to run `woeusb` as SuperUser.</message>\n"
+        "       <message xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb` 需要通過身份驗證。</message>\n"
+        "       <message xml:lang=\"pl_PL\">Wymagana jest autoryzacja do uruchomienia `woeusb` jako root</message>\n"
+        "       \n"
+        "       <defaults>\n"
+        "           <allow_any>auth_admin</allow_any>\n"
+        "           <allow_inactive>auth_admin</allow_inactive>\n"
+        "           <allow_active>auth_admin_keep</allow_active>\n"
+        "       </defaults>\n"
+        "       \n"
+        "       <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/local/bin/woeusbgui</annotate>\n"
+        "           <annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>\n"
+        "   </action>\n"
+        "   <action id=\"com.github.slacka.woeusb.run-gui-using-pkexec-local\">\n"
+        "       <description>Run `woeusb` as SuperUser</description>\n"
+        "       <description xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb`</description>\n"
+        "       <description xml:lang=\"pl_PL\">Uruchom `woeusb` jako root</description>\n"
         "\n"
-        "		<message>Authentication is required to run `woeusb` as SuperUser.</message>\n"
-        "		<message xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb` 需要通過身份驗證。</message>\n"
-        "		<message xml:lang=\"pl_PL\">Wymagana jest autoryzacja do uruchomienia `woeusb` jako root</message>\n"
+        "       <message>Authentication is required to run `woeusb` as SuperUser.</message>\n"
+        "       <message xml:lang=\"zh_TW\">以超級使用者(SuperUser)身份執行 `woeusb` 需要通過身份驗證。</message>\n"
+        "       <message xml:lang=\"pl_PL\">Wymagana jest autoryzacja do uruchomienia `woeusb` jako root</message>\n"
         "\n"
-        "		<defaults>\n"
-        "			<allow_any>auth_admin</allow_any>\n"
-        "			<allow_inactive>auth_admin</allow_inactive>\n"
-        "			<allow_active>auth_admin_keep</allow_active>\n"
-        "		</defaults>\n"
+        "       <defaults>\n"
+        "           <allow_any>auth_admin</allow_any>\n"
+        "           <allow_inactive>auth_admin</allow_inactive>\n"
+        "           <allow_active>auth_admin_keep</allow_active>\n"
+        "       </defaults>\n"
         "\n"
-        "		<annotate key=\"org.freedesktop.policykit.exec.path\">/usr/local/bin/woeusbgui</annotate>\n"
-        "   		<annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>\n"
-        "	</action>\n"
+        "       <annotate key=\"org.freedesktop.policykit.exec.path\">/usr/local/bin/woeusbgui</annotate>\n"
+        "           <annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>\n"
+        "   </action>\n"
         "</policyconfig>"
     )
     for action in dom.getElementsByTagName('action'):
@@ -384,3 +382,104 @@ def update_policy_to_allow_for_running_gui_as_root(path):
 
     with open("/usr/share/polkit-1/actions/com.github.woeusb.woeusb-ng.policy", "w") as file:
         file.write(dom.toxml())
+
+def write_win11_bypass(target_mountpoint, bypass_hardware=False, bypass_ms_account=False, disable_bitlocker=False):
+    """
+    Tạo file autounattend.xml với 2 giai đoạn (passes):
+    1. windowsPE: Để bypass kiểm tra phần cứng (Hardware Check).
+    2. specialize: Để bypass tài khoản MS và Bitlocker (Tác động vào hệ điều hành đã cài).
+    """
+    check_kill_signal()
+    
+    if not (bypass_hardware or bypass_ms_account or disable_bitlocker):
+        return True
+
+    print_with_color(_("Writing Windows 11 custom configuration (autounattend.xml)..."), "green")
+
+    # --- GIAI ĐOẠN 1: windowsPE (Chạy TRƯỚC khi cài đặt) ---
+    # Dùng để lừa bộ cài (Setup) bỏ qua kiểm tra phần cứng
+    pe_commands = []
+    if bypass_hardware:
+        base_path = r"HKLM\SYSTEM\Setup\LabConfig"
+        pe_commands.append(f"reg add {base_path} /v BypassTPMCheck /t REG_DWORD /d 1 /f")
+        pe_commands.append(f"reg add {base_path} /v BypassSecureBootCheck /t REG_DWORD /d 1 /f")
+        pe_commands.append(f"reg add {base_path} /v BypassRAMCheck /t REG_DWORD /d 1 /f")
+        pe_commands.append(f"reg add {base_path} /v BypassCPUCheck /t REG_DWORD /d 1 /f")
+        pe_commands.append(f"reg add {base_path} /v BypassStorageCheck /t REG_DWORD /d 1 /f")
+
+    # Tạo nội dung XML cho windowsPE
+    xml_pe_content = ""
+    if pe_commands:
+        xml_pe_cmds = ""
+        for index, cmd in enumerate(pe_commands, start=1):
+            xml_pe_cmds += f"""
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>{index}</Order>
+                    <Path>cmd /c {cmd}</Path>
+                </RunSynchronousCommand>"""
+        
+        xml_pe_content = f"""
+    <settings pass="windowsPE">
+        <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <RunSynchronous>
+                {xml_pe_cmds}
+            </RunSynchronous>
+            <UserData>
+                <ProductKey>
+                    <WillShowUI>OnError</WillShowUI>
+                </ProductKey>
+                <AcceptEula>true</AcceptEula>
+            </UserData>
+        </component>
+    </settings>"""
+
+    # --- GIAI ĐOẠN 2: specialize (Chạy SAU khi cài, trước khi vào User) ---
+    # Dùng để tác động vào Windows thật trên ổ cứng (Bypass Account, BitLocker)
+    specialize_commands = []
+    
+    # 2. Bypass Microsoft Account (Network Requirement)
+    if bypass_ms_account:
+        # Quan trọng: Lệnh này phải chạy trên OS thật
+        specialize_commands.append(r"reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE /v BypassNRO /t REG_DWORD /d 1 /f")
+        
+    # 3. Disable BitLocker
+    if disable_bitlocker:
+        specialize_commands.append(r"reg add HKLM\SYSTEM\CurrentControlSet\Control\BitLocker /v PreventDeviceEncryption /t REG_DWORD /d 1 /f")
+
+    # Tạo nội dung XML cho specialize
+    xml_specialize_content = ""
+    if specialize_commands:
+        xml_specialize_cmds = ""
+        for index, cmd in enumerate(specialize_commands, start=1):
+            xml_specialize_cmds += f"""
+                <RunSynchronousCommand wcm:action="add">
+                    <Order>{index}</Order>
+                    <Path>cmd /c {cmd}</Path>
+                </RunSynchronousCommand>"""
+
+        xml_specialize_content = f"""
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <RunSynchronous>
+                {xml_specialize_cmds}
+            </RunSynchronous>
+        </component>
+    </settings>"""
+
+    # Gộp toàn bộ file XML
+    full_xml_content = f"""<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    {xml_pe_content}
+    {xml_specialize_content}
+</unattend>"""
+
+    target_file = os.path.join(target_mountpoint, "autounattend.xml")
+
+    try:
+        with open(target_file, "w") as f:
+            f.write(full_xml_content)
+        print_with_color(_("Success: autounattend.xml created at {0}").format(target_file), "green")
+        return True
+    except IOError as e:
+        print_with_color(_("Error: Failed to write bypass file: {0}").format(e), "red")
+        return False

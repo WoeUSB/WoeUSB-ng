@@ -12,7 +12,7 @@ This package contains two programs:
 
 Supported images:
 
-Windows Vista, Windows 7, Window 8.x, Windows 10. All languages and any version (home, pro...) and Windows PE are supported.
+Windows Vista, Windows 7, Window 8.x, Windows 10, Windows 11. All languages and any version (home, pro...) and Windows PE are supported.
 
 Supported bootmodes:
 
@@ -20,32 +20,6 @@ Supported bootmodes:
 * Native UEFI booting is supported for Windows 7 and later images (limited to the FAT filesystem as the target)
 
 This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB) 
-
-## Installation
-
-### Arch
-```shell
-yay -S woeusb-ng
-```
-
-### For other distributions
-
-### 1. Install WoeUSB-ng's Dependencies
-#### Ubuntu
-
-```shell
-sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g
-```
-
-#### Fedora (tested on: Fedora Workstation 33)
-```shell
-sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
-```
-
-### 2. Install WoeUSB-ng
-```shell
-sudo pip3 install WoeUSB-ng
-```
 
 ## Installation from source code
 
@@ -64,14 +38,14 @@ sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
 ```
 ### 2. Install WoeUSB-ng
 ```shell
-git clone https://github.com/WoeUSB/WoeUSB-ng.git
+git clone https://github.com/Nguyen12345tt/WoeUSB-ng.git
 cd WoeUSB-ng
 sudo pip3 install .
 ```
 
 ## Installation from source code locally or in virtual environment 
 ```shell
-git clone https://github.com/WoeUSB/WoeUSB-ng.git
+git clone https://github.com/Nguyen12345tt/WoeUSB-ng.git
 cd WoeUSB-ng
 git apply development.patch
 sudo pip3 install -e .
@@ -83,9 +57,11 @@ Please note that this will not create menu shortcut and you may need to run gui 
 To remove WoeUSB-ng completely run (needed only when using installation from source code):
 ```shell
 sudo pip3 uninstall WoeUSB-ng
+
 sudo rm /usr/share/icons/WoeUSB-ng/icon.ico \
     /usr/share/applications/WoeUSB-ng.desktop \
     /usr/local/bin/woeusbgui
+
 sudo rmdir /usr/share/icons/WoeUSB-ng/
 ```
 

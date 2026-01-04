@@ -19,14 +19,14 @@ sys.path.insert(0, os.path.abspath('../src'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'WoeUSB'
-copyright = '2018, congelli501, slacka and WaxyMocha et. al.'
-author = 'congelli501, slacka and WaxyMocha et. al.'
+project = 'WoeUSB+'
+copyright = '2018-2026, congelli501, slacka, WaxyMocha, Nguyen12345tt, et. al.'
+author = 'Nguyen12345tt, based on work by congelli501, slacka and WaxyMocha et. al.'
 
 # The short X.Y version
-version = ''
+version = '0.2'
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '0.2.14-alpha'
 
 
 # -- General configuration ---------------------------------------------------
@@ -131,7 +131,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'WoeUSB.tex', 'WoeUSB Documentation',
-     'congelli501, slacka and WaxyMocha et. al.', 'manual'),
+    'Nguyen12345tt, congelli501, slacka and WaxyMocha et. al.', 'manual'),
 ]
 
 

@@ -19,11 +19,62 @@ app = wx.App()
 _ = miscellaneous.i18n
 
 
+# --- NEW CLASS: Cửa sổ chọn tùy chọn Windows 11 ---
+class Win11TweaksDialog(wx.Dialog):
+    def __init__(self, parent):
+        super().__init__(parent, title=_("Windows Installation Tweaks"), size=(400, 250))
+        
+        panel = wx.Panel(self)
+        vbox = wx.BoxSizer(wx.VERTICAL)
+        
+        lbl = wx.StaticText(panel, label=_("Select customization options:"))
+        lbl.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+        vbox.Add(lbl, flag=wx.LEFT|wx.TOP, border=10)
+        
+        vbox.AddSpacer(10)
+        
+        self.cb_hardware = wx.CheckBox(panel, label=_("Bypass Windows 11 Hardware Check\n(TPM 2.0, Secure Boot, RAM)"))
+        self.cb_ms_account = wx.CheckBox(panel, label=_("Bypass Microsoft Account Requirement\n(Allows creating local account offline)"))
+        self.cb_bitlocker = wx.CheckBox(panel, label=_("Disable BitLocker Device Encryption"))
+        
+        # Mặc định có thể để check hoặc uncheck tùy ý
+        self.cb_hardware.SetValue(True) 
+        self.cb_ms_account.SetValue(True)
+        self.cb_bitlocker.SetValue(True)
+
+        vbox.Add(self.cb_hardware, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=15)
+        vbox.AddSpacer(10)
+        vbox.Add(self.cb_ms_account, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=15)
+        vbox.AddSpacer(10)
+        vbox.Add(self.cb_bitlocker, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=15)
+        
+        vbox.AddSpacer(20)
+        
+        hbox_btn = wx.BoxSizer(wx.HORIZONTAL)
+        btn_ok = wx.Button(panel, wx.ID_OK, label=_("OK"))
+        btn_cancel = wx.Button(panel, wx.ID_CANCEL, label=_("Cancel"))
+        
+        hbox_btn.Add(btn_ok, flag=wx.RIGHT, border=10)
+        hbox_btn.Add(btn_cancel)
+        
+        vbox.Add(hbox_btn, flag=wx.ALIGN_RIGHT|wx.ALL, border=10)
+        
+        panel.SetSizer(vbox)
+        self.CenterOnParent()
+
+    def get_values(self):
+        return (self.cb_hardware.GetValue(), 
+                self.cb_ms_account.GetValue(), 
+                self.cb_bitlocker.GetValue())
+# ----------------------------------------------------
+
+
 class MainFrame(wx.Frame):
     __MainPanel = None
     __MenuBar = None
 
     __menuItemShowAll = None
+    # Đã xóa các biến option menu cũ
 
     def __init__(self, title, pos, size, style=wx.DEFAULT_FRAME_STYLE):
         super(MainFrame, self).__init__(None, -1, title, pos, size, style)
@@ -52,6 +103,9 @@ class MainFrame(wx.Frame):
         self.options_skip_grub = wx.MenuItem(options_menu, wx.ID_ANY, _("Skip legacy grub bootloader"),
                                               _("No legacy grub bootloader will be created. NOTE: It will only boot on system with UEFI support."),
                                               wx.ITEM_CHECK)
+        
+        # Đã xóa các menu item Bypass ở đây để chuyển sang popup
+
         options_menu.Append(self.options_boot)
         options_menu.Append(self.options_filesystem)
         options_menu.Append(self.options_skip_grub)
@@ -70,9 +124,7 @@ class MainFrame(wx.Frame):
 
         self.SetSizer(main_sizer)
 
-        # self.Connect(self.__menuItemShowAll.GetId(), wx.EVT_MENU, MainPanel.on_show_all_drive, None, self.__MainPanel)
         self.Bind(wx.EVT_MENU, self.__MainPanel.on_show_all_drive)
-
         self.Bind(wx.EVT_MENU, self.on_quit, exit_item)
         self.Bind(wx.EVT_MENU, self.on_about, help_item)
 
@@ -89,20 +141,14 @@ class MainFrame(wx.Frame):
 
 class MainPanel(wx.Panel):
     __parent = None
-
     __dvdDriveList = None
     __usbStickList = wx.ListBox
-
     __dvdDriveDevList = []
     __usbStickDevList = []
-
     __isoFile = wx.FilePickerCtrl
-
     __parentFrame = None
-
     __btInstall = None
     __btRefresh = None
-
     __isoChoice = None
     __dvdChoice = None
 
@@ -180,22 +226,16 @@ class MainPanel(wx.Panel):
         # USB
         self.__usbStickDevList = []
         self.__usbStickList.Clear()
-
         show_all_checked = self.__parent.is_show_all_checked()
-
         device_list = list_devices.usb_drive(show_all_checked)
-
         for device in device_list:
             self.__usbStickDevList.append(device[0])
             self.__usbStickList.Append(device[1])
 
         # ISO
-
         self.__dvdDriveDevList = []
         self.__dvdDriveList.Clear()
-
         drive_list = list_devices.dvd_drive()
-
         for drive in drive_list:
             self.__dvdDriveDevList.append(drive[0])
             self.__dvdDriveList.Append(drive[1])
@@ -204,10 +244,8 @@ class MainPanel(wx.Panel):
 
     def on_source_option_changed(self, __):
         is_iso = self.__isoChoice.GetValue()
-
         self.__isoFile.Enable(is_iso)
         self.__dvdDriveList.Enable(not is_iso)
-
         self.__btInstall.Enable(self.is_install_ok())
 
     def is_install_ok(self):
@@ -218,7 +256,6 @@ class MainPanel(wx.Panel):
     def on_list_or_file_modified(self, event):
         if event.GetEventType() == wx.EVT_LISTBOX and not event.IsSelection():
             return
-
         self.__btInstall.Enable(self.is_install_ok())
 
     def on_refresh(self, __):
@@ -226,15 +263,34 @@ class MainPanel(wx.Panel):
 
     def on_install(self, __):
         global woe
+        
+        # 1. Cảnh báo xóa dữ liệu
         if wx.MessageBox(
             _("Are you sure? This will delete all your files and wipe out the selected partition."),
             _("Cancel"),
             wx.YES_NO | wx.ICON_QUESTION | wx.NO_DEFAULT,
             self) != wx.YES:
             return
+            
         if self.is_install_ok():
-            is_iso = self.__isoChoice.GetValue()
+            
+            # 2. HIỆN POPUP CHỌN TÙY CHỌN WIN 11 ---
+            bypass_hw = False
+            bypass_ms = False
+            no_bitlocker = False
+            
+            # Bạn có thể thêm logic kiểm tra nếu là file ISO Windows 11 mới hiện, 
+            # nhưng hiện tại ta cứ hiện luôn cho tiện.
+            tweak_dlg = Win11TweaksDialog(self)
+            if tweak_dlg.ShowModal() == wx.ID_OK:
+                bypass_hw, bypass_ms, no_bitlocker = tweak_dlg.get_values()
+                tweak_dlg.Destroy()
+            else:
+                tweak_dlg.Destroy()
+                return # Người dùng bấm Cancel ở popup thì hủy cài đặt
+            # ---------------------------------------
 
+            is_iso = self.__isoChoice.GetValue()
             device = self.__usbStickDevList[self.__usbStickList.GetSelection()]
 
             if is_iso:
@@ -246,8 +302,18 @@ class MainPanel(wx.Panel):
                 filesystem = "NTFS"
             else:
                 filesystem = "FAT"
-		
-            woe = WoeUSB_handler(iso, device, boot_flag=self.__parent.options_boot.IsChecked(), filesystem=filesystem, skip_grub=self.__parent.options_skip_grub.IsChecked())
+        
+            woe = WoeUSB_handler(
+                iso, 
+                device, 
+                boot_flag=self.__parent.options_boot.IsChecked(), 
+                filesystem=filesystem, 
+                skip_grub=self.__parent.options_skip_grub.IsChecked(),
+                # Truyền các giá trị từ Popup xuống Handler
+                bypass_hardware_check=bypass_hw,
+                bypass_ms_account=bypass_ms,
+                disable_bitlocker=no_bitlocker
+                )
             woe.start()
 
             dialog = wx.ProgressDialog(_("Installing"), _("Please wait..."), 101, self.GetParent(),
@@ -318,8 +384,8 @@ class DialogAbout(wx.Dialog):
         self.__NotebookAutorLicence = wx.Notebook(self, wx.ID_ANY)
 
         self.__NotebookAutorLicence.AddPage(
-            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "slacka \nLin-Buo-Ren\nWaxyMocha", data_directory + "woeusb-logo.png",
-                                "github.com/WoeUSB/WoeUSB-ng"), _("Authors"), True)
+            PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "Nguyen12345tt\n (Based on work by slacka \nLin-Buo-Ren\nWaxyMocha)", data_directory + "woeusb-logo.png",
+                                "github.com/Nguyen12345tt/WoeUSB-ng"), _("Authors"), True)
         self.__NotebookAutorLicence.AddPage(
             PanelNoteBookAutors(self.__NotebookAutorLicence, wx.ID_ANY, "Colin GILLE / Congelli501",
                                 data_directory + "c501-logo.png", "www.congelli.eu"), _("Original WinUSB Developer"), False)
@@ -387,7 +453,8 @@ class WoeUSB_handler(threading.Thread):
     error = ""
     kill = False
 
-    def __init__(self, source, target, boot_flag, filesystem, skip_grub=False):
+    def __init__(self, source, target, boot_flag, filesystem, skip_grub=False, 
+                 bypass_hardware_check=False, bypass_ms_account=False, disable_bitlocker=False):
         threading.Thread.__init__(self)
 
         core.gui = self
@@ -396,6 +463,9 @@ class WoeUSB_handler(threading.Thread):
         self.boot_flag = boot_flag
         self.filesystem = filesystem
         self.skip_grub = skip_grub
+        self.bypass_hardware_check = bypass_hardware_check
+        self.bypass_ms_account = bypass_ms_account
+        self.disable_bitlocker = disable_bitlocker
 
     def run(self):
         source_fs_mountpoint, target_fs_mountpoint, temp_directory, target_media = core.init(
@@ -406,7 +476,8 @@ class WoeUSB_handler(threading.Thread):
         )
         try:
             core.main(source_fs_mountpoint, target_fs_mountpoint, self.source, self.target, "device", temp_directory,
-                      self.filesystem, self.boot_flag , None, self.skip_grub)
+                      self.filesystem, self.boot_flag , None, self.skip_grub, 
+                      self.bypass_hardware_check, self.bypass_ms_account, self.disable_bitlocker)
         except SystemExit:
             pass
 

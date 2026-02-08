@@ -46,6 +46,11 @@ sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
 ```shell
 sudo pip3 install WoeUSB-ng
 ```
+If you are using Debian, then you should use pipx instead, because pipx will put and manage this package in a virtual environment.
+```shell
+sudo apt install pipx
+sudo pipx install WoeUSB-ng
+```
 
 ## Installation from source code
 

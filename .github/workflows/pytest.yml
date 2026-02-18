@@ -1,0 +1,23 @@
+name: PyTest
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      # Setup Python (faster than using Python container)
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install pytest
+        run: |
+          pip install -U pytest
+      - name: Run test suite
+        run: |
+          pytest -v tests

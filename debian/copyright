@@ -1,0 +1,22 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: woeusb-ng
+Upstream-Contact: jakubmateusz@poczta.onet.pl
+Source: https://github.com/WoeUSB/WoeUSB-ng
+
+Files: *
+Copyright: 2021 Jakub Szymański <jakubmateusz@poczta.onet.pl>
+License: GPL-3.0+
+
+License: GPL-3.0+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ On Debian systems, the full text of the GNU General Public License
+ version 3 can be found in the file '/usr/share/common-licenses/GPL-3'.

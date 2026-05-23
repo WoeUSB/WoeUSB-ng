@@ -1,0 +1,5 @@
+woeusb-ng (0.2.12-1) unstable; urgency=medium
+
+  * Initial Debian packaging.
+
+ -- Bryant Eadon <bryant.eadon@gmail.com>  Sat, 23 May 2026 00:00:00 +0000

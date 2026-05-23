@@ -1,0 +1,34 @@
+Source: woeusb-ng
+Section: utils
+Priority: optional
+Maintainer: Jakub Szymański <jakubmateusz@poczta.onet.pl>
+Build-Depends: debhelper-compat (= 13),
+               dh-python,
+               python3-all,
+               python3-setuptools
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
+Homepage: https://github.com/WoeUSB/WoeUSB-ng
+
+Package: woeusb-ng
+Architecture: all
+Depends: ${python3:Depends},
+         ${misc:Depends},
+         python3-wxgtk4.0,
+         python3-termcolor,
+         util-linux,
+         parted,
+         dosfstools,
+         ntfs-3g,
+         grub-pc-bin | grub-efi-amd64-bin,
+         p7zip-full,
+         wimtools
+Description: Create bootable Windows USB drives from ISO images or DVD
+ WoeUSB-ng is a simple tool that enables you to create your own USB stick
+ Windows installer from an ISO image or a real DVD.
+ .
+ It supports creating bootable USB drives for Windows Vista through
+ Windows 11, using either FAT32 or NTFS filesystems, with both BIOS
+ and UEFI boot support.
+ .
+ This is a rewrite of the original WoeUSB project.

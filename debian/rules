@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME = woeusb-ng
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_configure:
+	# Polkit policy hardcodes /usr/local/bin; packages install to /usr/bin
+	sed -i 's|/usr/local/bin/woeusbgui|/usr/bin/woeusbgui|' \
+		miscellaneous/com.github.woeusb.woeusb-ng.policy
+	dh_auto_configure

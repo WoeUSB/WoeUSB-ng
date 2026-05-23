@@ -1,0 +1,27 @@
+woeusb-ng for Debian/Ubuntu
+---------------------------
+
+Installation
+~~~~~~~~~~~~
+Use apt to install the .deb so that dependencies are resolved automatically:
+
+  sudo apt install ./woeusb-ng_*.deb
+
+Do not use `dpkg -i` directly — it will install the package files but skip
+dependency resolution, leaving the package unconfigured if python3-termcolor
+or wimtools are not already present.  If you have already run `dpkg -i`, fix
+the broken state with:
+
+  sudo apt --fix-broken install
+
+Building from source
+~~~~~~~~~~~~~~~~~~~~
+Install the build dependencies:
+
+  sudo apt install devscripts debhelper dh-python python3-all python3-setuptools
+
+Then build from the root of the source tree:
+
+  dpkg-buildpackage -us -uc -b
+
+The resulting .deb is written to the parent directory.

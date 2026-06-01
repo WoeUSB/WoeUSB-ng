@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=WoeUSB-ng
+GenericName=Windows USB Creator
+Comment=Create bootable Windows USB drives from ISO images
+Exec=WoeUSB-ng
+Icon=woeusb-ng
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=windows;usb;bootable;iso;installer;
+StartupNotify=true

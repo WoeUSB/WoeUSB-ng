@@ -23,6 +23,32 @@ This project rewrite of original [WoeUSB](https://github.com/slacka/WoeUSB)
 
 ## Installation
 
+### AppImage
+
+Portable x86_64 AppImages, when available, are attached to the GitHub Releases page.
+They bundle WoeUSB-ng, Python, wxPython/GTK, and the runtime tools needed for disk
+creation.
+
+```shell
+chmod +x WoeUSB-ng-*-x86_64.AppImage
+./WoeUSB-ng-*-x86_64.AppImage
+```
+
+For command-line usage:
+
+```shell
+sudo ./WoeUSB-ng-*-x86_64.AppImage --cli --device /path/to/windows.iso /dev/sdX
+```
+
+Replace `/dev/sdX` with the target USB device. All data on the target device will
+be erased.
+
+AppImage builds can also be produced from source with:
+
+```shell
+packaging/appimage/build-appimage.sh
+```
+
 ### Arch
 ```shell
 yay -S woeusb-ng

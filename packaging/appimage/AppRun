@@ -1,0 +1,129 @@
+#!/bin/bash
+set -euo pipefail
+
+APPDIR=$(dirname "$(readlink -f "$0")")
+
+export LD_LIBRARY_PATH="$APPDIR/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+export PATH="$APPDIR/usr/bin:$PATH"
+
+PYTHON_VERSION=$("$APPDIR/usr/bin/python3" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")' 2>/dev/null || echo "3")
+export PYTHONHOME="$APPDIR/usr"
+PYTHONPATH_BUNDLED="$APPDIR/usr/lib/python3/site-packages:$APPDIR/usr/lib/python${PYTHON_VERSION}:$APPDIR/usr/lib/python${PYTHON_VERSION}/lib-dynload"
+export PYTHONPATH="$PYTHONPATH_BUNDLED${PYTHONPATH:+:$PYTHONPATH}"
+
+export GTK_DATA_PREFIX="$APPDIR/usr"
+export GTK_THEME=Adwaita
+export GTK_PATH="$APPDIR/usr/lib/gtk-3.0"
+export GTK3_MODULES=""
+export GDK_PIXBUF_MODULE_FILE="$APPDIR/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+export GDK_PIXBUF_MODULEDIR="$APPDIR/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders"
+export PANGO_LIBDIR="$APPDIR/usr/lib"
+export GSETTINGS_SCHEMA_DIR="$APPDIR/usr/share/glib-2.0/schemas"
+export GSETTINGS_BACKEND=memory
+export XDG_DATA_DIRS="$APPDIR/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+export FONTCONFIG_PATH="${FONTCONFIG_PATH:-/etc/fonts}"
+export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-}"
+
+if [ -d "$APPDIR/usr/lib/grub" ]; then
+    export GRUB_PREFIX="$APPDIR/usr/lib/grub"
+fi
+
+run_cli() {
+    exec "$APPDIR/usr/bin/python3" -W ignore::SyntaxWarning -c "
+import sys
+sys.argv = ['woeusb'] + sys.argv[1:]
+from WoeUSB import core
+core.run()
+" "$@"
+}
+
+run_about() {
+    exec "$APPDIR/usr/bin/python3" -W ignore::SyntaxWarning -c "
+from WoeUSB import core
+core.print_application_info()
+"
+}
+
+check_wx() {
+    local wx_import_error
+
+    if ! wx_import_error=$("$APPDIR/usr/bin/python3" -c "import wx; import wx.adv" 2>&1); then
+        echo "ERROR: Failed to import wxPython. The AppImage may be corrupted." >&2
+        echo "$wx_import_error" >&2
+        echo "Try downloading the AppImage again or report this build as broken." >&2
+        exit 1
+    fi
+}
+
+NEEDS_ROOT=1
+for arg in "$@"; do
+    case "$arg" in
+        --help|-h|--version|-V|--about|-ab)
+            NEEDS_ROOT=0
+            break
+            ;;
+    esac
+done
+
+if [ "${1:-}" = "--cli" ] && [ "$NEEDS_ROOT" -eq 0 ]; then
+    shift
+    case "${1:-}" in
+        --about|-ab)
+            run_about
+            ;;
+    esac
+    run_cli "$@"
+fi
+
+if [ "${1:-}" != "--cli" ]; then
+    case "${1:-}" in
+        --about|-ab)
+            run_about
+            ;;
+        --help|-h|--version|-V)
+            run_cli "$@"
+            ;;
+    esac
+
+    check_wx
+fi
+
+if [ "$EUID" -ne 0 ] && [ "$NEEDS_ROOT" -eq 1 ]; then
+    echo "WoeUSB-ng requires root privileges for disk operations."
+
+    if command -v pkexec >/dev/null 2>&1; then
+        echo "Elevating with pkexec..."
+        LAUNCHER="${APPIMAGE:-$(readlink -f "$0")}"
+        exec pkexec env \
+            DISPLAY="${DISPLAY:-}" \
+            XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" \
+            WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-}" \
+            XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-}" \
+            DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-}" \
+            "$LAUNCHER" "$@"
+    elif command -v sudo >/dev/null 2>&1; then
+        echo "pkexec not found, elevating with sudo..."
+        LAUNCHER="${APPIMAGE:-$(readlink -f "$0")}"
+        exec sudo \
+            DISPLAY="${DISPLAY:-}" \
+            XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" \
+            WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-}" \
+            XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-}" \
+            DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-}" \
+            "$LAUNCHER" "$@"
+    else
+        echo "ERROR: Neither pkexec nor sudo is available." >&2
+        echo "Re-run as root: sudo $0 $*" >&2
+        exit 1
+    fi
+fi
+
+if [ "${1:-}" = "--cli" ]; then
+    shift
+    run_cli "$@"
+fi
+
+exec "$APPDIR/usr/bin/python3" -W ignore::SyntaxWarning -c "
+from WoeUSB import gui
+gui.run()
+" "$@"

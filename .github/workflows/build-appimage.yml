@@ -1,0 +1,92 @@
+name: Build AppImage
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build WoeUSB-ng AppImage
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Resolve package version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          version="$(packaging/appimage/build-appimage.sh --print-version)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Building WoeUSB-ng v${version}"
+
+      - name: Restore RPM cache
+        uses: actions/cache@v4
+        with:
+          path: build/appimage/deps-rpms
+          key: woeusb-ng-appimage-rpms-${{ runner.os }}-${{ steps.version.outputs.version }}-${{ hashFiles('packaging/appimage/build-appimage.sh') }}
+          restore-keys: |
+            woeusb-ng-appimage-rpms-${{ runner.os }}-${{ steps.version.outputs.version }}-
+            woeusb-ng-appimage-rpms-${{ runner.os }}-
+
+      - name: Build AppImage in Fedora
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker run --rm \
+            -e HOST_UID="$(id -u)" \
+            -e HOST_GID="$(id -g)" \
+            -e WOEUSB_VERSION="${{ steps.version.outputs.version }}" \
+            -v "$PWD":/work \
+            -w /work \
+            fedora:latest \
+            bash -lc '
+              set -euo pipefail
+
+              trap "chown -R ${HOST_UID}:${HOST_GID} /work/build 2>/dev/null || true" EXIT
+
+              dnf install -y \
+                --setopt=install_weak_deps=False \
+                --disablerepo=fedora-cisco-openh264 \
+                git wget python3 python3-pip python3-wxpython4 \
+                patchelf rpm-build cpio file findutils binutils dnf-plugins-core
+
+              packaging/appimage/build-appimage.sh --no-clean
+
+              app="build/appimage/WoeUSB-ng-${WOEUSB_VERSION}-x86_64.AppImage"
+              test -s "$app"
+
+              APPIMAGE_EXTRACT_AND_RUN=1 "$app" --version | tee build/appimage/appimage-version.txt
+              grep -Fx "$WOEUSB_VERSION" build/appimage/appimage-version.txt
+
+              APPIMAGE_EXTRACT_AND_RUN=1 "$app" --help >/dev/null
+            '
+
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WoeUSB-ng-${{ steps.version.outputs.version }}-x86_64.AppImage
+          path: build/appimage/WoeUSB-ng-${{ steps.version.outputs.version }}-x86_64.AppImage
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Write job summary
+        shell: bash
+        run: |
+          {
+            echo "## AppImage build"
+            echo
+            echo "- Version: \`${{ steps.version.outputs.version }}\`"
+            echo "- Artifact: \`WoeUSB-ng-${{ steps.version.outputs.version }}-x86_64.AppImage\`"
+            echo "- Retention: 14 days"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -8,6 +8,8 @@ setup(
     ],
     install_requires=[
         'termcolor',
-        'wxPython',
-    ]
+    ],
+    extras_require={
+        'gui': ['wxPython'],
+    },
 )

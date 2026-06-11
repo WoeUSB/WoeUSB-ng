@@ -30,43 +30,76 @@ yay -S woeusb-ng
 
 ### For other distributions
 
-### 1. Install WoeUSB-ng's Dependencies
+### 1. Install WoeUSB-ng CLI dependencies
 #### Ubuntu
 
 ```shell
-sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g
+sudo apt install git p7zip-full python3-pip grub2-common grub-pc-bin parted dosfstools ntfs-3g
 ```
 
 #### Fedora (tested on: Fedora Workstation 33)
 ```shell
-sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
+sudo dnf install git p7zip p7zip-plugins python3-pip
 ```
 
-### 2. Install WoeUSB-ng
+### 2. Install WoeUSB-ng CLI
 ```shell
 sudo pip3 install WoeUSB-ng
 ```
 
+### 3. Optional: install GUI support
+#### Ubuntu
+
+```shell
+sudo apt install python3-wxgtk4.0
+sudo pip3 install 'WoeUSB-ng[gui]'
+```
+
+#### Fedora (tested on: Fedora Workstation 33)
+```shell
+sudo dnf install python3-wxpython4
+sudo pip3 install 'WoeUSB-ng[gui]'
+```
+
 ## Installation from source code
 
-### 1. Install WoeUSB-ng's Build Dependencies
+### 1. Install WoeUSB-ng CLI build dependencies
 #### Ubuntu
 ```shell
-sudo apt install git p7zip-full python3-pip python3-wxgtk4.0 grub2-common grub-pc-bin parted dosfstools ntfs-3g
+sudo apt install git p7zip-full python3-pip grub2-common grub-pc-bin parted dosfstools ntfs-3g
 ```
 #### Arch
 ```shell
-sudo pacman -Suy p7zip python-pip python-wxpython
+sudo pacman -Suy p7zip python-pip
 ```
 #### Fedora (tested on: Fedora Workstation 33) 
 ```shell
-sudo dnf install git p7zip p7zip-plugins python3-pip python3-wxpython4
+sudo dnf install git p7zip p7zip-plugins python3-pip
 ```
-### 2. Install WoeUSB-ng
+### 2. Install WoeUSB-ng CLI
 ```shell
 git clone https://github.com/WoeUSB/WoeUSB-ng.git
 cd WoeUSB-ng
 sudo pip3 install .
+```
+
+### 3. Optional: install GUI support from source
+#### Arch
+```shell
+sudo pacman -Suy python-wxpython
+sudo pip3 install '.[gui]'
+```
+
+#### Ubuntu
+```shell
+sudo apt install python3-wxgtk4.0
+sudo pip3 install '.[gui]'
+```
+
+#### Fedora (tested on: Fedora Workstation 33)
+```shell
+sudo dnf install python3-wxpython4
+sudo pip3 install '.[gui]'
 ```
 
 ## Installation from source code locally or in virtual environment 
@@ -88,6 +121,8 @@ sudo rm /usr/share/icons/WoeUSB-ng/icon.ico \
     /usr/local/bin/woeusbgui
 sudo rmdir /usr/share/icons/WoeUSB-ng/
 ```
+
+If `woeusbgui` is run without GUI dependencies installed, it will print a short message telling you to install `WoeUSB-ng[gui]`.
 
 ## License
 WoeUSB-ng is distributed under the [GPL license](https://github.com/WoeUSB/WoeUSB-ng/blob/master/COPYING).

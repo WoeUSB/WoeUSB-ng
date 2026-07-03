@@ -27,7 +27,15 @@ import sys
 import os
 
 if os.getuid() != 0:
-    subprocess.run(["pkexec", os.path.realpath(__file__)])
+    display = os.environ.get("DISPLAY", ":0")
+    xauthority = os.environ.get("XAUTHORITY")
+    subprocess.run([
+        "pkexec",
+        "env",
+        f"DISPLAY={display}",
+        f"XAUTHORITY={xauthority}",
+        os.path.realpath(__file__),
+    ])
 else:
     try:
         import WoeUSB.gui
@@ -37,4 +45,3 @@ else:
 
         WoeUSB.utils.update_policy_to_allow_for_running_gui_as_root(__file__)
         print("Policy was updated, please run this program again")
-

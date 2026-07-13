@@ -1,0 +1,161 @@
+msgid "" 
+msgstr "" 
+"Project-Id-Version: winusb\n" 
+"Report-Msgid-Bugs-To: WoeUSB Issue Tracker <https://github.com/slacka/WoeUSB/" 
+"issues>\n" 
+"POT-Creation-Date: 2019-05-19 17:54+0200\n" 
+"PO-Revision-Date: 2019-05-19 17:54+0200\n" 
+"Last-Translator: Claybiockiller <clay0305@hotmail.com>\n" 
+"Language-Team: \n" 
+"Language: zh_CN\n" 
+"MIME-Version: 1.0\n" 
+"Content-Type: text/plain; charset=UTF-8\n" 
+"Content-Transfer-Encoding: 8bit\n" 
+"X-Poedit-SourceCharset: UTF-8\n" 
+"X-Poedit-Basepath: .\n" 
+"Plural-Forms: nplurals=1; plural=0;\n" 
+"X-Generator: Poedit 2.2.1\n" 
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: ../../../gui.py:36 
+msgid "Show all drives" 
+msgstr "显示所有驱动器"
+
+#: ../../../gui.py:37 
+msgid "Show all drives, even those not detected as USB stick." 
+msgstr "显示所有驱动器，即使未标识为U盘"
+
+#: ../../../gui.py:48 
+msgid "Set boot flag" 
+msgstr "设置启动标志"
+
+#: ../../../gui.py:49 
+msgid "Sets boot flag after process of copying." 
+msgstr "复制完成后设置启动标志"
+
+#: ../../../gui.py:51 
+msgid "Use NTFS" 
+msgstr "使用 NTFS"
+
+#: ../../../gui.py:52 
+msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
+msgstr "使用 NTFS 而非 FAT. 注: NTFS 似乎比 FAT 要慢"
+
+#: ../../../gui.py:58 
+msgid "&File" 
+msgstr "文件(&F)"
+
+#: ../../../gui.py:59 
+msgid "&Options" 
+msgstr "选项(&O)"
+
+#: ../../../gui.py:60 
+msgid "&Help" 
+msgstr "寻求帮助(&H)"
+
+#: ../../../gui.py:116 
+msgid "Source :" 
+msgstr "源："
+
+#: ../../../gui.py:119 
+msgid "From a disk image (iso)" 
+msgstr "来自光盘映像文件(iso)"
+
+#: ../../../gui.py:124 
+msgid "Please select a disk image" 
+msgstr "请选择一个光盘映像文件"
+
+#: ../../../gui.py:130 
+msgid "From a CD/DVD drive" 
+msgstr "来自 CD/DVD 光驱"
+
+#: ../../../gui.py:143 
+msgid "Target device :" 
+msgstr "目标设备："
+
+#: ../../../gui.py:155 
+msgid "Install" 
+msgstr "开始安装"
+
+#: ../../../gui.py:245 
+#, fuzzy 
+#| 
+msgid "Installing.." 
+msgid "Installing" msgstr "正在安装……"
+
+#: ../../../gui.py:245 
+msgid "Please wait..." 
+msgstr "请稍候……"
+
+#: ../../../gui.py:256 
+msgid "Are you sure you want to cancel the installation?" 
+msgstr "请问您确定要取消安装吗？"
+
+#: ../../../gui.py:256 
+msgid "Cancel" 
+msgstr "取消"
+
+#: ../../../gui.py:265 
+msgid "Installation succeeded!" 
+msgstr "安装成功！"
+
+#: ../../../gui.py:265 ../../../gui.py:267 
+msgid "Installation" 
+msgstr "安装"
+
+#: ../../../gui.py:267 
+msgid "Installation failed!" 
+msgstr "安装失败！"
+
+#: ../../../gui.py:283 
+msgid "About" 
+msgstr "关于本软件"
+
+#: ../../../gui.py:339 
+msgid "License" 
+msgstr "授权条款"
+
+#~ msgid "Error : " 
+#~ msgstr "错误："
+#~ msgid "Error..." 
+#~ msgstr "错误……"
+#~ msgid "Unknown error as occurred!" 
+#~ msgstr "发生了未知的错误！"
+#~ msgid "Fatal error : " 
+#~ msgstr "致命错误："
+#~ msgid "Version %s" 
+#~ msgstr "第 %s 版"
+#~ msgid "Developer" 
+#~ msgstr "软件开发者"
+#~ msgid "" 
+#~ "%s is free software: you can redistribute it and/or modify it under the " 
+#~ "terms of the GNU General Public License as published by the Free Software " 
+#~ "Foundation, either version 3 of the License, or (at your option) any " 
+#~ "later version.\n" 
+#~ "\n" 
+#~ "%s is distributed in the hope that it will be useful, but WITHOUT ANY " 
+#~ "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS " 
+#~ "FOR A PARTICULAR PURPOSE.  See theGNU General Public License for more " 
+#~ "details.\n" 
+#~ "\n" 
+#~ "You should have received a copy of the GNU General Public Licensealong " 
+#~ "with %s.  If not, see http://www.gnu.org/licenses/." 
+#~ msgstr "" 
+#~ "%s 为自由软件：您可以在 Free Software Foundation 所发表的 GNU General " 
+#~ "Public License 授权条款第 3 版或任意（您所中意之）更近期版本的规定下进行本" 
+#~ "软件的再散布与修改。\n" 
+#~ "\n" 
+#~ "%s 以其会有所用的期望下而散布，但不做任何担保；甚至于不包含暗示其对于" 
+#~ "商业价值或是特定需求的适用性的保证。更多相关细节请参考 GNU " 
+#~ "General Public License 授权条款。\n" 
+#~ "\n" 
+#~ "您应该已经随 %s 得到一份 GNU General Public License 授权条款的副本。如果没" 
+#~ "有的话请上 http://www.gnu.org/licenses/ 浏览。"
+#~ msgid "File not Found : " 
+#~ msgstr "找不到文件："
+#~ msgid "Error" 
+#~ msgstr "错误"
+#~ msgid "bytes" 
+#~ msgstr "字节"
+#~ msgid "WinUSB" 
+#~ msgstr "WinUSB Windows 可开机 USB 制作工具"

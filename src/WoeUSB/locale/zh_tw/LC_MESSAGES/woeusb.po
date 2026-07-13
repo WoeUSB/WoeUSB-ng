@@ -5,7 +5,7 @@ msgstr ""
 "issues>\n"
 "POT-Creation-Date: 2019-05-19 17:54+0200\n"
 "PO-Revision-Date: 2019-05-19 17:54+0200\n"
-"Last-Translator: Ｖ字龍 <Vdragon.Taiwan@gmail.com>\n"
+"Last-Translator: Claybiockiller <clay0305@hotmail.com>\n" 
 "Language-Team: chinese-l10n <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -27,19 +27,19 @@ msgstr "秀出所有磁碟機，就算沒有識別為 USB 記憶碟也一樣。"
 
 #: ../../../gui.py:48
 msgid "Set boot flag"
-msgstr ""
+msgstr "設定啟動旗標"
 
 #: ../../../gui.py:49
 msgid "Sets boot flag after process of copying."
-msgstr ""
+msgstr "複製完成后設定啟動旗標"
 
 #: ../../../gui.py:51
 msgid "Use NTFS"
-msgstr ""
+msgstr "使用NTFS"
 
 #: ../../../gui.py:52
 msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
-msgstr ""
+msgstr "使用 NTFS 而非 FAT. 注: NTFS 似乎比 FAT 要慢"
 
 #: ../../../gui.py:58
 msgid "&File"
@@ -47,7 +47,7 @@ msgstr "檔案(&F)"
 
 #: ../../../gui.py:59
 msgid "&Options"
-msgstr ""
+msgstr "選項(&O)"
 
 #: ../../../gui.py:60
 msgid "&Help"
@@ -55,7 +55,7 @@ msgstr "尋求幫助(&H)"
 
 #: ../../../gui.py:116
 msgid "Source :"
-msgstr "來源可開機媒體："
+msgstr "來源："
 
 #: ../../../gui.py:119
 msgid "From a disk image (iso)"

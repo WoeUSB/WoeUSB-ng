@@ -262,7 +262,7 @@ def check_target_filesystem_free_space(target_fs_mountpoint, source_fs_mountpoin
     needed_space += additional_space_required_for_grub_installation
 
     if needed_space > free_space:
-        print_with_color(_("Error: Not enough free space on target partition!"))
+        print_with_color(_("Error: Not enough free space on target partition!"), "red")
         print_with_color(
             _("Error: We required {0}({1} bytes) but '{2}' only has {3}({4} bytes).")
             .format(
@@ -270,7 +270,7 @@ def check_target_filesystem_free_space(target_fs_mountpoint, source_fs_mountpoin
                 str(needed_space),
                 target_partition,
                 str(free_space),
-                str(free_space)))
+                str(free_space)), "red")
         return 1
 
 

@@ -405,8 +405,10 @@ class WoeUSB_handler(threading.Thread):
             target_media=self.target
         )
         try:
-            core.main(source_fs_mountpoint, target_fs_mountpoint, self.source, self.target, "device", temp_directory,
+            result = core.main(source_fs_mountpoint, target_fs_mountpoint, self.source, self.target, "device", temp_directory,
                       self.filesystem, self.boot_flag , None, self.skip_grub)
+            if result and not self.error:
+                self.error = self.state or _("Installation failed!")
         except SystemExit:
             pass
 

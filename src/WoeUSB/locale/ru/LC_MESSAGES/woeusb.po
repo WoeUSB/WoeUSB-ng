@@ -1,0 +1,538 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# SPDX-FileCopyrightText: 2026 Olesya Gerasimenko <goa@altlinux.org>
+msgid ""
+msgstr ""
+"Project-Id-Version: woeusb\n"
+"Report-Msgid-Bugs-To: WoeUSB Issue Tracker <"
+"https://github.com/slacka/WoeUSB/issues>\n"
+"POT-Creation-Date: 2020-10-05 21:33+0200\n"
+"PO-Revision-Date: 2026-10-08 16:29+0300\n"
+"Last-Translator: Olesya Gerasimenko <goa@altlinux.org>\n"
+"Language-Team: Basealt Translation Team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Lokalize 23.08.5\n"
+"X-Poedit-SearchPath-0: .\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
+"=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: core.py:85
+msgid "You need to specify installation type (--device or --partition)"
+msgstr "Необходимо указать тип установки (--device или --partition)"
+
+#: core.py:148
+#, python-brace-format
+msgid "Warning: You are not running {0} as root!"
+msgstr "Предупреждение: запуск {0} выполнен не от имени пользователя root!"
+
+#: core.py:149
+msgid "Warning: This might be the reason of the following failure."
+msgstr "Предупреждение: это может привести к сбою."
+
+#: core.py:163
+msgid "Error: Unable to mount source filesystem"
+msgstr "Ошибка: не удалось подключить исходную файловую систему"
+
+#: core.py:186
+msgid "Error: Unable to mount target filesystem"
+msgstr "Ошибка: не удалось подключить целевую файловую систему"
+
+#: core.py:222
+#, python-brace-format
+msgid "Wiping all existing partition table and filesystem signatures in {0}"
+msgstr ""
+"Удаление всех существующих таблиц разделов и подписей файловой системы на {0}"
+
+#: core.py:236
+#, python-brace-format
+msgid "Ensure that {0} is really wiped..."
+msgstr "Проверка факта очистки {0}..."
+
+#: core.py:243
+msgid ""
+"Error: Partition is still detected after wiping all signatures, this"
+" indicates that the drive might be locked into readonly mode due to end of"
+" lifespan."
+msgstr ""
+"Ошибка: раздел продолжает определяться после удаления всех подписей. Это"
+" означает, что диск может находиться в режиме «только чтение» из-за истечения"
+" срока службы."
+
+#: core.py:257
+#, python-brace-format
+msgid "Creating new partition table on {0}..."
+msgstr "Создание новой таблицы разделов на {0}..."
+
+#: core.py:262
+msgid "Error: Currently GUID partition table is not supported."
+msgstr ""
+"Ошибка: в текущей версии программы таблица разделов GUID не поддерживается."
+
+#: core.py:265
+msgid "Error: Partition table not supported."
+msgstr "Ошибка: таблица разделов не поддерживается."
+
+#: core.py:292
+msgid "Error: Filesystem not supported"
+msgstr "Ошибка: файловая система не поддерживается"
+
+#: core.py:295
+msgid "Creating target partition..."
+msgstr "Создание целевого раздела..."
+
+#: core.py:326
+msgid "FATAL: Illegal parted_mkpart_fs_type, please report bug."
+msgstr ""
+"КРИТИЧЕСКАЯ ОШИБКА: недопустимый parted_mkpart_fs_type. Сообщите"
+" разработчикам об ошибке."
+
+#: core.py:338
+msgid "FATAL: Shouldn't be here"
+msgstr "КРИТИЧЕСКАЯ ОШИБКА: этого здесь быть не должно"
+
+#: core.py:378
+msgid ""
+"Warning: Unable to download UEFI:NTFS partition image from GitHub,"
+" installation skipped.  Target device might not be bootable if the UEFI"
+" firmware doesn't support NTFS filesystem."
+msgstr ""
+"Предупреждение: не удалось загрузить образ раздела UEFI:NTFS с GitHub."
+" Установка пропущена. Запуск целевого устройства может оказаться невозможным,"
+" если микропрограмма UEFI не поддерживает файловую систему NTFS."
+
+#: core.py:394
+msgid "Mounting source filesystem..."
+msgstr "Подключение исходной файловой системы..."
+
+#: core.py:399 core.py:434
+#, python-brace-format
+msgid "Error: Unable to create {0} mountpoint directory"
+msgstr "Ошибка: не удалось создать каталог точки подключения {0}"
+
+#: core.py:408 core.py:415
+msgid "Error: Unable to mount source media"
+msgstr "Ошибка: не удалось подключить исходный носитель"
+
+#: core.py:429
+msgid "Mounting target filesystem..."
+msgstr "Подключение целевой файловой системы..."
+
+#: core.py:440
+msgid "Error: Unable to mount target media"
+msgstr "Ошибка: не удалось подключить целевой носитель"
+
+#: core.py:462
+msgid "Copying files from source media..."
+msgstr "Копирование файлов с исходного носителя..."
+
+#: core.py:520
+msgid "Installing GRUB bootloader for legacy PC booting support..."
+msgstr ""
+"Установка загрузчика GRUB для поддержки устаревшего способа запуска ПК..."
+
+#: core.py:541
+msgid "Installing custom GRUB config for legacy PC booting..."
+msgstr ""
+"Установка настраиваемого конфигурационного файла GRUB для устаревшего способа"
+" запуска ПК..."
+
+#: core.py:560
+#, python-brace-format
+msgid "Unmounting and removing {0}..."
+msgstr "Отключение и удаление {0}..."
+
+#: core.py:562
+msgid "Warning: Unable to unmount filesystem."
+msgstr "Предупреждение: не удалось отключить файловую систему."
+
+#: core.py:568
+msgid "Warning: Unable to remove source mountpoint"
+msgstr "Предупреждение: не удалось удалить точку подключения источника"
+
+#: core.py:600 core.py:607
+msgid ""
+"Some mountpoints are not unmount/cleaned successfully and must be done"
+" manually"
+msgstr ""
+"Некоторые точки подключения не были успешно отключены/очищены; это необходимо"
+" выполнить вручную"
+
+#: core.py:605
+msgid ""
+"We unable to unmount target filesystem for you, please make sure target"
+" filesystem is unmounted before detaching to prevent data corruption"
+msgstr ""
+"Программе не удалось отключить целевую файловую систему. Обязательно"
+" отключите целевую файловую систему перед отсоединением устройства, чтобы"
+" предотвратить повреждение данных"
+
+#: core.py:612
+msgid ""
+"Target device is busy, please make sure you unmount all filesystems on target"
+" device or shutdown the computer before detaching it."
+msgstr ""
+"Целевое устройство занято. Обязательно отключите все файловые системы на"
+" целевом устройстве или выключите компьютер перед отсоединением этого"
+" устройства."
+
+#: core.py:615
+msgid "You may now safely detach the target device"
+msgstr "Теперь целевое устройство можно без опасений отсоединить"
+
+#: core.py:620
+msgid "Done :)"
+msgstr "Готово :)"
+
+#: core.py:621
+msgid "The target device should be bootable now"
+msgstr "Теперь целевое устройство должно быть доступно для запуска"
+
+#: gui.py:34
+msgid "Show all drives"
+msgstr "Показать все диски"
+
+#: gui.py:35
+msgid "Show all drives, even those not detected as USB stick."
+msgstr ""
+"Показать все диски — даже те, которые не определяются как USB-накопитель."
+
+#: gui.py:46
+msgid "Set boot flag"
+msgstr "Установить флаг загрузки"
+
+#: gui.py:47
+msgid "Sets boot flag after process of copying."
+msgstr "Установить флаг загрузки после процесса копирования."
+
+#: gui.py:49
+msgid "Use NTFS"
+msgstr "Использовать NTFS"
+
+#: gui.py:50
+msgid "Use NTFS instead of FAT. NOTE: NTFS seems to be slower than FAT."
+msgstr "Использовать NTFS вместо FAT. ПРИМЕЧАНИЕ: NTFS работает медленнее FAT."
+
+#: gui.py:56
+msgid "&File"
+msgstr "&Файл"
+
+#: gui.py:57
+msgid "&Options"
+msgstr "&Параметры"
+
+#: gui.py:58
+msgid "&Help"
+msgstr "&Справка"
+
+#: gui.py:114
+msgid "Source :"
+msgstr "Источник:"
+
+#: gui.py:117
+msgid "From a disk image (iso)"
+msgstr "Образ диска (iso)"
+
+#: gui.py:122
+msgid "Please select a disk image"
+msgstr "Выберите образ диска"
+
+#: gui.py:128
+msgid "From a CD/DVD drive"
+msgstr "CD/DVD-диск"
+
+#: gui.py:141
+msgid "Target device :"
+msgstr "Целевое устройство:"
+
+#: gui.py:153
+msgid "Install"
+msgstr "Установить"
+
+#: gui.py:243
+msgid "Installing"
+msgstr "Установка"
+
+#: gui.py:243
+msgid "Please wait..."
+msgstr "Подождите..."
+
+#: gui.py:254
+msgid "Are you sure you want to cancel the installation?"
+msgstr "Действительно отменить установку?"
+
+#: gui.py:254
+msgid "Cancel"
+msgstr "Отмена"
+
+#: gui.py:263
+msgid "Installation succeeded!"
+msgstr "Установка выполнена успешно!"
+
+#: gui.py:263 gui.py:265
+msgid "Installation"
+msgstr "Установка"
+
+#: gui.py:265
+msgid "Installation failed!"
+msgstr "Сбой установки!"
+
+#: gui.py:281
+msgid "About"
+msgstr "О программе"
+
+#: gui.py:312
+msgid "Authors"
+msgstr "Авторы"
+
+#: gui.py:315
+msgid "Original WinUSB Developer"
+msgstr "Первоначальный разработчик WinUSB"
+
+#: gui.py:317
+msgid ""
+"\n"
+"            This file is part of WoeUSB-ng.\n"
+"\n"
+"            WoeUSB-ng is free software: you can redistribute it and/or"
+" modify\n"
+"            it under the terms of the GNU General Public License as published"
+" by\n"
+"            the Free Software Foundation, either version 3 of the License,"
+" or\n"
+"            (at your option) any later version.\n"
+"\n"
+"            WoeUSB-ng is distributed in the hope that it will be useful,\n"
+"            but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"            GNU General Public License for more details.\n"
+"\n"
+"            You should have received a copy of the GNU General Public"
+" License\n"
+"            along with WoeUSB-ng.  If not, see <http://www.gnu.org/licenses/"
+">.\n"
+"        "
+msgstr ""
+"\n"
+"            Этот файл является частью программы WoeUSB-ng.\n"
+"\n"
+"            Программа WoeUSB-ng — свободное программное обеспечение. Вы"
+" можете распространять\n "
+"            и/или изменять его на условиях лицензии GNU General Public"
+" License, опубликованной\n "
+"            Free Software Foundation; версии 3 или (по вашему желанию) любой"
+" более поздней версии.\n"
+"\n"
+"            Программа WoeUSB-ng распространяется в надежде, что она будет"
+" полезна, но БЕЗ КАКОЙ-ЛИБО\n "
+"            ГАРАНТИИ, даже без подразумеваемой гарантии КОММЕРЧЕСКОЙ"
+" ПРИГОДНОСТИ или\n"
+"            ПРИГОДНОСТИ ДЛЯ ОПРЕДЕЛЁННОЙ ЦЕЛИ. Подробнее смотрите в тексте"
+" GNU General\n"
+"            Public License.\n"
+"\n"
+"            Вы должны были получить копию GNU General Public License вместе с"
+" программой WoeUSB-ng.\n"
+"            Если это не так, смотрите <http://www.gnu.org/licenses/>.\n"
+"        "
+
+#: gui.py:337
+msgid "License"
+msgstr "Лицензия"
+
+#: utils.py:38
+#, python-brace-format
+msgid ""
+"Error: {0} requires {1} command in the executable search path, but it is not"
+" found."
+msgstr ""
+"Ошибка: {0} требуется команда {1} в пути поиска исполняемого файла, но она не"
+" найдена."
+
+#: utils.py:50
+msgid "Error: mkdosfs/mkfs.msdos/mkfs.vfat/mkfs.fat command not found!"
+msgstr "Ошибка: команда mkdosfs/mkfs.msdos/mkfs.vfat/mkfs.fat не найдена!"
+
+#: utils.py:51
+msgid "Error: Please make sure that dosfstools is properly installed!"
+msgstr "Ошибка: убедитесь, что установка dosfstools выполнена правильно!"
+
+#: utils.py:56
+msgid "Error: mkntfs command not found!"
+msgstr "Ошибка: команда mkntfs не найдена!"
+
+#: utils.py:57
+msgid "Error: Please make sure that ntfs-3g is properly installed!"
+msgstr "Ошибка: убедитесь, что установка ntfs-3g выполнена правильно!"
+
+#: utils.py:67
+msgid "Error: grub-install or grub2-install command not found!"
+msgstr "Ошибка: команда grub-install или grub2-install не найдена!"
+
+#: utils.py:68
+msgid "Error: Please make sure that GNU GRUB is properly installed!"
+msgstr "Ошибка: убедитесь, что установка GNU GRUB выполнена правильно!"
+
+#: utils.py:86
+#, python-brace-format
+msgid ""
+"Error: Source media \"{0}\" not found or not a regular file or a block device"
+" file!"
+msgstr ""
+"Ошибка: исходный носитель «{0}» не найден или не является обычным файлом или"
+" файлом блочного устройства!"
+
+#: utils.py:92
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not a block device file!"
+msgstr "Ошибка: целевой носитель «{0}» не является файлом блочного устройства!"
+
+#: utils.py:96
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not an entire storage device!"
+msgstr ""
+"Ошибка: целевой носитель «{0}» не является всем устройством хранения данных!"
+
+#: utils.py:100
+#, python-brace-format
+msgid "Error: Target media \"{0}\" is not an partition!"
+msgstr "Ошибка: целевой носитель «{0}» не является разделом!"
+
+#: utils.py:122
+#, python-brace-format
+msgid "Info: Target device is {0}"
+msgstr "Информация: целевое устройство — {0}"
+
+#: utils.py:123
+#, python-brace-format
+msgid "Info: Target partition is {0}"
+msgstr "Информация: целевой раздел — {0}"
+
+#: utils.py:148
+msgid ""
+"Error: Source media is currently mounted, unmount the partition then try again"
+msgstr ""
+"Ошибка: исходный носитель сейчас подключён. Отключите раздел, затем"
+" попробуйте снова"
+
+#: utils.py:153
+msgid ""
+"Error: Target partition is currently mounted, unmount the partition then try"
+" again"
+msgstr ""
+"Ошибка: целевой раздел сейчас подключён. Отключите раздел, затем попробуйте"
+" снова"
+
+#: utils.py:160
+msgid ""
+"Error: Target device is currently busy, unmount all mounted partitions in"
+" target device then try again"
+msgstr ""
+"Ошибка: целевое устройство сейчас занято. Отключите все подключённые разделы"
+" на целевом устройстве, затем попробуйте снова"
+
+#: utils.py:176
+#, python-brace-format
+msgid ""
+"Warining: File {0} in source image has exceed the FAT32 Filesystem 4GiB"
+" Single File Size Limitation, swiching to NTFS filesystem."
+msgstr ""
+"Предупреждение: файл {0} в исходном образе превышает максимальный размер для"
+" одного файла, установленный файловой системой FAT32 (4 ГиБ). Переключение на"
+" файловую систему NTFS."
+
+#: utils.py:181
+msgid ""
+"Refer: https://github.com/slacka/WoeUSB/wiki/Limitations#fat32-filesystem-4gib"
+"-single-file-size-limitation for more info."
+msgstr ""
+"Справка: на веб-сайте https://github.com/slacka/WoeUSB/wiki/Limitations#fat32-"
+"filesystem-4gib-single-file-size-limitation доступны дополнительные сведения."
+
+#: utils.py:205
+msgid ""
+"Error: Target filesystem not supported, currently supported filesystem: FAT,"
+" NTFS."
+msgstr ""
+"Ошибка: целевая файловая система не поддерживается. В текущей версии"
+" программы поддерживаются FAT и NTFS."
+
+#: utils.py:226
+msgid ""
+"Warning: Your device doesn't seems to have an UEFI:NTFS partition, UEFI"
+" booting will fail if the motherboard firmware itself doesn't support NTFS"
+" filesystem!"
+msgstr ""
+"Предупреждение: похоже, что на устройстве нет раздела UEFI:NTFS. UEFI-запуск"
+" не удастся выполнить, если сама микропрограмма материнской платы не"
+" поддерживает файловую систему NTFS!"
+
+#: utils.py:229
+msgid ""
+"Info: You may recreate disk with an UEFI:NTFS partition by using the --device"
+" creation method"
+msgstr ""
+"Информация: если использовать способ создания --device, можно создать диск с"
+" разделом UEFI:NTFS"
+
+#: utils.py:261
+msgid "Error: Not enough free space on target partition!"
+msgstr "Ошибка: в целевом разделе недостаточно свободного места!"
+
+#: utils.py:263
+#, python-brace-format
+msgid "Error: We required {0}({1} bytes) but '{2}' only has {3}({4} bytes)."
+msgstr ""
+"Ошибка: требуется {0} ({1} байт), но «{2}» предоставляет только {3} ({4}"
+" байт)."
+
+#: workaround.py:16
+msgid "Making system realize that partition table has changed..."
+msgstr "Передача системе информации об изменении таблицы разделов..."
+
+#: workaround.py:19
+msgid "Wait 3 seconds for block device nodes to populate..."
+msgstr "Подождите 3 секунды — появляются файлы блочных устройств..."
+
+#: workaround.py:35
+msgid ""
+"Applying workaround for buggy motherboards that will ignore disks with no"
+" partitions with the boot flag toggled"
+msgstr ""
+"Применение обходного решения для проблемных материнских плат, которые"
+" игнорируют диски, если ни один из их разделов не отмечен флагом загрузки"
+
+#: workaround.py:62
+msgid ""
+"Source media seems to be Windows 7-based with EFI support, applying"
+" workaround to make it support UEFI booting"
+msgstr ""
+"Похоже, что в основе исходного носителя — Windows 7 с"
+" поддержкой EFI. Применяется обходное решение, чтобы обеспечить поддержку"
+" UEFI-запуска"
+
+#: workaround.py:71
+#, python-brace-format
+msgid "DEBUG: Can't find efi directory, use {0}"
+msgstr "ОТЛАДКА: не удалось найти каталог efi, используйте {0}"
+
+#: workaround.py:75 workaround.py:87
+#, python-brace-format
+msgid "DEBUG: {0} detected."
+msgstr "ОТЛАДКА: обнаружен каталог {0}."
+
+#: workaround.py:83
+msgid "DEBUG: Can't find efi/boot directory, use "
+msgstr "ОТЛАДКА: не удалось найти каталог efi/boot, используйте "
+
+#: workaround.py:95
+msgid "INFO: Detected existing EFI bootloader, workaround skipped."
+msgstr ""
+"ИНФОРМАЦИЯ: обнаружен существующий загрузчик EFI. Обходное решение пропущено."
+
+
